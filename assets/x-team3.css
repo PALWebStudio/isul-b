@@ -1,0 +1,41 @@
+/* "Екипи и специалисти" (photo cards on navy, ISUL watermark) — extracted from dhome.css for variant B. */
+#home .team{ gap: 24px; }
+.nwm{ position: relative; display: block; overflow: hidden; }
+.nwm::after{ content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(74,24,48,0) 45%, rgba(74,24,48,.55) 100%); }
+.nwm::before{ content: ""; position: absolute; z-index: 2; right: 7%; bottom: 7%; width: clamp(14px, 12%, 46px); aspect-ratio: 1017 / 1737; pointer-events: none;
+  background: url('brand/isul-crest-white.svg') center / contain no-repeat; opacity: .9; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+.rart__lead.nwm::before{ width: clamp(44px, 5vw, 64px); right: 28px; bottom: 26px; }
+#home .tm3{ display: grid !important; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; perspective: 1200px; }
+.tm3__c{ position: relative; display: block; aspect-ratio: 3 / 4; border-radius: 20px; overflow: hidden; text-decoration: none; color: #fff; background: linear-gradient(135deg, var(--x-blue), var(--x-navy));
+  box-shadow: 0 28px 48px -30px rgba(74,24,48,.6); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; will-change: transform; }
+.tm3__c:hover{ box-shadow: 0 40px 70px -30px rgba(74,24,48,.75); }
+.tm3__c img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; transition: transform 1s cubic-bezier(.2,.8,.2,1); }
+.tm3__c:hover img{ transform: scale(1.06); }
+.tm3__shade{ position: absolute; inset: 0; background: linear-gradient(180deg, rgba(74,24,48,0) 40%, rgba(74,24,48,.6) 68%, rgba(44,11,24,.95)); }
+.tm3__txt{ position: absolute; left: 16px; right: 16px; bottom: 16px; display: grid; gap: 4px; }
+.tm3__txt small{ font-size: .64rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #F0DCE4; }
+.tm3__txt b{ font-weight: 700; font-size: 1.02rem; line-height: 1.25; text-shadow: 0 1px 12px rgba(24,6,13,.45); }
+.tm3__txt em{ font-style: normal; font-size: .8rem; line-height: 1.3; color: #E5D3DA; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tm3__go{ position: absolute; right: 12px; top: 12px; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--x-plum); font-weight: 800; opacity: 0; transition: opacity .3s; }
+.tm3__c:hover .tm3__go{ opacity: 1; }
+@media (max-width: 760px){
+#home .tm3{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+#home .tm3{ grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@media (max-width: 1100px){
+#home .tm3{ grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(200px, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+.tm3__c{ scroll-snap-align: start; }
+}
+@media (max-width: 760px){
+#home .tm3{ grid-auto-columns: 62%; }
+}
+#home .sx--navy{ position: relative; overflow: hidden; color: #fff;
+  background: radial-gradient(900px 500px at 12% 0%, rgba(94,31,56,.6), transparent 60%), radial-gradient(700px 400px at 95% 100%, rgba(142,35,78,.35), transparent 60%), var(--x-navy); }
+#home .sx--navy::after{ content: ""; position: absolute; right: 3vw; bottom: -30px; width: clamp(180px, 20vw, 320px); aspect-ratio: 1017 / 526; background: url('brand/isul-crown-white.svg') center / contain no-repeat; opacity: .06; pointer-events: none; }
+#home .sx--navy .sx-head{ border-bottom-color: rgba(255,255,255,.14); }
+#home .sx--navy .sx-head h2{ color: #fff; }
+#home .sx--navy .sx-kick{ color: #E7C9D5; }
+#home .sx--navy .sx-link{ color: #fff; }
+#home .sx--navy .sx-crown{ filter: brightness(0) invert(1); opacity: .75; }
+#home .sx--navy .teamnote{ color: #B58A9C; }
+#home .sx--navy .tm3__c{ box-shadow: 0 30px 50px -30px rgba(0,0,0,.8); }

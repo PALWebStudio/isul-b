@@ -1,0 +1,36 @@
+/* Variant X careers: the clinics page photo cards / list rows (x-clinics.css) for job ads, with a Картички | Списък switch */
+/* line icons as on the clinics page (.cx svg) */
+.jb .cx-view svg, .jx-res svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.jb__head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 14px; }
+.jb__head .jb__n { margin: 0; }
+.jb__head .mbp--s { margin-left: auto; }
+.jb__head .cx-view { margin-left: 0; }
+.jx-res.is-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.jx-card { aspect-ratio: 4 / 3; }
+.jx-card .cx-card__body { left: 16px; right: 52px; bottom: 14px; gap: 6px; }
+.jx-card .cx-card__body b { font-size: .92rem; line-height: 1.22; -webkit-line-clamp: 3; }
+.jx-card .cx-card__tel { font-size: .74rem; }
+.jx-card .cx-card__tel svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; flex: none; }
+.jx-card .cx-badge { font-size: .66rem; }
+.jx-card .cx-card__go { right: 14px; bottom: 14px; }
+.jx-demo, .jx-src { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 99px; font-size: .68rem; font-weight: 700; vertical-align: 1px; }
+.jx-demo { background: #FBEFD6; color: #7A4F00; }
+.jx-src { background: #F6EEF2; color: #782B4A; }
+.jx-demo--c { position: absolute; left: 10px; top: 36px; margin: 0; box-shadow: 0 4px 10px -4px rgba(0,0,0,.4); }
+.jx-t { all: unset; cursor: pointer; color: #2B1E24; border-radius: 4px; }
+.jx-t:hover { color: #782B4A; }
+.jx-t:focus-visible { outline: 3px solid #782B4A; outline-offset: 2px; }
+.jx-res .cx-row__img.nwm::before { width: 16px; right: 8px; bottom: 8px; top: auto; }
+.jx-res .cx-row__m { color: #666066; font-size: .84rem; }
+.jx-res .cx-row__m svg { width: 15px; height: 15px; fill: none; stroke: #782B4A; stroke-width: 2; }
+.jx-res .cx-row__m { gap: 4px 0; }
+.jx-res .cx-row__m > * + *::before { content: "·"; margin: 0 10px; color: #B9AEB3; }
+@media (max-width: 1180px) { .jx-res.is-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .jx-res.is-cards { grid-template-columns: minmax(0, 1fr); }
+  .jb__head .mbp--s { display: none; }
+  .jb__head .cx-view { margin-left: auto; }
+  .jx-res .cx-row { align-items: start; }
+  .jx-res .cx-row__m { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .jx-res .cx-row__m > * + *::before { display: none; }
+}

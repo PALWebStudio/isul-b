@@ -1,0 +1,7 @@
+/* Variant X only — hand-written, loaded last by tools/build-variant-x.py.
+   Burgundy as an accent: burgundy marks what you act on — the chosen filter, buttons, labels — and gold draws the fine lines. */
+
+/* chosen item in side menus (Клиники, Екип, Кариери) */
+.jb__f button[aria-pressed="true"] { background: #782B4A !important; border-color: #782B4A !important; color: #fff !important; }
+.jb__f button[aria-pressed="true"] span { color: #F2C9D8 !important; }
+

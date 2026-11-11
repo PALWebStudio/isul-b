@@ -1,0 +1,15 @@
+/* Variant X — press-centre video band: the reels fill the band edge to edge; how many show depends on the screen */
+.pc-video .pc-vgrid { max-width: none; margin-left: 0; grid-template-columns: repeat(6, minmax(0, 1fr)); justify-content: stretch; gap: clamp(12px, 1.4vw, 20px); }
+@media (min-width: 1000px) {
+  .pc-video > .vwrap { grid-template-columns: 180px minmax(0, 1fr); gap: 0 clamp(24px, 2.4vw, 40px); }
+}
+/* tablet: 4 reels */
+@media (max-width: 999px) {
+  .pc-video .pc-vgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pc-video .pc-v:nth-child(n+5) { display: none; }
+}
+/* phone: 2 reels; the rest stay behind „Виж всички“ */
+@media (max-width: 640px) {
+  .pc-video .pc-vgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pc-video .pc-v:nth-child(n+3) { display: none; }
+}

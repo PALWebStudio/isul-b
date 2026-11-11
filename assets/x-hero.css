@@ -1,0 +1,39 @@
+/* Variant X only — hand-written, not generated (loaded last by tools/build-variant-x.py).
+   Home hero: a living, flowing gradient in the ISUL palette — deep wine, official burgundy,
+   light burgundy and the gold of the crest — instead of B's navy + blue. */
+
+.hero {
+  background:
+    radial-gradient(700px 500px at 80% 32%, rgba(157,48,92,.50), transparent 60%),
+    radial-gradient(560px 420px at 6% 96%, rgba(201,174,130,.20), transparent 64%),
+    radial-gradient(760px 380px at 34% -14%, rgba(120,43,74,.55), transparent 68%),
+    linear-gradient(160deg, #12050B 0%, #1E0811 48%, #0B0307 100%);
+}
+
+/* "лекува" — brighter rose-to-gold so it reads on the darker wine */
+.rot__w { background: linear-gradient(100deg, #FFD3E2, #E2739F 42%, var(--gold)); -webkit-background-clip: text; background-clip: text; }
+
+/* slowly drifting light — the "flow" */
+.hero::before {
+  content: ""; position: absolute; inset: -20%; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 30% 40%, rgba(210,96,142,.16), transparent 70%),
+    radial-gradient(34% 38% at 72% 70%, rgba(201,174,130,.13), transparent 70%),
+    radial-gradient(30% 34% at 60% 20%, rgba(157,48,92,.26), transparent 70%);
+  filter: blur(30px);
+  animation: xflow 22s ease-in-out infinite alternate;
+}
+@keyframes xflow {
+  0%   { transform: translate3d(-4%, -2%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(5%, 3%, 0) rotate(8deg) scale(1.08); }
+  100% { transform: translate3d(-2%, 5%, 0) rotate(-6deg) scale(1.02); }
+}
+
+/* the perspective floor in rose-gold lines */
+.floor {
+  background-image: linear-gradient(rgba(217,163,184,.38) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(201,174,130,.30) 1.5px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; }
+}

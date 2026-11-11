@@ -1,0 +1,26 @@
+/* Variant X — footer crest fills with white like the gold hero crest (cf) does. */
+.ftc { position: relative; flex: none; display: block; width: 46px; aspect-ratio: 1017 / 1737;
+  -webkit-mask: url('brand/isul-crest-white.svg') center / contain no-repeat;
+          mask: url('brand/isul-crest-white.svg') center / contain no-repeat; }
+.ft__brand .ftc__ghost { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .22; }
+.ftc__fill { position: absolute; left: 0; right: 0; bottom: 0; height: 0%; overflow: hidden;
+  background: linear-gradient(170deg, #FFFFFF 0%, #F6EEF2 55%, #E2C792 100%); }
+.ftc__wave { position: absolute; left: 0; top: -2px; width: 200%; height: 6px; fill: #FFFFFF; animation: cfwave 1.1s linear infinite; }
+.ftc.is-on .ftc__fill { animation: ftcFill 2.6s cubic-bezier(.65,0,.35,1) forwards; }
+@keyframes ftcFill { to { height: 112%; } }
+.ftc__shine { position: absolute; inset: 0; overflow: hidden; }
+.ftc__shine::before { content: ""; position: absolute; inset: -20% -120%; background: linear-gradient(105deg, transparent 42%, rgba(201,174,130,.9) 50%, transparent 58%); transform: translateX(-100%); }
+.ftc.is-on .ftc__shine::before { animation: ftcShine 7s ease-in-out 2.6s infinite; }
+@keyframes ftcShine { 0% { transform: translateX(-100%); } 25%, 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ftc .ftc__fill { animation: none; height: 100%; }
+  .ftc__wave, .ftc__shine { display: none; }
+}
+
+/* Footer group „Обществена информация“ (pages moved out of the „За нас“ menu) */
+.ft__pub { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 28px; padding-block: 18px; border-bottom: 1px solid var(--line-d); }
+.ft__pub-h { margin: 0; font-size: .76rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted-d); }
+.ft__pub ul { display: flex; flex-wrap: wrap; gap: 6px 24px; margin: 0; padding: 0; list-style: none; }
+.ft__pub a { color: #fff; font-size: .86rem; text-decoration: none; }
+.ft__pub a:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) { .ft__pub { flex-direction: column; gap: 10px; } .ft__pub ul { flex-direction: column; gap: 10px; } }

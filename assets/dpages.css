@@ -1,0 +1,111 @@
+/* =========================================================
+   Variant D — inner pages on the homepage design system
+   (loaded only by variant-d.html, after bands.css / dhome.css)
+   Dark navy header over a photo · white / mist content bands ·
+   one dark showcase band at the end · burgundy as accent only.
+   ========================================================= */
+#page { background: #fff !important; }
+
+/* ---------- Page header: navy over the photo (like the home hero) ---------- */
+.pg-hero--x { background:
+  linear-gradient(90deg, rgba(12,22,38,.95) 0%, rgba(12,22,38,.84) 38%, rgba(12,22,38,.55) 70%, rgba(12,22,38,.7) 100%),
+  linear-gradient(0deg, rgba(12,22,38,.85), transparent 45%),
+  var(--bg) right 30% / cover no-repeat, var(--x-navy) !important; }
+.pg-hero--x::after { background: radial-gradient(700px 380px at 12% 0%, rgba(26,73,125,.55), transparent 65%); }
+.pg-hero__crown { opacity: .07; left: auto; right: 3vw; bottom: -24px; }
+.pg-hero--x .crumbs, .pg-hero--x .crumbs a { color: #BFD6F2; }
+.pg-hero--x .pg-lead { color: #C9D6EA; }
+.pg-hero--x h1 { text-shadow: none; }
+.pg-hero--x .cl-contact > * { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+.pg-hero--x .btn-a { background: var(--x-plum); color: #fff; }
+.pg-hero--x .btn-a:hover { background: #7B2A4C; color: #fff; }
+.pg-hero--x .pg-search { border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.95); }
+/* section tabs */
+.pg-sub a { background: rgba(255,255,255,.08); color: #DCE4EF; }
+.pg-sub a:hover { background: rgba(255,255,255,.16); color: #fff; }
+.pg-sub a[aria-current] { background: #fff; color: var(--x-ink); box-shadow: inset 0 3px 0 var(--x-plum); }
+
+/* ---------- Content bands: white ↔ mist, dark text everywhere ---------- */
+.band { padding-block: var(--x-sec); }
+.band--white { background: #fff; }
+.band--blue, .band--isul { background: var(--x-mist) !important; color: var(--x-ink) !important; }
+.band--blue::before, .band--isul::before { display: none; }
+.band__body h3, .band--blue h3, .band--isul h3, .band--white h3 { color: var(--x-ink); font-size: clamp(1.3rem, 1rem + .9vw, 1.8rem); letter-spacing: -.02em; }
+.band__body h3::after { content: ""; display: block; width: 36px; height: 3px; margin-top: 12px; border-radius: 3px; background: var(--x-plum); }
+.band__body h3:not(:first-child) { margin-top: 1.8em; }
+.band--blue a, .band--isul a, .band--white a { color: var(--x-blue); text-decoration-color: rgba(26,73,125,.35); }
+.band--blue a:hover, .band--isul a:hover, .band--white a:hover { color: var(--x-plum); }
+.band li::marker { color: var(--x-plum) !important; }
+.band .crown-mark { width: 52px; margin-bottom: 28px; opacity: .85; filter: brightness(0) saturate(100%) invert(24%) sepia(43%) saturate(2400%) hue-rotate(310deg) brightness(88%); }
+.band--blue .doc, .band--isul .doc, .band--white .doc { background: #fff; border: 1px solid var(--x-line); color: var(--x-ink) !important; border-radius: 12px; box-shadow: var(--x-shadow); }
+.band--blue .doc__ext, .band--isul .doc__ext, .band--white .doc__ext { background: var(--x-plum); color: #fff; }
+.band .tbl { background: #fff; border-color: var(--x-line); border-radius: var(--x-r); box-shadow: var(--x-shadow); color: var(--x-ink); }
+.band .tbl tr:first-child td { background: var(--x-mist); }
+.band .pg-src { color: var(--x-mute) !important; border-color: var(--x-line) !important; }
+.band .pg-src a { color: var(--x-blue) !important; }
+.band__body figure img { border-radius: var(--x-r); box-shadow: var(--x-shadow-h); }
+.band .leader, .band .leader b { color: var(--x-ink) !important; }
+.band .leader small { color: var(--x-mute) !important; }
+.band .members li { border-color: var(--x-line); }
+
+/* ---------- The one dark showcase band (other clinics / more news) ---------- */
+.band--others { background: radial-gradient(900px 500px at 15% 0%, rgba(26,73,125,.55), transparent 60%), var(--x-navy) !important; color: #fff !important; }
+.band--others h3 { color: #fff !important; }
+.band--others h3::after { margin-inline: auto; }
+.band--others .crown-mark { filter: none; opacity: .7; }
+.chips-row a { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+.chips-row a:hover { background: #fff; color: var(--x-ink); }
+.band--isul:has(.news-grid--3) .ncard, .band--isul:has(.news-grid--3) .ncard b { color: var(--x-ink); }
+.band--isul:has(.news-grid--3) .ncard__meta { color: var(--x-plum); }
+
+/* ---------- Page-level grids get the home section look ---------- */
+#page .cl-groups, #page .docs-grid, #page .news-grid:not(.news-grid--3), #page .hub { padding-block: calc(var(--x-sec) - 16px) calc(var(--x-sec) - 24px); }
+#page .ev-grid { padding-block: 24px var(--x-sec); }
+#page .ct-top { padding-top: calc(var(--x-sec) - 24px); }
+#page .ct-route-cta { margin-top: 16px; margin-bottom: calc(var(--x-sec) - 24px); }
+.cl-group h2, .hub__col h2 { display: flex; align-items: center; gap: 14px; font-family: "Unbounded", sans-serif !important; font-weight: 500 !important; text-transform: none !important; color: var(--x-ink) !important; border-bottom: 1px solid var(--x-line) !important; padding-bottom: 14px; }
+.cl-group h2::before { content: ""; width: 34px; aspect-ratio: 1017 / 526; flex-shrink: 0; background: url('brand/isul-crown.svg') center / contain no-repeat; }
+.cl-group h2 { font-size: clamp(1.3rem, 1rem + .8vw, 1.7rem) !important; }
+
+/* ---------- Cards: one radius, one border, one shadow ---------- */
+.cl-card, .ncard__img, .leader__img, .hub__col, .evc, .ct-card, .book-card, .vcard { border-radius: var(--x-r) !important; }
+.cl-card, .hub__col, .ct-card, .book-card { background: #fff !important; border: 1px solid var(--x-line) !important; box-shadow: var(--x-shadow); }
+.cl-card:hover, .ct-card:hover, .book-card:hover { box-shadow: var(--x-shadow-h); border-color: var(--x-line) !important; }
+.cl-card__img { background: linear-gradient(135deg, var(--x-blue), var(--x-navy)); }
+.cl-card b, .ncard b, .hub__col a { color: var(--x-ink); }
+.cl-card:hover b, .ncard:hover b, .hub__col a:hover { color: var(--x-plum); }
+.ncard__meta { color: var(--x-plum); }
+.ct-card { border-left: 1px solid var(--x-line) !important; }
+.ct-card b { color: var(--x-ink); }
+.ct-card.is-emg b { color: #C62828; }
+.book-card.is-main { background: linear-gradient(120deg, rgba(12,22,38,.92), rgba(26,73,125,.85)), url('photos/clinics/c3.jpg') center / cover !important; border: 0 !important; }
+.ct-route-cta { border-radius: var(--x-r); }
+.ct-route-cta__btn { background: var(--x-plum); color: #fff; }
+.leader--card .leader__img { box-shadow: var(--x-shadow); }
+.leader em { color: var(--x-plum); }
+.evc { background: #fff; border-color: var(--x-line); box-shadow: var(--x-shadow); }
+.evc__date { color: var(--x-blue); }
+.evc__tag { color: var(--x-plum); }
+
+/* ---------- Video band on every page: white, like the home ---------- */
+#page .vband { background: var(--x-mist) !important; color: var(--x-ink); padding-block: var(--x-sec); }
+#page .vband::before, #page .vband::after { display: none; }
+#page .vband__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; gap: 0 18px; padding-bottom: 18px; margin-bottom: 36px; border-bottom: 1px solid var(--x-line); }
+#page .vband__head::before { content: ""; width: 44px; aspect-ratio: 1017 / 526; align-self: center; background: url('brand/isul-crown.svg') center / contain no-repeat; }
+#page .vband__head h2 { color: var(--x-ink); font-family: "Unbounded", sans-serif; font-weight: 500; font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.3rem); }
+#page .vband__head h2::before { display: none; }
+#page .vband__head a { color: var(--x-plum); }
+#page .vcard { background: #fff; color: var(--x-ink); border: 1px solid var(--x-line); box-shadow: var(--x-shadow); }
+#page .vcard:hover { background: #fff; box-shadow: var(--x-shadow-h); }
+#page .vcard__tag { color: var(--x-blue); }
+#page .vcard small, #page .vband__note { color: var(--x-mute); }
+#page .vcard__play::after { border-left-color: var(--x-blue); }
+#page .vband--page { background: #fff !important; }
+
+/* navigator page keeps its dark stage */
+#page .anav-sec { background: radial-gradient(900px 600px at 15% 10%, rgba(26,73,125,.55), transparent 60%), var(--x-navy) !important; }
+
+@media (max-width: 640px) {
+  #page .vband__head { grid-template-columns: auto minmax(0, 1fr); }
+  #page .vband__head a { grid-column: 1 / -1; margin-top: 10px; }
+}

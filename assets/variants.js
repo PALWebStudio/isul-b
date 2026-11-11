@@ -1,0 +1,81 @@
+/* Prototype-only: floating variant switcher + device preview (desktop · tablet · phone), visible on every page. */
+(function () {
+  const inFrame = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+  if (inFrame) return;   // the page inside the device preview shows no prototype controls
+  const V = [['A', 'index.html', 'Академичен'], ['B', 'variant-b.html', 'Пулс'], ['X', 'variant-x.html', 'B в официалното бордо'], ['C', 'variant-c.html', 'По isul.eu'], ['D', 'variant-d.html', 'Пулс с видео'], ['D2', 'variant-d2.html', 'D: помощ в hero, прозорци'], ['E', 'variant-e.html', 'Клиники — анатомична карта']];
+  const ALL_IC = '<rect x="1.5" y="5" width="12" height="9" rx="1"/><rect x="15" y="6" width="5" height="9" rx="1"/><rect x="20.5" y="9" width="2.5" height="6" rx=".6"/><path d="M5 18h5"/>';
+  const DEV = [['tablet', 'Таблет', 820, 1180, '<rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M11 18.5h2"/>'], ['phone', 'Телефон', 390, 844, '<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>']];
+  const here = location.pathname.split('/').pop() || 'index.html';
+  const nav = document.createElement('nav');
+  nav.className = 'vswitch'; nav.setAttribute('aria-label', 'Варианти на дизайна');
+  nav.innerHTML = '<span>Вариант</span>' + V.map(([k, f, t]) => `<a href="${f}" title="${t}"${f === here ? ' aria-current="page"' : ''}>${k}</a>`).join('') +
+    '<i class="vswitch__sep" aria-hidden="true"></i>' + DEV.map(([k, t, , , ic]) => `<button type="button" data-dev="${k}" title="Виж като ${t.toLowerCase()}" aria-label="Виж като ${t.toLowerCase()}"><svg viewBox="0 0 24 24">${ic}</svg></button>`).join('') + `<button type="button" data-dev="all" title="Компютър, таблет и телефон заедно" aria-label="Компютър, таблет и телефон заедно"><svg viewBox="0 0 24 24">${ALL_IC}</svg></button>`;
+  const css = document.createElement('style');
+  css.textContent = `.vswitch{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:2000;display:flex;align-items:center;gap:4px;padding:5px 5px 5px 14px;border-radius:99px;background:rgba(20,24,34,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px -10px rgba(0,0,0,.5);font:600 12px/1 system-ui,sans-serif;color:#c9cfdb}
+.vswitch span{margin-right:6px;letter-spacing:.06em;text-transform:uppercase}
+.vswitch a,.vswitch button{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;color:#fff;text-decoration:none;font-size:14px;transition:background .2s;border:0;background:none;cursor:pointer;padding:0}
+.vswitch a:hover,.vswitch button:hover{background:rgba(255,255,255,.15)}
+.vswitch a[aria-current],.vswitch button[aria-pressed="true"]{background:#9D305C}
+.vswitch a:focus-visible,.vswitch button:focus-visible{outline:3px solid #F2B705;outline-offset:2px}
+.vswitch svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.vswitch__sep{width:1px;height:20px;background:rgba(255,255,255,.2);margin:0 4px}
+@media (max-width:1024px){.vswitch{bottom:calc(84px + env(safe-area-inset-bottom,0px));left:12px}.vswitch span{display:none}.vswitch{padding:5px}.vswitch__sep,.vswitch button{display:none}}
+.vdev{position:fixed;inset:0;z-index:1999;display:grid;grid-template-rows:auto 1fr;background:radial-gradient(1000px 600px at 50% 0%,#1E2B44,#0A0F1A);font:600 13px/1.2 system-ui,sans-serif;color:#C9D6EA}
+.vdev[hidden]{display:none}
+.vdev__bar{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px}
+.vdev__bar button{font:inherit;padding:8px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;cursor:pointer}
+.vdev__bar button[aria-pressed="true"]{background:#9D305C;border-color:#9D305C}
+.vdev__bar small{opacity:.7;margin:0 6px}
+.vdev__x{margin-left:14px}
+.vdev__stage{position:relative;overflow:hidden}
+.vdev__dev{position:relative;background:#0B0F17;border-radius:44px;padding:14px;box-shadow:0 0 0 2px #2A3447,0 40px 90px -30px rgba(0,0,0,.9);transform-origin:top center}
+.vdev__dev--tablet{border-radius:34px;padding:22px}
+.vdev__dev iframe{display:block;border:0;border-radius:30px;background:#fff}
+.vdev__row{display:flex;align-items:flex-end;justify-content:center;gap:28px}
+.vdev__cell{display:grid;justify-items:center;gap:10px}
+.vdev__cell>small{opacity:.75}
+.vdev__dev--desktop{border-radius:16px;padding:12px 12px 28px}
+.vdev__dev--desktop iframe{border-radius:6px}
+.vdev__wrap{position:absolute;left:50%;top:10px;transform-origin:top center;width:max-content}
+.vdev__dev--tablet iframe{border-radius:14px}`;
+  document.head.appendChild(css);
+  document.body.appendChild(nav);
+
+  /* device preview: the current page (same address, same hash) inside a phone / tablet frame */
+  let ov = null, cur = null;
+  const SIZES = { desktop: ['Компютър', 1440, 900], tablet: ['Таблет', 820, 1180], phone: ['Телефон', 390, 844] };
+  const fit = () => {
+    if (!ov || ov.hidden) return;
+    const w = ov.querySelector('.vdev__wrap'), st = ov.querySelector('.vdev__stage');
+    w.style.transform = 'translateX(-50%)';
+    const s = Math.min(1, (st.clientHeight - 30) / w.offsetHeight, (st.clientWidth - 40) / w.offsetWidth);
+    w.style.transform = `translateX(-50%) scale(${s})`;
+  };
+  const frame = (k) => { const [t, wd, ht] = SIZES[k]; return `<div class="vdev__cell"><div class="vdev__dev vdev__dev--${k}"><iframe title="${t}" style="width:${wd}px;height:${ht}px" src="${location.href}"></iframe></div>${cur === 'all' ? `<small>${t} · ${wd}×${ht}</small>` : ''}</div>`; };
+  function open(k) {
+    if (!ov) {
+      ov = document.createElement('div'); ov.className = 'vdev'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Преглед на устройство');
+      ov.innerHTML = `<div class="vdev__bar">${DEV.map(([d, t, w, h]) => `<button type="button" data-d="${d}">${t} <small>${w}×${h}</small></button>`).join('')}<button type="button" data-d="all">Всички три</button><button type="button" class="vdev__x">Затвори ✕</button></div><div class="vdev__stage"><div class="vdev__wrap"></div></div>`;
+      document.body.appendChild(ov);
+      ov.querySelectorAll('[data-d]').forEach((b) => b.addEventListener('click', () => open(b.dataset.d)));
+      ov.querySelector('.vdev__x').addEventListener('click', close);
+      addEventListener('resize', fit);
+      addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov && !ov.hidden) close(); });
+    }
+    cur = k;
+    ov.querySelector('.vdev__wrap').innerHTML = k === 'all' ? `<div class="vdev__row">${['desktop', 'tablet', 'phone'].map(frame).join('')}</div>` : frame(k);
+    ov.hidden = false; document.documentElement.style.overflow = 'hidden';
+    ov.querySelectorAll('[data-d]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.d === k)));
+    nav.querySelectorAll('[data-dev]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.dev === k)));
+    ov.querySelectorAll('iframe').forEach((f) => f.addEventListener('load', fit));
+    requestAnimationFrame(fit);
+  }
+  function close() {
+    const f = ov.querySelector(cur === 'all' ? '.vdev__dev--desktop iframe' : 'iframe');
+    ov.hidden = true; document.documentElement.style.overflow = ''; cur = null;
+    nav.querySelectorAll('[data-dev]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+    try { const u = f.contentWindow.location.href; if (u && u !== location.href) location.href = u; } catch (e) { /* ignore */ }
+    ov.querySelector('.vdev__wrap').innerHTML = '';
+  }
+  nav.querySelectorAll('[data-dev]').forEach((b) => b.addEventListener('click', () => (cur === b.dataset.dev ? close() : open(b.dataset.dev))));
+})();

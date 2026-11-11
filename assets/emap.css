@@ -1,0 +1,119 @@
+/* Анатомична карта на клиниките (variant E) embedded on the B home page — scoped to .emap */
+.emap{ --night: #0C1626; --night-2: #13233B; --plum: #9D305C; --plum-hi: #FF8FBE; --blue: #1A497D; --gold: #E6C99A;
+  --fg: #EEF2F8; --mute: #A9B6CA; --line: rgba(255,255,255,.12);
+  --f-disp: "Unbounded", "Arial Black", sans-serif; --f-body: "Onest", system-ui, sans-serif;  }
+.emap .e-tools{ display: grid; justify-items: center; gap: 14px; margin-top: 22px; }
+.emap .e-tools input{ width: min(560px, 100%); font: inherit; font-size: 1rem; color: #fff; padding: 13px 20px; border-radius: 99px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.07); outline: 0; }
+.emap .e-tools input::placeholder{ color: #8E9BB0; }
+.emap .e-tools input:focus{ border-color: var(--plum-hi); box-shadow: 0 0 0 5px rgba(255,143,190,.15); }
+.emap .e-chips{ display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.emap .e-chips button{ font: inherit; font-size: .82rem; font-weight: 600; color: #DCE4EF; background: rgba(255,255,255,.05); border: 1px solid var(--line); border-radius: 99px; padding: 7px 13px 7px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.emap .e-chips button i{ width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.emap .e-chips button:hover{ background: rgba(255,255,255,.1); }
+.emap .e-chips button[aria-pressed="true"]{ background: #fff; color: var(--night); border-color: #fff; }
+.emap .atlas{ position: relative; max-width: 1440px; margin: 10px auto 0; padding: 18px clamp(16px, 3vw, 40px) 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 520px) minmax(0, 1fr); gap: 0 18px; min-height: 900px; }
+.emap .atlas__cv{ position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.emap .atlas__mid{ position: relative; }
+.emap .atlas__col{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; position: relative; z-index: 2; }
+.emap .atlas__col--l{ align-items: flex-end; }
+.emap .atlas__col--r{ align-items: flex-start; }
+.emap .ec{ width: min(330px, 100%); display: grid; grid-template-columns: 4px minmax(0, 1fr); gap: 0 12px; align-items: center; padding: 9px 14px 9px 10px; border-radius: 14px; text-align: left; font: inherit; color: var(--fg); cursor: pointer;
+  background: rgba(19,35,59,.72); border: 1px solid var(--line); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .3s, border-color .25s, background .25s, box-shadow .3s; }
+.emap .atlas__col--l .ec{ grid-template-columns: minmax(0, 1fr) 4px; text-align: right; padding: 9px 10px 9px 14px; }
+.emap .ec__bar{ align-self: stretch; border-radius: 4px; background: var(--c); }
+.emap .atlas__col--l .ec__bar{ order: 2; }
+.emap .ec b{ display: block; font-weight: 700; font-size: .92rem; line-height: 1.25; }
+.emap .ec small{ display: block; color: var(--mute); font-size: .74rem; letter-spacing: .02em; margin-top: 2px; }
+.emap .ec small em{ font-style: normal; color: var(--c); font-weight: 700; }
+.emap .ec:hover, .emap .ec.is-hot, .emap .ec:focus-visible{ background: rgba(31,55,90,.95); border-color: var(--c); box-shadow: 0 16px 34px -18px rgba(0,0,0,.8), 0 0 0 1px var(--c); }
+.emap .atlas__col--l .ec:hover, .emap .atlas__col--l .ec.is-hot{ transform: translateX(-6px); }
+.emap .atlas__col--r .ec:hover, .emap .atlas__col--r .ec.is-hot{ transform: translateX(6px); }
+.emap .atlas.has-hot .ec:not(.is-hot){ opacity: .38; }
+.emap .ec.is-off{ opacity: .14 !important; pointer-events: none; }
+.emap .atlas__tip{ position: absolute; transform: translate(-50%, calc(-100% - 14px)); background: #fff; color: var(--night); padding: 6px 12px; border-radius: 99px; font-weight: 700; font-size: .82rem; white-space: nowrap; pointer-events: none; z-index: 3; box-shadow: 0 10px 20px -10px #000; }
+.emap .e-note{ text-align: center; color: var(--mute); font-size: .82rem; margin: 0 auto 60px; padding-inline: 16px; }
+.emap .drawer{ position: fixed; inset: 0; z-index: 60; background: rgba(5,10,20,.55); display: flex; justify-content: flex-end; }
+.emap .drawer[hidden]{ display: none; }
+.emap .drawer__in{ position: relative; width: min(460px, 100%); height: 100%; overflow-y: auto; background: #fff; color: #0F1A2B; animation: drIn .35s cubic-bezier(.2,.8,.2,1); }
+@keyframes drIn{ from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.emap .drawer__x{ position: absolute; right: 14px; top: 14px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); font-size: 1.6rem; cursor: pointer; }
+.emap .dr-img{ aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--blue), var(--plum)); }
+.emap .dr-img img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.emap .dr-body{ padding: 22px 24px 30px; display: grid; gap: 14px; }
+.emap .dr-k{ margin: 0; font-size: .74rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--c); filter: brightness(.75); }
+.emap .dr-body h2{ margin: -6px 0 0; font-family: var(--f-disp); font-weight: 500; font-size: 1.45rem; line-height: 1.15; letter-spacing: -.02em; }
+.emap .dr-organ{ display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: #F3F5F9; font-size: .9rem; }
+.emap .dr-organ i{ width: 10px; height: 10px; border-radius: 50%; background: var(--plum-hi); box-shadow: 0 0 0 3px rgba(255,143,190,.3); }
+.emap .dr-ct{ display: grid; gap: 8px; }
+.emap .dr-ct a, .emap .dr-ct div{ display: grid; padding: 10px 14px; border-radius: 12px; border: 1px solid #E2DDD8; text-decoration: none; color: #0F1A2B; font-weight: 700; }
+.emap .dr-ct span{ font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #4E5868; font-weight: 600; }
+.emap .dr-links{ display: flex; flex-wrap: wrap; gap: 8px; }
+.emap .dr-links a{ padding: 11px 16px; border-radius: 99px; text-decoration: none; font-weight: 700; border: 1.5px solid #0F1A2B; color: #0F1A2B; }
+.emap .dr-links a.is-main{ background: var(--plum); border-color: var(--plum); color: #fff; }
+.emap .dr-links a:hover{ filter: brightness(.92); }
+@media (max-width: 1100px){
+.emap .atlas{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; min-height: 0; }
+.emap .atlas__mid{ display: none; }
+.emap .atlas__cv{ position: fixed; inset: 0; opacity: .32; z-index: 0; }
+.emap .atlas__col{ justify-content: flex-start; align-items: stretch !important; }
+.emap .ec{ width: 100%; }
+.emap .atlas__col--l .ec{ grid-template-columns: 4px minmax(0, 1fr); text-align: left; padding: 9px 14px 9px 10px; }
+.emap .atlas__col--l .ec__bar{ order: 0; }
+.emap .atlas__col--l .ec:hover, .emap .atlas__col--r .ec:hover, .emap .ec.is-hot{ transform: none; }
+}
+@media (max-width: 640px){
+.emap .atlas{ grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce){
+.emap .ec, .emap .drawer__in{ transition: none; animation: none; }
+}
+.emap { position: relative; color: var(--fg); padding-block: clamp(56px, 6vw, 88px) 40px;
+  background: radial-gradient(1100px 700px at 50% 45%, rgba(26,73,125,.42), transparent 65%), radial-gradient(700px 500px at 85% 90%, rgba(157,48,92,.22), transparent 60%), var(--night); overflow: hidden; }
+.emap__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+.emap__head .kick { display: inline-flex; align-items: center; gap: 10px; font-size: .74rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #FF8FBE; }
+.emap__head h2 { margin: 8px 0 8px; font-family: "Unbounded", sans-serif; font-weight: 500; font-size: clamp(1.8rem, 1.2rem + 2vw, 3rem); letter-spacing: -.02em; color: #fff; }
+.emap__head p { margin: 0; max-width: 62ch; color: var(--mute); }
+.emap .e-tools { justify-items: start; margin-top: 22px; }
+.emap .e-chips { justify-content: flex-start; }
+.emap .atlas { max-width: none; padding-inline: 0; min-height: 780px; }
+.emap__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }
+.emap__cta a { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 99px; font-weight: 700; text-decoration: none; }
+.emap__cta .is-main { background: var(--plum); color: #fff; } .emap__cta .is-main:hover { background: #B53A6C; }
+.emap__cta .is-ghost { border: 1px solid rgba(255,255,255,.28); color: #fff; } .emap__cta .is-ghost:hover { background: rgba(255,255,255,.1); }
+.emap .drawer { color: #0F1A2B; }
+/* compact version for the home page */
+.emap { padding-block: 48px 32px; }
+.emap__head h2 { font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.4rem); margin: 6px 0; }
+.emap__head p { font-size: .95rem; }
+.emap .e-tools { margin-top: 16px; gap: 10px; display: flex; flex-wrap: wrap; align-items: center; }
+.emap .e-tools input { width: 300px; padding: 9px 16px; font-size: .9rem; }
+.emap .e-chips button { padding: 5px 11px 5px 9px; font-size: .78rem; }
+.emap .atlas { min-height: 0; height: 640px; padding-top: 8px; padding-bottom: 8px; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px) minmax(0, 1fr); }
+.emap .atlas__col { gap: 3px; }
+.emap .ec { width: min(300px, 100%); padding: 4px 10px 4px 8px; border-radius: 10px; gap: 0 9px; grid-template-columns: 3px minmax(0, 1fr); }
+.emap .atlas__col--l .ec { padding: 4px 8px 4px 10px; grid-template-columns: minmax(0, 1fr) 3px; }
+.emap .ec b { font-size: .8rem; line-height: 1.2; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.emap .ec small { font-size: .66rem; margin-top: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.emap__cta { margin-top: 16px; }
+.emap__cta a { padding: 11px 20px; font-size: .92rem; }
+@media (max-width: 1100px) { .emap .atlas { height: auto; } }
+/* filters in a column on the left of the map */
+.emap__body { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 18px; }
+.emap .e-tools { margin: 0; position: sticky; top: 170px; display: grid; gap: 12px; justify-items: stretch; }
+.emap .e-tools input { width: 100%; }
+.emap .e-chips { display: grid; gap: 6px; justify-content: stretch; }
+.emap .e-chips button { width: 100%; justify-content: flex-start; text-align: left; padding: 8px 12px; font-size: .82rem; border-radius: 10px; }
+.emap .atlas { grid-template-columns: minmax(0, 1fr) minmax(220px, 300px) minmax(0, 1fr); gap: 0 10px; }
+.emap .ec { width: min(280px, 100%); }
+@media (max-width: 1100px) { .emap__body { grid-template-columns: minmax(0, 1fr); } .emap .e-tools { position: static; } .emap .e-chips { display: flex; flex-wrap: wrap; } .emap .e-chips button { width: auto; } }
+/* the map grows with its two columns, so the buttons below are never covered */
+.emap .atlas { height: auto; min-height: 600px; }
+.emap .atlas__col { justify-content: flex-start; gap: 4px; }
+.emap__cta { position: relative; z-index: 3; margin-top: 22px; }
+/* the two buttons sit under the filters in the left column */
+.emap .e-tools .emap__cta { display: grid; gap: 8px; margin: 6px 0 0; justify-content: stretch; }
+.emap .e-tools .emap__cta a { justify-content: center; text-align: center; padding: 10px 12px; font-size: .82rem; line-height: 1.3; border-radius: 12px; }
+.emap .atlas { min-height: 0; height: 640px; }
+.emap .atlas__col { justify-content: space-between; gap: 3px; }
+.emap .atlas { height: 700px; }

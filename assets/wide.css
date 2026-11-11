@@ -1,0 +1,24 @@
+/* Variants B and D: menu and content run edge to edge.
+   One shared side gutter replaces the centred 1240–1320px columns. */
+:root { --gut: clamp(16px, 3.2vw, 56px); }
+.wrap, .vwrap, .hd__in, .hero__in, .cband__wrap, .proto {
+  max-width: none !important; width: 100%; margin-inline: 0 !important;
+  padding-left: var(--gut) !important; padding-right: var(--gut) !important;
+}
+.hd__in { gap: clamp(16px, 2vw, 40px); }
+.hd__nav { flex: 1; justify-content: center; }
+.hero__in { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+/* text blocks stay readable on very wide screens */
+.pg-body { max-width: 980px; }
+.pg-lead, .bm__lead, .anav-sec__head p { max-width: 70ch; }
+/* full-width rows get more columns on large monitors */
+@media (min-width: 1600px) {
+  .cl-cards, .docs-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .news-grid, .ev-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .team { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ql__in { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* events row already bleeds; align its first card with the gutter */
+body[data-variant="d"] .evm__track { padding-left: var(--gut); }
+@media (max-width: 900px) { .hero__in { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (max-width: 900px) { .hero h1 { font-size: clamp(2.4rem, 8.4vw, 4.6rem) !important; overflow-wrap: anywhere; } }

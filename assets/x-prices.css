@@ -1,0 +1,37 @@
+/* Ценоразпис — searchable official price list */
+.pl { background: #fff; padding: 28px 0 56px; color: #2B1E24; }
+.pl__top { display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch; }
+.pl__find { flex: 1 1 420px; display: flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 14px; border: 1px solid #E2DCDF; background: #FAF8F7; }
+.pl__find svg { width: 20px; height: 20px; fill: none; stroke: #666066; stroke-width: 2; display: block; }
+.pl__find input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: inherit; font-size: 1rem; padding: 10px 2px; color: #2B1E24; }
+.pl__find small { color: #666066; white-space: nowrap; font-weight: 600; }
+.pl__find:focus-within { border-color: #5E1F38; background: #fff; box-shadow: 0 0 0 4px rgba(94,31,56,.1); }
+.pl__docs { display: flex; gap: 10px; }
+.pl__docs a { display: flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 14px; border: 1px solid #E2DCDF; color: #2B1E24; text-decoration: none; font-weight: 600; font-size: .9rem; }
+.pl__docs b { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #782B4A; color: #fff; font-size: .68rem; }
+.pl__docs a:first-child b { background: #1D7044; }
+.pl__docs a:hover { border-color: #5E1F38; }
+.pl__fee { margin: 14px 0 22px; padding: 12px 16px; border-radius: 12px; background: #FFF6E5; color: #6B4A00; font-size: .9rem; line-height: 1.5; }
+.pl__grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 28px; align-items: start; }
+.pl__nav { position: sticky; top: 150px; max-height: calc(100vh - 170px); overflow-y: auto; display: grid; gap: 2px; padding-right: 6px; scrollbar-width: thin; }
+.pl__nav a { display: flex; justify-content: space-between; gap: 10px; padding: 8px 10px; border-radius: 10px; color: #55424B; text-decoration: none; font-size: .86rem; line-height: 1.3; }
+.pl__nav a span { flex-shrink: 0; font-size: .74rem; color: #8E8086; font-weight: 700; }
+.pl__nav a:hover { background: #FAF8F7; color: #2B1E24; }
+.pl__nav a.is-on { background: #2B1E24; color: #fff; } .pl__nav a.is-on span { color: #E7C9D5; }
+.pl__g { scroll-margin-top: 150px; margin-bottom: 30px; }
+.pl__g h2 { margin: 0 0 10px; padding-bottom: 10px; border-bottom: 2px solid #2B1E24; font-family: "Unbounded", sans-serif; font-weight: 500; font-size: clamp(1.1rem, .95rem + .5vw, 1.4rem); }
+.pl__sub h3 { margin: 16px 0 6px; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #782B4A; }
+.pl table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.pl thead th { text-align: left; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #8E8086; padding: 8px 10px; border-bottom: 1px solid #E2DCDF; }
+.pl tbody td { padding: 10px; border-bottom: 1px solid #F4EFF0; vertical-align: top; }
+.pl tbody tr:hover td { background: #FCF7F9; }
+.pl__code { width: 90px; color: #8E8086; font-variant-numeric: tabular-nums; font-size: .82rem; white-space: nowrap; }
+.pl__name small { display: block; margin-top: 3px; color: #666066; font-size: .78rem; }
+.pl__unit { width: 90px; color: #666066; font-size: .84rem; }
+.pl__price { width: 120px; text-align: right; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pl thead th:last-child { text-align: right; }
+.pl__note { margin: 10px 0 0; font-size: .84rem; color: #666066; line-height: 1.5; }
+.pl__empty { padding: 30px; text-align: center; color: #666066; }
+.pl [hidden] { display: none !important; }
+@media (max-width: 1000px) { .pl__grid { grid-template-columns: minmax(0, 1fr); } .pl__nav { display: flex; overflow-x: auto; position: sticky; top: 64px; z-index: 5; background: #fff; padding: 8px 0; max-height: none; } .pl__nav a { flex-shrink: 0; white-space: nowrap; border: 1px solid #E2DCDF; border-radius: 99px; } }
+@media (max-width: 640px) { .pl__code, .pl thead th:first-child, .pl__unit, .pl thead th:nth-child(3) { display: none; } .pl__docs { width: 100%; } .pl__docs a { flex: 1; } }

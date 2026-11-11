@@ -1,0 +1,195 @@
+/* =========================================================
+   Variants D and D2 — revised inner pages (everything except the home page and the Press centre).
+   Same language as the Press centre: compact navy header, a white sticky bar for section tabs,
+   calm white/mist content, plum only as an accent, tight vertical rhythm — no large empty areas.
+   ========================================================= */
+
+/* ---------- 1. Page header: compact ---------- */
+.pg2 { padding-block: clamp(26px, 2.6vw, 38px) clamp(24px, 2.4vw, 34px) !important; }
+.pg2 .crumbs { margin: 0 0 10px; font-size: .82rem; }
+.pg2 h1 { margin: 0; font-size: clamp(1.7rem, 1.2rem + 1.5vw, 2.5rem) !important; line-height: 1.12; max-width: 30ch; }
+.pg2 .pg-lead { margin: 10px 0 0; font-size: 1rem; line-height: 1.5; max-width: 72ch; }
+.pg2 .pg-cta, .pg2 .pg-search, .pg2 .dix__tools { margin-top: 16px; }
+.pg2 .pg-search { max-width: 560px; }
+
+/* ---------- 2. Section tabs: white sticky bar under the header ---------- */
+.pg2-sub { position: sticky; top: 76px; z-index: 30; background: rgba(255,255,255,.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--x-line, #E3E8EF); }
+.pg2-sub .pg-sub { display: flex; gap: 2px; margin: 0 !important; overflow-x: auto; scrollbar-width: none; }
+.pg2-sub .pg-sub a { flex-shrink: 0; padding: 16px 14px 14px !important; border-radius: 0 !important; background: none !important; color: var(--x-mute, #5A6476) !important; font-weight: 600; font-size: .92rem; border-bottom: 3px solid transparent; box-shadow: none !important; }
+.pg2-sub .pg-sub a:hover { color: var(--x-ink, #0F1A2B) !important; }
+.pg2-sub .pg-sub a[aria-current] { color: var(--x-ink, #0F1A2B) !important; border-bottom-color: var(--x-plum, #9D305C); }
+
+/* ---------- 3. Content pages (two columns: content + side panel) ---------- */
+#page .rp { padding-block: 28px 48px; }
+#page .rp__grid { grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; }
+#page .rp__side { top: 140px; gap: 12px; }
+#page .rp__main { display: grid; gap: 14px; align-content: start; }
+#page .rs { border-radius: 16px; padding: 22px 24px; box-shadow: none; }
+#page .rs__head { gap: 0; margin-bottom: 10px; }
+#page .rs__n { display: none; }
+#page .rs__head h2 { padding-top: 0; font-size: clamp(1.05rem, .95rem + .4vw, 1.25rem); }
+#page .rs__head h2::before { content: ""; display: block; width: 28px; height: 3px; margin-bottom: 10px; border-radius: 3px; background: var(--x-plum, #9D305C); }
+#page .rs p, #page .rs li { line-height: 1.65; }
+#page .rl-gallery--1 .rl-img { max-height: 340px; }
+#page .rl-img img { max-height: 340px; object-fit: cover; width: 100%; }
+#page .rfind { margin: 0; }
+#page .ra { border-radius: 14px; padding: 16px 18px; }
+#page .pg-src { margin: 6px 0 0; }
+
+/* ---------- 4. Clinic page: tighter rhythm, smaller display type ---------- */
+#page .ch { padding-block: 22px 28px; }
+#page .ch__in { grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; }
+#page .ch h1 { font-size: clamp(1.7rem, 1.2rem + 1.5vw, 2.5rem); margin-bottom: 10px; }
+#page .ch__lead { font-size: .98rem; margin-bottom: 14px; }
+#page .ch__fig { aspect-ratio: 16 / 10; }
+#page .ch__facts { margin-top: 18px; padding-top: 14px; }
+#page .cnav__links a { padding: 15px 12px; }
+#page .cs { padding-block: 40px; scroll-margin-top: 140px; }
+#page .cs__h { font-size: clamp(1.35rem, 1.1rem + .9vw, 1.9rem); margin-bottom: 20px; line-height: 1.15; }
+#page .cs__h br { display: none; }
+#page .cs__h em { display: inline; }
+#page .ck { margin-bottom: 8px; }
+#page .cs__about { gap: 24px; }
+#page .chd { gap: 24px; }
+#page .chd img, #page .chd__ph { max-width: 150px; }
+#page .chd h2 { font-size: clamp(1.3rem, 1.1rem + .8vw, 1.8rem); }
+#page .cs--dark { padding-block: 32px; }
+#page .cstep { gap: 12px; }
+
+/* ---------- 5. Unit and doctor pages ---------- */
+#page .ch--unit h1 { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.2rem); }
+#page .usib { top: 76px; }
+#page .dp { padding-block: 28px 44px; }
+#page .dp__grid { grid-template-columns: 240px minmax(0, 1fr); gap: 32px; }
+#page .dp__body { margin-top: 30px; gap: 28px; }
+
+/* ---------- 6. Lists, hubs, grids ---------- */
+#page .cl-groups { padding-block: 24px 44px !important; }
+#page .cl-group { margin-bottom: 28px; }
+#page .cl-group h2 { margin-bottom: 14px; padding-bottom: 10px; font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem) !important; }
+#page .hub { padding-block: 24px 44px !important; gap: 14px; }
+#page .hub__col { padding: 18px 20px; }
+#page .ev-grid { padding-block: 24px 44px; }
+#page .dix { padding-block: 22px 44px; }
+#page .vband--page { padding-block: 28px 44px; }
+#page .pg2-top { padding-top: 24px; }
+#page .book-cards { margin: 0; }
+#page .ct-top { padding-top: 24px; }
+#page .ct-route-cta { margin-bottom: 0; }
+#page .anav-sec--page { padding-block: 28px 44px; }
+
+/* the rich content placed right after a top block (contacts / book) starts closer */
+#page .ct-route-cta + .rp, #page .pg2-top + .rp { padding-top: 18px; }
+
+@media (max-width: 1000px) {
+  #page .rp__grid, #page .ch__in { grid-template-columns: minmax(0, 1fr); }
+  #page .dp__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) { .pg2-sub { top: 64px; } }
+
+/* content sections one under another — no half-width cards leaving holes */
+#page .rp__main { grid-template-columns: minmax(0, 1fr) !important; }
+#page .rs--half { grid-column: auto !important; }
+
+/* ---------- Ръководство ---------- */
+.mg { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; padding-bottom: 20px; }
+.mg__c { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 16px; align-items: center; padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid var(--x-line, #E3E8EF); }
+.mg__c--lead { grid-column: 1 / -1; background: var(--x-mist, #F3F6FA); border-color: transparent; }
+.mg__av { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: var(--x-mist, #F3F6FA); color: var(--x-blue, #1A497D); font-family: "Unbounded", sans-serif; font-size: 1.05rem; }
+.mg__c--lead .mg__av { background: #fff; }
+.mg__av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.mg__c b { display: block; font-size: 1.02rem; color: var(--x-ink, #0F1A2B); }
+.mg__c b a { color: inherit; text-decoration: none; } .mg__c b a:hover { color: var(--x-plum, #9D305C); }
+
+.mg__mail { display: inline-block; margin-top: 6px; font-size: .86rem; font-weight: 600; color: var(--x-blue, #1A497D); }
+.mg__c > .mg__av { display: grid; margin: 0; font-size: 1.05rem; color: var(--x-blue, #1A497D); }
+.mg__c > div > span { display: block; margin-top: 2px; font-size: .88rem; color: var(--x-mute, #5A6476); }
+
+/* =========================================================
+   v3 — balanced between nursing-bg (photo header, pill tabs, warm calm blocks)
+   and NKB (task tiles, numbered rows with a checklist card, help band) in ISUL colours.
+   ========================================================= */
+/* ---------- header: copy left, photo right ---------- */
+.h3 { position: relative; overflow: hidden; color: #fff; background: radial-gradient(900px 500px at 8% 0%, rgba(26,73,125,.6), transparent 60%), var(--x-navy, #0C1626); }
+.h3::after { content: ""; position: absolute; right: -60px; bottom: -80px; width: 340px; aspect-ratio: 1017 / 526; background: url('brand/isul-crown-white.svg') center / contain no-repeat; opacity: .05; pointer-events: none; }
+.h3__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 420px); gap: clamp(24px, 4vw, 64px); align-items: center; padding-block: 28px 30px; }
+.h3 .crumbs, .h3 .crumbs a { color: #9FB3CF; font-size: .82rem; }
+.h3 .crumbs { margin: 0 0 18px; }
+.h3__kick { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #E6C99A; }
+.h3__kick span { width: 26px; height: 2px; background: var(--x-plum, #9D305C); }
+.h3 h1 { margin: 0; font-family: "Unbounded", sans-serif; font-weight: 500; font-size: clamp(1.8rem, 1.2rem + 1.8vw, 2.9rem); line-height: 1.08; letter-spacing: -.025em; color: #fff; max-width: 22ch; }
+.h3__lead { margin: 14px 0 0; max-width: 60ch; color: #C9D6EA; line-height: 1.55; }
+.h3 .pg-cta, .h3 .pg-search { margin-top: 18px; }
+.h3__fig { position: relative; margin: 0; aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px -36px rgba(0,0,0,.9); }
+.h3__fig img { width: 100%; height: 100%; object-fit: cover; }
+.h3__fig.nwm::before { width: 34px; right: 18px; bottom: 16px; }
+/* ---------- pill tabs on a light bar ---------- */
+.h3-sub { position: sticky; top: 76px; z-index: 30; background: rgba(243,246,250,.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--x-line, #E3E8EF); }
+.h3-sub .pg-sub { display: flex; gap: 6px; margin: 0 !important; padding-block: 10px; overflow-x: auto; scrollbar-width: none; }
+.h3-sub .pg-sub::-webkit-scrollbar { display: none; }
+.h3-sub .pg-sub a { flex-shrink: 0; padding: 8px 16px !important; border-radius: 99px !important; background: transparent !important; color: var(--x-ink, #0F1A2B) !important; font-weight: 600; font-size: .88rem; box-shadow: none !important; border: 0; }
+.h3-sub .pg-sub a:hover { background: #fff !important; }
+.h3-sub .pg-sub a[aria-current] { background: var(--x-plum, #9D305C) !important; color: #fff !important; }
+/* ---------- in-page contents (NKB) ---------- */
+.r3-toc { border-bottom: 1px solid var(--x-line, #E3E8EF); background: #fff; }
+.r3-toc__in { display: flex; gap: 4px 22px; overflow-x: auto; scrollbar-width: none; }
+.r3-toc a { flex-shrink: 0; display: flex; gap: 6px; padding: 14px 0; color: var(--x-mute, #5A6476); text-decoration: none; font-size: .86rem; font-weight: 500; border-bottom: 2px solid transparent; white-space: nowrap; max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
+.r3-toc a span { color: var(--x-plum, #9D305C); font-weight: 700; }
+.r3-toc a:hover, .r3-toc a.is-on { color: var(--x-ink, #0F1A2B); border-bottom-color: var(--x-plum, #9D305C); }
+/* ---------- numbered rows ---------- */
+#page .rp3 { background: #fff; padding: 0 0 20px; }
+.rp3__in { display: grid; }
+.r3 { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(280px, 400px); gap: 0 32px; align-items: start; padding: 34px 0; border-bottom: 1px solid var(--x-line, #E3E8EF); scroll-margin-top: 140px; background: none !important; border-radius: 0 !important; box-shadow: none !important; }
+.r3--solo { grid-template-columns: 72px minmax(0, 1fr); }
+.r3__n { font-family: "Unbounded", sans-serif; font-size: 2rem; line-height: 1; color: #C8D2E0; }
+.r3__main h2 { margin: 2px 0 12px; font-family: "Unbounded", sans-serif; font-weight: 500; font-size: clamp(1.15rem, 1rem + .5vw, 1.45rem); line-height: 1.25; color: var(--x-ink, #0F1A2B); }
+.r3__sub { margin: -6px 0 12px; color: var(--x-mute, #5A6476); }
+.r3__body { color: #2B3547; line-height: 1.7; max-width: 78ch; }
+.r3__body p { margin: 0 0 .8em; }
+.r3__body .rl-img img { max-height: 320px; width: 100%; object-fit: cover; }
+.r3.is-long:not(.is-open) .r3__body { max-height: 260px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+.r3 .rs__more { margin-top: 8px; border: 0; background: none; padding: 0; font: inherit; font-weight: 700; color: var(--x-plum, #9D305C); cursor: pointer; }
+.r3__card { padding: 20px 22px; border-radius: 16px; background: var(--x-mist, #F3F6FA); }
+.r3__k { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--x-plum, #9D305C); }
+.r3__k span { width: 7px; height: 7px; border-radius: 50%; background: var(--x-plum, #9D305C); }
+.r3__card .rl-checks, .r3__card .rl-list { margin: 0; }
+.r3__card .rl-links, .r3__card .rl-doc { background: #fff; }
+.r3__card > * + * { margin-top: 8px; }
+/* ---------- section hub tiles (NKB) ---------- */
+.t3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); margin: 28px 0 10px; border: 1px solid var(--x-line, #E3E8EF); border-radius: 18px; overflow: hidden; background: var(--x-line, #E3E8EF); gap: 1px; }
+.t3__c { position: relative; display: grid; gap: 14px; align-content: start; min-height: 128px; padding: 20px 22px; background: #fff; color: var(--x-ink, #0F1A2B); text-decoration: none; transition: background .2s; }
+.t3__c svg { width: 26px; height: 26px; fill: none; stroke: var(--x-plum, #9D305C); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.t3__c b { font-size: 1rem; line-height: 1.3; padding-right: 30px; }
+.t3__go { position: absolute; right: 18px; top: 18px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--x-line, #E3E8EF); color: var(--x-ink, #0F1A2B); transition: background .2s, color .2s, border-color .2s; }
+.t3__c:hover { background: var(--x-mist, #F3F6FA); }
+.t3__c:hover .t3__go { background: var(--x-plum, #9D305C); border-color: var(--x-plum, #9D305C); color: #fff; }
+/* ---------- contacts from the page ---------- */
+.r3-use { padding: 30px 0 6px; }
+.r3-use h2 { margin: 0 0 14px; font-family: "Unbounded", sans-serif; font-weight: 500; font-size: 1.15rem; }
+.r3-use__g { display: flex; flex-wrap: wrap; gap: 10px; }
+.r3-use__g a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 99px; border: 1px solid var(--x-line, #E3E8EF); color: var(--x-ink, #0F1A2B); font-weight: 600; text-decoration: none; }
+.r3-use__g a:hover { border-color: var(--x-plum, #9D305C); color: var(--x-plum, #9D305C); }
+.r3-use__g svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+/* ---------- big phone cards (contacts / book) ---------- */
+#page .ct-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; padding-top: 28px; }
+#page .ct-card { padding: 22px; border-radius: 18px !important; box-shadow: none !important; }
+#page .ct-card:first-child { background: var(--x-navy, #0C1626) !important; border-color: var(--x-navy, #0C1626) !important; }
+#page .ct-card:first-child span, #page .ct-card:first-child b { color: #fff !important; }
+#page .ct-card b { font-family: "Unbounded", sans-serif; font-weight: 500; font-size: 1.35rem; }
+#page .ct-card span { font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--x-mute, #5A6476); }
+/* ---------- closing help band ---------- */
+.hb3 { background: radial-gradient(900px 500px at 90% 0%, rgba(157,48,92,.28), transparent 60%), var(--x-navy, #0C1626); color: #fff; }
+.hb3__in { display: grid; grid-template-columns: minmax(240px, 1.1fr) repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; padding-block: 44px; }
+.hb3__t h2 { margin: 0 0 8px; font-family: "Unbounded", sans-serif; font-weight: 500; font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); color: #fff; }
+.hb3__t p:last-child { margin: 0; color: #C9D6EA; }
+.hb3__c { display: grid; align-content: start; gap: 6px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); color: #fff; text-decoration: none; transition: background .2s, transform .2s; }
+.hb3__c:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+.hb3__c small { font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #E6C99A; }
+.hb3__c b { font-family: "Unbounded", sans-serif; font-weight: 500; font-size: 1.3rem; }
+.hb3__c span { color: #C9D6EA; font-size: .88rem; }
+.hb3__c--emg small { color: #FF9FB0; }
+@media (max-width: 1100px) { .hb3__in { grid-template-columns: repeat(3, minmax(0, 1fr)); } .hb3__t { grid-column: 1 / -1; } .r3 { grid-template-columns: 56px minmax(0, 1fr); } .r3__card { grid-column: 2; margin-top: 16px; } }
+@media (max-width: 760px) { .h3__in { grid-template-columns: minmax(0, 1fr); } .h3__fig { display: none; } .hb3__in { grid-template-columns: minmax(0, 1fr); } .r3 { grid-template-columns: minmax(0, 1fr); } .r3__n { font-size: 1.4rem; margin-bottom: 6px; } .r3__card { grid-column: 1; } .h3-sub { top: 64px; } }
+#page .r3.rs { border: 0 !important; border-bottom: 1px solid var(--x-line, #E3E8EF) !important; padding: 34px 0 !important; }
+.t3 { background: none; border: 0; border-radius: 0; overflow: visible; gap: 12px; }
+.t3__c { border: 1px solid var(--x-line, #E3E8EF); border-radius: 16px; }

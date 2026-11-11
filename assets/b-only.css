@@ -1,0 +1,16 @@
+/* Variant B only — hand-written, loaded last by tools/build-variant-b.mjs (not generated, edit here).
+   Every inner page header in the navy of „Клиники и отделения“ (body.b-cc .pg-hero--x in cc.css):
+   the clinic and unit pages, „За нас“ and the patient portal had their own blue-pink gradients. */
+body.b-cc .kx .kx-ph,
+body.b-cc .ab .ab-hx,
+body.b-cc .phx-hero {
+  background:
+    linear-gradient(90deg, rgba(12,22,38,.95) 0%, rgba(12,22,38,.84) 38%, rgba(12,22,38,.55) 70%, rgba(12,22,38,.7) 100%),
+    linear-gradient(0deg, rgba(12,22,38,.85), transparent 45%),
+    #0c1626 !important;
+}
+body.b-cc .kx .kx-ph::after,
+body.b-cc .ab .ab-hx::after { background: radial-gradient(700px 380px at 12% 0%, rgba(26,73,125,.55), transparent 65%) !important; }
+/* the patient portal: its gold rule under the header stays; the blue glow of the other headers is added behind the text */
+body.b-cc .phx-hero { isolation: isolate; }
+body.b-cc .phx-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(700px 380px at 12% 0%, rgba(26,73,125,.55), transparent 65%); }

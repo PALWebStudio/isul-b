@@ -1,0 +1,41 @@
+/* Синя лента „Клиниките на ИСУЛ“ — same card shape as „Медицински направления“ */
+.cband { position: relative; overflow: hidden; color: #fff; padding-block: clamp(52px, 6vw, 88px);
+  background: radial-gradient(900px 500px at 15% 0%, rgba(91,155,224,.45), transparent 60%), radial-gradient(800px 500px at 90% 100%, rgba(10,30,70,.7), transparent 60%), linear-gradient(135deg, #1A497D, #16579D 55%, #123B66); }
+.cband::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 60%, #000, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 50% 60%, #000, transparent 70%); }
+.cband__wrap { position: relative; max-width: 1320px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); }
+.cband__head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+.cband__kick { font-size: .76rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #BFD6F2; }
+.cband h2 { margin: 8px 0 0; font-family: "Unbounded", "Arial Black", sans-serif; font-weight: 500; font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3.2rem); letter-spacing: -.03em; color: #fff;
+  text-shadow: 0 1px 0 #DCE7F5, 0 2px 0 #C2D4EC, 0 3px 0 #A8C0E2, 0 4px 0 #8EADD8, 0 5px 0 #7499CC, 0 6px 14px rgba(5,20,45,.55); }
+.cband__ctl { display: flex; gap: 8px; }
+.cband__ctl button { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); color: #fff; font-size: 1.2rem; cursor: pointer; transition: background .2s, transform .2s; }
+.cband__ctl button:hover { background: #fff; color: #1A497D; transform: scale(1.06); }
+.cband__stage { perspective: 1700px; height: 470px; display: grid; place-items: center; touch-action: pan-y; cursor: grab; user-select: none; }
+.cband__stage:active { cursor: grabbing; }
+.cband__ring { list-style: none; margin: 0; padding: 0; position: relative; width: 250px; height: 340px; transform-style: preserve-3d; transition: transform 1s cubic-bezier(.2,.8,.2,1); }
+.cband__ring > li { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.ccard3 { position: relative; display: block; height: 100%; border-radius: 22px; overflow: hidden; text-decoration: none; color: #fff;
+  border: 1px solid rgba(255,255,255,.35); box-shadow: 0 30px 50px -25px rgba(0,10,30,.7); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .4s, border-color .3s; }
+.ccard3 img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.8,.2,1), filter .4s; filter: saturate(.9); pointer-events: none; }
+.ccard3__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,59,102,.05) 20%, rgba(18,59,102,.55) 55%, rgba(10,32,64,.95)); }
+.ccard3__txt { position: absolute; left: 20px; right: 20px; bottom: 22px; display: grid; gap: 4px; transform: translateZ(40px); }
+.ccard3__txt small { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #CFE0F5; }
+.ccard3__txt b { font-family: "Unbounded", "Arial Black", sans-serif; font-weight: 700; font-size: 1.42rem; line-height: 1.08; letter-spacing: -.02em; color: #fff;
+  text-shadow: 0 1px 0 #E3ECF7, 0 2px 0 #C9D9EE, 0 3px 0 #AFC5E4, 0 4px 0 #94B1DA, 0 5px 0 #7A9DCF, 0 7px 12px rgba(0,10,30,.6); }
+.ccard3__go { position: absolute; right: 16px; top: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.9); color: #1A497D; font-weight: 800; opacity: 0; transform: scale(.8); transition: opacity .3s, transform .3s; }
+.cband__ring > li.is-front .ccard3 { border-color: #fff; box-shadow: 0 40px 70px -25px rgba(0,10,30,.85), 0 0 0 3px rgba(255,255,255,.15); }
+.cband__ring > li.is-front .ccard3__go, .ccard3:hover .ccard3__go { opacity: 1; transform: none; }
+.ccard3:hover img, .cband__ring > li.is-front img { transform: scale(1.07); filter: saturate(1.05); }
+.ccard3:focus-visible { outline: 3px solid #F2B705; outline-offset: 3px; }
+.cband__all { display: table; margin: 6px auto 0; color: #fff; font-weight: 700; text-decoration: none; padding: 12px 22px; border-radius: 99px; border: 1px solid rgba(255,255,255,.4); transition: background .2s, color .2s; }
+.cband__all:hover { background: #fff; color: #1A497D; }
+@media (max-width: 760px) {
+  .cband__ctl { display: none; }
+  .cband__stage { perspective: none; height: auto; display: block; cursor: auto; margin-top: 22px; }
+  .cband__ring { width: auto; height: auto; transform: none !important; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; margin-inline: calc(-1 * clamp(16px, 4vw, 48px)); padding-inline: clamp(16px, 4vw, 48px); }
+  .cband__ring > li { position: relative; inset: auto; flex: 0 0 72%; height: 360px; transform: none !important; scroll-snap-align: center; }
+  .cband__all { margin-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .cband__ring, .ccard3, .ccard3 img { transition: none; } }
