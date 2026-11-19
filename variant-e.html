@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Клиники и отделения · ИСУЛ (вариант E)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/e.css?v=1">
+<style>.proto,.vswitch{display:none!important}</style>
+</head>
+<body>
+<a class="skip" href="#atlas">Към клиниките</a>
+
+<header class="e-hd">
+  <a class="e-brand" href="variant-d.html"><img src="assets/brand/isul-crest-white.svg" width="1017" height="1737" alt=""><span><b>ИСУЛ</b><small>УМБАЛ „Царица Йоанна“</small></span></a>
+  <nav aria-label="Основна навигация">
+    <a href="variant-d.html#/patient">За пациента</a>
+    <a href="variant-e.html" aria-current="page">Клиники</a>
+    <a href="variant-d.html#/doctors">Лекари</a>
+    <a href="variant-d.html#/news">Новини</a>
+    <a href="variant-d.html#/contacts">Контакти</a>
+  </nav>
+  <a class="e-cta" href="https://www.superdoc.bg" target="_blank" rel="noopener">Запази час</a>
+</header>
+
+<main>
+  <section class="e-intro">
+    <p class="e-kick"><span></span>Анатомична карта на болницата</p>
+    <h1>Клиники и отделения</h1>
+    <p class="e-lead">27 клиники, отделения и лаборатории, свързани с органите и системите, които лекуват. Посочете клиника, за да видите връзката, или орган, за да видите кой го лекува.</p>
+    <div class="e-tools">
+      <label class="vh" for="eq">Търсене на клиника</label>
+      <input id="eq" type="search" placeholder="Търсене: кардиология, лаборатория, бъбрек…" autocomplete="off">
+      <div class="e-chips" id="echips" role="group" aria-label="Филтър по вид"></div>
+    </div>
+  </section>
+
+  <section class="atlas" id="atlas" aria-label="Клиники, свързани с анатомията">
+    <canvas class="atlas__cv" id="ecv" aria-hidden="true"></canvas>
+    <ul class="atlas__col atlas__col--l" id="colL"></ul>
+    <div class="atlas__mid" aria-hidden="true"><span class="atlas__tip" id="etip" hidden></span></div>
+    <ul class="atlas__col atlas__col--r" id="colR"></ul>
+  </section>
+
+  <p class="e-note">Връзките са ориентировъчни и служат за навигация. Лабораториите и диагностичните звена работят за всички клиники.</p>
+</main>
+
+<aside class="drawer" id="drawer" hidden aria-labelledby="dr-h">
+  <div class="drawer__in">
+    <button type="button" class="drawer__x" id="drx" aria-label="Затвори">×</button>
+    <div id="drbody"></div>
+  </div>
+</aside>
+
+<script src="assets/content/isul-content.js?v=3"></script>
+<script src="assets/e.js?v=4"></script>
+<script src="assets/variants.js?v=12"></script>
+</body>
+</html>
