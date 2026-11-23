@@ -13,7 +13,7 @@ const SLOGANS = [
 const PHONE = { label: '02 9432 170', tel: '+35929432170', ok: true };       // Телефонна централа
 const PHONE_REG = { label: '02 9432 207', tel: '+35929432207', ok: true };   // Медицински център — записване на час
 const PHONE_DESK = { label: '02 9432 203', tel: '+35929432203', ok: true };  // Регистратура
-const PHONE_EMG = { label: '02 9432 637', tel: '+35929432637', ok: true };   // Спешно отделение
+const PHONE_EMG = { label: '02 9432 203', tel: '+35929432203', ok: true };   // Спешно отделение
 const ADDRESS = 'ул. „Бяло море“ № 8, София 1527';
 const MAPS = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent('УМБАЛ Царица Йоанна ИСУЛ, ул. Бяло море 8, София 1527');
 const LAB_URL = 'https://lab.isul.eu/';

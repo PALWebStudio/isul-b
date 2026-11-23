@@ -19,7 +19,7 @@
     copy: I('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>')
   };
   const clinics = Object.values(C).sort((a, b) => a.name.localeCompare(b.name, 'bg'));
-  const PHONES = [['Телефонна централа', '02 9432 170'], ['Записване на час', '02 9432 207'], ['Регистратура', '02 9432 203'], ['Спешно отделение', '02 9432 637']];
+  const PHONES = [['Телефонна централа', '02 9432 170'], ['Записване на час', '02 9432 207'], ['Спешно отделение · регистратура', '02 9432 203']];
 
   root.innerHTML = `
   <article class="cct cct--book">
@@ -36,8 +36,8 @@
 
   <article class="cct cct--emg">
     <div class="cct__top"><span class="cct__ico">${ICO.plus}</span><div><h3>Спешно отделение</h3><p class="cct__live"><span class="cct__dot"></span>Работи денонощно · 24/7</p></div></div>
-    <a class="cct__big" href="tel:+35929432637">02 9432 637</a>
-    <div class="cct__row"><a class="cct__btn cct__btn--red" href="tel:+35929432637">${ICO.phone}Обади се</a><a class="cct__btn" href="route.html">${ICO.pin}Маршрут</a><a class="cct__btn" href="#/clinic/20">Информация</a></div>
+    <a class="cct__big" href="tel:+35929432203">02 9432 203</a>
+    <div class="cct__row"><a class="cct__btn cct__btn--red" href="tel:+35929432203">${ICO.phone}Обади се</a><a class="cct__btn" href="route.html">${ICO.pin}Маршрут</a><a class="cct__btn" href="#/clinic/20">Информация</a></div>
     <p class="cct__note">При опасност за живота се обадете на <a href="tel:112"><b>112</b></a>.</p>
   </article>
 
@@ -70,7 +70,7 @@
 
   // compact mode: a row of buttons; the matching tile drops down underneath when clicked
   (function compact() {
-    const T = [['book', ICO.cal, 'Запази час', 'СуперДок · 02 9432 207'], ['emg', ICO.plus, 'Спешно отделение', '24/7 · 02 9432 637'], ['lab', ICO.lab, 'Лабораторни резултати', 'lab.isul.eu'], ['route', ICO.pin, 'Как да стигна', 'ул. „Бяло море“ 8'], ['phones', ICO.phone, 'Важни телефони', 'Централа · Регистратура']];
+    const T = [['book', ICO.cal, 'Запази час', 'СуперДок · 02 9432 207'], ['emg', ICO.plus, 'Спешно отделение', '24/7 · 02 9432 203'], ['lab', ICO.lab, 'Лабораторни резултати', 'lab.isul.eu'], ['route', ICO.pin, 'Как да стигна', 'ул. „Бяло море“ 8'], ['phones', ICO.phone, 'Важни телефони', 'Централа · Регистратура']];
     const bar = document.createElement('div'); bar.className = 'ccb'; bar.setAttribute('role', 'tablist');
     bar.innerHTML = T.map(([k, ic, t, sub]) => `<button type="button" class="ccb__b ccb__b--${k}" role="tab" aria-selected="false" aria-controls="cct-${k}" data-k="${k}"><span class="cct__ico">${ic}</span><span><b>${t}</b><small>${sub}</small></span><i aria-hidden="true"></i></button>`).join('');
     root.before(bar);

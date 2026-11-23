@@ -26,6 +26,20 @@
 .cx-opts button:hover { background: #F6EEF2; box-shadow: inset 3px 0 0 #9d305c; }
 .cx-opts button[aria-pressed="true"] { background: #9d305c; color: #fff; box-shadow: none; }
 .cx-opts button[aria-pressed="true"] span { color: #ffb9d5; }
+.cx-opts--c button { min-height: 0; padding: 7px 12px; font-size: .86rem; line-height: 1.3; text-align: left; }
+.cx-opts--c button[data-g] { min-height: 42px; font-size: .94rem; margin-bottom: 4px; }
+.cx-opts--c button[data-c] { justify-content: flex-start; }
+.cx-opts--c button em { font-style: normal; }
+.cx-opts--c button svg { width: 17px; height: 17px; stroke-width: 1.8; color: #9d305c; opacity: .75; }
+.cx-opts--c button:hover svg { opacity: 1; }
+.cx-opts--c button[aria-pressed="true"] svg { color: #fff; opacity: 1; }
+/* clinic icon (Lucide line icons, as on the МБАЛ Благоевград site) */
+.cx-ic { justify-self: start; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; color: #fff; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); margin-bottom: 4px; }
+.cx-ic svg { width: 19px; height: 19px; }
+.cx-row__g { display: flex; align-items: center; gap: 6px; }
+.cx-row__g svg { width: 16px; height: 16px; color: #9d305c; flex: none; }
+.cx-pill { display: inline-flex; align-items: center; gap: 6px; }
+.cx-pill svg { width: 15px; height: 15px; flex: none; }
 .cx-side__acc { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 8px 10px; margin-bottom: 6px; border: 0; border-top: 1px solid #e3e8ef; background: none; color: #0f1a2b; font-size: .94rem; font-weight: 600; text-align: left; }
 .cx-side__acc span { font-size: .8rem; color: #8a94a6; }
 .cx-side__acc svg { margin-left: auto; transition: transform .2s; color: #9d305c; }
@@ -217,7 +231,64 @@
 .cx-card__tel svg { display: none; }
 .cx-card__go { right: 10px; bottom: 10px; width: 22px; height: 22px; font-size: .75rem; }
 .cx-card__go svg { width: 13px; height: 13px; }
+.cx-ic { width: 28px; height: 28px; border-radius: 9px; margin-bottom: 5px; }
+.cx-ic svg { width: 16px; height: 16px; }
 @media (max-width: 1320px) { .cx-results.is-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 1100px) { .cx-results.is-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .cx-results.is-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .cx-card__tel { display: none; }   /* cards: only the name and the white "N звена" badge */
+
+/* ---- the expanded clinic, calm version (.cxp): white card in the style of the clinic page („Подредба“) ---- */
+.cxp { border-radius: 20px; box-shadow: 0 24px 48px -36px rgba(15,26,43,.45); }
+.cxp .cx-panel__x { width: 40px; height: 40px; background: #F6EEF2; color: #0f1a2b; }
+.cxp .cx-panel__x:hover { background: #d7dfee; }
+.cxp .cx-panel__x svg { width: 18px; height: 18px; }
+.cxp__top { display: grid; grid-template-columns: minmax(220px, 34%) minmax(0, 1fr); gap: clamp(18px, 2.4vw, 32px); padding: clamp(16px, 1.8vw, 22px); }
+.cxp__img { position: relative; display: block; min-height: 240px; border-radius: 14px; overflow: hidden; background: #F6EEF2; }
+.cxp__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cxp__img.nwm::before { z-index: 1; left: 12px; right: auto; top: auto; bottom: 12px; width: 28px; opacity: .8; }
+.cxp__ph { position: absolute; inset: 0; display: grid; place-items: center; color: #9d305c; }
+.cxp__ph svg { width: 64px; height: 64px; opacity: .5; }
+.cxp__b { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; min-width: 0; padding: 6px 48px 4px 0; }
+.cxp__k { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #9d305c; }
+.cxp__ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: #F6EEF2; }
+.cxp__ic svg { width: 17px; height: 17px; }
+.cxp .cxp__h { font-family: var(--f-disp); font-weight: 500; font-size: clamp(1.3rem, 1rem + .9vw, 1.75rem); line-height: 1.15; letter-spacing: -.02em; color: #0f1a2b; }
+.cxp .cxp__h::after { display: none; }
+.cxp__t { margin: 0; max-width: 68ch; font-size: .95rem; line-height: 1.6; color: #5a6476; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.cxp__row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; width: 100%; padding: 14px 0; border-block: 1px solid #EEE8EB; }
+.cxp__head { display: inline-flex; align-items: center; gap: 12px; color: #0f1a2b; text-decoration: none; }
+.cxp__head b { display: block; font-size: .95rem; font-weight: 600; line-height: 1.25; }
+.cxp__head small { display: block; font-size: .8rem; color: #5a6476; }
+.cxp__head:hover b { color: #9d305c; }
+.cxp__av { width: 44px; height: 44px; flex: none; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: #F6EEF2; color: #9d305c; font-size: .8rem; font-weight: 700; }
+.cxp__av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.cxp__ct { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: .93rem; color: #0f1a2b; }
+.cxp__ct li, .cxp__ct a { display: inline-flex; align-items: center; gap: 8px; }
+.cxp__ct a { color: #0f1a2b; text-decoration: none; font-weight: 600; }
+.cxp__ct a:hover { color: #9d305c; }
+.cxp__ct svg { width: 17px; height: 17px; flex: none; color: #9d305c; }
+.cxp__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 2px; }
+.cxp__btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 99px; background: #9d305c; color: #fff; font-weight: 600; font-size: .94rem; text-decoration: none; border: 1px solid #9d305c; transition: background .15s; }
+.cxp__btn:hover { background: #1a497d; }
+.cxp__btn svg { width: 16px; height: 16px; }
+.cxp__btn--o { background: #fff; color: #9d305c; border-color: #e3e8ef; }
+.cxp__btn--o:hover { background: #F6EEF2; }
+.cxp__lnk { color: #9d305c; font-weight: 600; font-size: .94rem; text-decoration: none; }
+.cxp__lnk:hover { text-decoration: underline; }
+.cxp__units { padding: 4px clamp(16px, 1.8vw, 22px) clamp(16px, 1.8vw, 22px); }
+.cxp__uh { margin: 0 0 8px; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5a6476; }
+.cxp__uh span { margin-left: 4px; color: #9d305c; }
+.cxp__units ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cxp__units a { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid #EEE8EB; background: #f3f6fa; color: #0f1a2b; text-decoration: none; }
+.cxp__units a:hover { border-color: #9d305c; background: #fff; }
+.cxp__units b { display: block; font-size: .93rem; font-weight: 600; line-height: 1.3; }
+.cxp__units small { display: block; margin-top: 2px; font-size: .8rem; color: #5a6476; }
+.cxp__units svg { width: 16px; height: 16px; flex: none; color: #9d305c; }
+@media (max-width: 760px) {
+  .cxp__top { grid-template-columns: minmax(0, 1fr); }
+  .cxp__img { min-height: 0; aspect-ratio: 16 / 9; }
+  .cxp__b { padding: 0; }
+  .cxp__row { flex-direction: column; align-items: flex-start; }
+  .cxp__ct { flex-direction: column; }
+}

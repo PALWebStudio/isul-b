@@ -38,7 +38,7 @@
   const toggleSearch = (o) => { sform.hidden = !o; sbtn.setAttribute('aria-expanded', String(o)); if (o) sq.focus(); };
   sbtn.addEventListener('click', () => toggleSearch(sform.hidden));
   sform.addEventListener('submit', (e) => e.preventDefault());
-  const PH = [['Телефонна централа', '02 9432 170', '+35929432170'], ['Записване на час', '02 9432 207', '+35929432207'], ['Регистратура', '02 9432 203', '+35929432203'], ['Спешно отделение', '02 9432 637', '+35929432637']];
+  const PH = [['Телефонна централа', '02 9432 170', '+35929432170'], ['Записване на час', '02 9432 207', '+35929432207'], ['Спешно отделение · регистратура', '02 9432 203', '+35929432203']];
   sq.addEventListener('input', () => {
     const q = norm(sq.value);
     if (q.length < 2) { sres.innerHTML = ''; return; }

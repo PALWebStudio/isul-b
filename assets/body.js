@@ -24,7 +24,7 @@
       <div class="panel__empty" data-a="pempty">
         <h2>Изберете зона</h2>
         <p>Посочете светеща точка върху тялото ${opts.compact ? 'или отворете навигатора на цял екран за пълния списък със зони' : 'или изберете от списъка отдолу'}.</p>
-        <div class="warn112"><b>Внезапна силна болка в гърдите, задух, изкривена уста или слабост в ръка или крак?</b> Обадете се веднага на <a href="tel:112">112</a>. Спешно отделение на ИСУЛ: <a href="tel:+35929432637">02 9432 637</a>.</div>
+        <div class="warn112"><b>Внезапна силна болка в гърдите, задух, изкривена уста или слабост в ръка или крак?</b> Обадете се веднага на <a href="tel:112">112</a>. Спешно отделение на ИСУЛ: <a href="tel:+35929432203">02 9432 203</a>.</div>
       </div>
       <div class="panel__body" data-a="pbody" hidden></div>
     </aside>
@@ -262,7 +262,7 @@
     const cls = z.clinics.map(clinic).filter(Boolean);
     pempty.hidden = true; pbody.hidden = false;
     pbody.innerHTML = `<div class="pz"><p class="pz__k">${z.specs.map((x) => spec(x).name).join(' · ')}</p><h2>${z.name}</h2><p class="pz__latin">${z.latin}</p></div>
-      ${z.red ? `<div class="pz__red"><b>Спешно:</b> ${z.red} <a href="tel:112">112</a> · Спешно отделение <a href="tel:+35929432637">02 9432 637</a></div>` : ''}
+      ${z.red ? `<div class="pz__red"><b>Спешно:</b> ${z.red} <a href="tel:112">112</a> · Спешно отделение <a href="tel:+35929432203">02 9432 203</a></div>` : ''}
       <div class="pz"><h3>Чести оплаквания</h3><ul class="pz__sym">${z.sym.map((x) => `<li>${x}</li>`).join('')}</ul></div>
       ${(TESTS[z.id] || []).length ? `<div class="pz"><h3>Изследвания</h3><ul class="pz__tests">${TESTS[z.id].map((k) => `<li><a href="${linkUnit(T[k][0])}">${T[k][1]}<span aria-hidden="true">→</span></a></li>`).join('')}</ul></div>` : ''}
       ${(opts.doctors || window.ISUL_NAV_DOCTORS) ? (opts.doctors || window.ISUL_NAV_DOCTORS)(z.clinics, z.id) : ''}

@@ -59,6 +59,9 @@
   if (!window.CLINIC_GROUPS) window.CLINIC_GROUPS = GROUPS_ORDER;
   const shortName = (n) => n.replace(/^Клиника по /, '').replace(/^(.)/, (m) => m.toUpperCase()).replace(' за лечение на метаболитни заболявания', '').replace(' с извършване на специфична дейност по андрология', ' и андрология');
   const clinicList = () => Object.values(C.clinics).sort((a, b) => a.id - b.id);
+  /* one line icon per clinic (Lucide, ISC licence — same set as the МБАЛ Благоевград site) */
+  const CLINIC_ICON = {"1":"<path d=\"M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8\"/><path d=\"M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4\"/><path d=\"M12 4v6\"/><path d=\"M2 18h20\"/>","2":"<path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2\"/><path d=\"M7 2v20\"/><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"/>","3":"<path d=\"M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5\"/><path d=\"M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27\"/>","4":"<path d=\"M12 11.22C11 9.997 10 9 10 8a2 2 0 0 1 4 0c0 1-.998 2.002-2.01 3.22\"/><path d=\"m12 18 2.57-3.5\"/><path d=\"M6.243 9.016a7 7 0 0 1 11.507-.009\"/><path d=\"M9.35 14.53 12 11.22\"/><path d=\"M9.35 14.53C7.728 12.246 6 10.221 6 7a6 5 0 0 1 12 0c-.005 3.22-1.778 5.235-3.43 7.5l3.557 4.527a1 1 0 0 1-.203 1.43l-1.894 1.36a1 1 0 0 1-1.384-.215L12 18l-2.679 3.593a1 1 0 0 1-1.39.213l-1.865-1.353a1 1 0 0 1-.203-1.422z\"/>","5":"<path d=\"M12 18V5\"/><path d=\"M15 13a4.17 4.17 0 01-3-4 4.17 4.17 0 01-3 4\"/><path d=\"M17.707 6.294A3 3 0 1012 5a3 3 0 10-5.707 1.294\"/><path d=\"M17.996 5.125a4 4 0 012.526 5.77\"/><path d=\"M18 18a4 4 0 002-7.465\"/><path d=\"M19.967 17.482a4 4 0 11-7.967.517 4 4 0 11-7.967-.517\"/><path d=\"M6 18a4 4 0 01-2-7.465\"/><path d=\"M6.004 5.125a4 4 0 00-2.526 5.77\"/>","6":"<path d=\"m10.852 14.772-.383.923\"/><path d=\"m10.852 9.228-.383-.923\"/><path d=\"m13.148 14.772.382.924\"/><path d=\"m13.53 8.305-.382.923\"/><path d=\"m14.772 10.852.923-.383\"/><path d=\"m14.772 13.148.923.383\"/><path d=\"M17.997 5.125a4 4 0 012.526 5.77\"/><path d=\"M18 18a4 4 0 002-7.464\"/><path d=\"M4.033 17.483A4 4 0 0011.46 20c.184-.31.896-.31 1.076 0a4 4 0 007.43-2.517\"/><path d=\"M6 18a4 4 0 01-2-7.464\"/><path d=\"M6.002 5.125a4 4 0 00-2.525 5.77\"/><path d=\"M6.293 6.294a3 3 0 01-.287-1.098l-.004-.07a3 3 0 015.968-.543c.05.02.057.01.059 0a3 3 0 015.968.542l-.004.071a3 3 0 01-.287 1.098\"/><path d=\"m9.228 10.852-.923-.383\"/><path d=\"m9.228 13.148-.923.383\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>","7":"<path d=\"M10.165 6.598C9.954 7.478 9.64 8.36 9 9c-.64.64-1.521.954-2.402 1.165A6 6 0 0 0 8 22c7.732 0 14-6.268 14-14a6 6 0 0 0-11.835-1.402Z\"/><path d=\"M5.341 10.62a4 4 0 1 0 5.279-5.28\"/>","8":"<path d=\"M3 7V5a2 2 0 0 1 2-2h2\"/><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"/><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"/><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"/><path d=\"M7 12h10\"/>","9":"<path d=\"M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z\"/>","10":"<path d=\"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>","11":"<path d=\"m18 2 4 4\"/><path d=\"m17 7 3-3\"/><path d=\"M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5\"/><path d=\"m9 11 4 4\"/><path d=\"m5 19-3 3\"/><path d=\"m14 4 6 6\"/>","12":"<path d=\"M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0\"/><path d=\"M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4\"/>","13":"<circle cx=\"16\" cy=\"4\" r=\"1\"/><path d=\"m18 19 1-7-6 1\"/><path d=\"m5 8 3-3 5.5 3-2.36 3.5\"/><path d=\"M4.24 14.5a5 5 0 0 0 6.88 6\"/><path d=\"M13.76 17.5a5 5 0 0 0-6.88-6\"/>","14":"<path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\"/><path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\"/>","15":"<circle cx=\"6\" cy=\"6\" r=\"3\"/><path d=\"M8.12 8.12 12 12\"/><path d=\"M20 4 8.12 15.88\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><path d=\"M14.8 14.8 20 20\"/>","16":"<path d=\"m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z\"/><path d=\"m8.5 8.5 7 7\"/>","17":"<path d=\"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5\"/><path d=\"M15 12h.01\"/><path d=\"M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1\"/><path d=\"M9 12h.01\"/>","18":"<path d=\"M16 3h5v5\"/><path d=\"m21 3-6.75 6.75\"/><circle cx=\"10\" cy=\"14\" r=\"6\"/>","19":"<path d=\"M11 2v2\"/><path d=\"M5 2v2\"/><path d=\"M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1\"/><path d=\"M8 15a6 6 0 0 0 12 0v-3\"/><circle cx=\"20\" cy=\"10\" r=\"2\"/>","20":"<path d=\"M10 10H6\"/><path d=\"M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2\"/><path d=\"M19 18h2a1 1 0 0 0 1-1v-3.28a1 1 0 0 0-.684-.948l-1.923-.641a1 1 0 0 1-.578-.502l-1.539-3.076A1 1 0 0 0 16.382 8H14\"/><path d=\"M8 8v4\"/><path d=\"M9 18h6\"/><circle cx=\"17\" cy=\"18\" r=\"2\"/><circle cx=\"7\" cy=\"18\" r=\"2\"/>","21":"<path d=\"M12 3v18\"/><path d=\"m19 8 3 8a5 5 0 0 1-6 0zV7\"/><path d=\"M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1\"/><path d=\"m5 8 3 8a5 5 0 0 1-6 0zV7\"/><path d=\"M7 21h10\"/>","22":"<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\"/>","23":"<path d=\"M12 14.991h.01\"/><path d=\"M12 22v-3\"/><path d=\"M12 2v3\"/><path d=\"M13 22h-2\"/><path d=\"M13 2h-2\"/><path d=\"M13.99 10H14\"/><path d=\"m16.5 19.794-1-1.733\"/><path d=\"m16.5 4.205-1 1.732\"/><path d=\"m19.794 16.5-1.732-1\"/><path d=\"m19.794 7.5-1.732 1\"/><path d=\"M2 12h3\"/><path d=\"M2 13v-2\"/><path d=\"M22 12h-3\"/><path d=\"M22 13v-2\"/><path d=\"m4.206 16.5 1.732-1\"/><path d=\"m4.206 7.5 1.732 1\"/><path d=\"m7.5 19.794 1-1.733\"/><path d=\"m7.5 4.205 1 1.732\"/><path d=\"M9 12h.01\"/><circle cx=\"12\" cy=\"12\" r=\"7\"/>","24":"<path d=\"M9 2v17.5A2.5 2.5 0 0 1 6.5 22A2.5 2.5 0 0 1 4 19.5V2\"/><path d=\"M20 2v17.5a2.5 2.5 0 0 1-2.5 2.5a2.5 2.5 0 0 1-2.5-2.5V2\"/><path d=\"M3 2h7\"/><path d=\"M14 2h7\"/><path d=\"M9 16H4\"/><path d=\"M20 16h-5\"/>","25":"<path d=\"M6 18h8\"/><path d=\"M3 22h18\"/><path d=\"M14 22a7 7 0 1 0 0-14h-1\"/><path d=\"M9 14h2\"/><path d=\"M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z\"/><path d=\"M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3\"/>","26":"<path d=\"m10 16 1.5 1.5\"/><path d=\"m14 8-1.5-1.5\"/><path d=\"M15 2c-1.798 1.998-2.518 3.995-2.807 5.993\"/><path d=\"m16.5 10.5 1 1\"/><path d=\"m17 6-2.891-2.891\"/><path d=\"M2 15c6.667-6 13.333 0 20-6\"/><path d=\"m20 9 .891.891\"/><path d=\"M3.109 14.109 4 15\"/><path d=\"m6.5 12.5 1 1\"/><path d=\"m7 18 2.891 2.891\"/><path d=\"M9 22c1.798-1.998 2.518-3.995 2.807-5.993\"/>","27":"<path d=\"M12 7v4\"/><path d=\"M14 21v-3a2 2 0 0 0-4 0v3\"/><path d=\"M14 9h-4\"/><path d=\"M18 11h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2\"/><path d=\"M18 21V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16\"/>"};
+  const clinicIcon = (id, cls) => CLINIC_ICON[id] ? `<svg${cls ? ` class="${cls}"` : ''} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CLINIC_ICON[id]}</svg>` : '';
 
   /* ---------- Events & videos (shared components) ---------- */
   const EVENTS = [
@@ -231,7 +234,7 @@
   /* closing band on every inner page */
   const helpBand = () => `<section class="hb3"><div class="vwrap hb3__in"><div class="hb3__t"><p class="h3__kick"><span></span>Как можем да помогнем</p><h2>Нужна Ви е помощ?</h2><p>Записване, спешна помощ и път до болницата — на едно място.</p></div>
     <a class="hb3__c" href="${SUPERDOC}" target="_blank" rel="noopener"><small>Запази час</small><b>02 9432 207</b><span>Онлайн през СуперДок или по телефона</span></a>
-    <a class="hb3__c hb3__c--emg" href="tel:+35929432637"><small>Спешно отделение · 24/7</small><b>02 9432 637</b><span>При спешен случай се обадете на 112</span></a>
+    <a class="hb3__c hb3__c--emg" href="tel:+35929432203"><small>Спешно отделение · 24/7</small><b>02 9432 203</b><span>При спешен случай се обадете на 112</span></a>
     <a class="hb3__c" href="route.html"><small>Как да стигна</small><b>ул. „Бяло море“ 8</b><span>Маршрут с кола, пеша или градски транспорт</span></a></div></section>`;
   function richRows(o) {
     const acc = { tels: new Set(), mails: new Set(), docs: [] };
@@ -431,7 +434,7 @@
     const admitHtml = sec('admit', 'Прием', 'Как да постъпите<br>в клиниката', `<a class="cs__more" href="#/admission">Пълен наръчник за прием →</a><ol class="cstep">${steps.map(([t, d], i) => `<li><span>${String(i + 1).padStart(2, '0')}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>${patientBlocks.length && !(XC && patientBlocks.reduce((n, b) => n + (b.x || '').length, 0) < 40) ? `<div class="cs__extra">${richBody(patientBlocks, acc)}</div>` : ''}
       <div class="cprice">${kick('Ценоразпис')}<h3>Цени на услугите в <em>${esc(isClinic ? 'Клиниката по ' + shortN : c.name)}</em></h3><p>Консултации, изследвания, процедури и престой — за пациенти без здравна осигуровка или извън НЗОК.</p><a class="chb chb--d" href="#/pricelist">Виж цените →</a></div>`);
 
-    const telItems = phones.map((p, i) => [i ? 'Клиника · ' + (i + 1) : 'Клиника', p]).concat([['Записване на час', '02 9432 207'], ['Регистратура', '02 9432 203'], ['Спешно отделение', '02 9432 637']]);
+    const telItems = phones.map((p, i) => [i ? 'Клиника · ' + (i + 1) : 'Клиника', p]).concat([['Записване на час', '02 9432 207'], ['Спешно отделение · регистратура', '02 9432 203']]);
     const contactsHtml = sec('contacts', 'Контакти', 'Телефони на клиниката', `<div class="ctel">${telItems.map(([t, p]) => `<a href="${telOf(p)}"><span>${esc(t)}</span><b>${esc(p)}</b></a>`).join('')}${c.emails.map((e) => `<a href="mailto:${esc(e)}"><span>Имейл</span><b>${esc(e)}</b></a>`).join('')}</div><div class="cs__row">${XC ? `<a class="chb chb--o" href="#/kade/c${id}">Къде е в болницата →</a>` : ''}<a class="chb chb--o" href="route.html">Как да стигна →</a><a class="chb chb--o" href="#/navigator">Анатомичен навигатор →</a></div>`, 'cs--panel');
 
     const grp = GROUP_OF[id], near = XC && grp ? clinicList().filter((x) => x.id != id && GROUP_OF[x.id] === grp) : [];
@@ -507,7 +510,7 @@
     const shortN = c.name.replace(/^Клиника по /, '');
     const isClinic = /^Клиника по /.test(c.name);
     const phones = (c.phones.join('; ') || '02 9432 170').split(/;|,| и /).map((x) => x.trim()).filter((x) => /\d{3}/.test(x));
-    const tel1 = kind === 'er' ? '02 9432 637' : phones[0] || '02 9432 170';
+    const tel1 = kind === 'er' ? '02 9432 203' : phones[0] || '02 9432 170';
     const allTxt = c.patient.concat(c.blocks).map((b) => b.x || '').join('\n');
     const visit = kind === 'clinic' ? (allTxt.match(/Свиждане[^:\n]*:\s*([^\n]{4,80})/i) || [])[1] || '' : '';
     const kick = (t) => `<p class="ck"><span></span>${esc(t)}</p>`;
@@ -675,8 +678,8 @@
     const histHtml = histAll || galHtml ? sec('hist', histAll && galHtml ? 'История и галерия' : histAll ? 'История' : 'Галерия', '', `${histAll ? HM.ms.length >= 2 ? histAll : `<div class="chist"><h3>${histName}</h3><div class="chist__b">${histAll}</div></div>` : ''}${galHtml}`, 'cs--panel') : '';
 
     /* ---- contacts ---- */
-    const FIXED = ['02 9432 207', '02 9432 203', '02 9432 637'];
-    const telItems = (kind === 'er' ? [['Спешно отделение', '02 9432 637']] : []).concat(phones.filter((p) => !FIXED.includes(p)).map((p, i) => [i ? (isClinic ? 'Клиника' : 'Звено') + ' · ' + (i + 1) : isClinic ? 'Клиника' : 'Звено', p]), [['Записване на час', '02 9432 207'], ['Регистратура', '02 9432 203']], kind === 'er' ? [] : [['Спешно отделение', '02 9432 637']]);
+    const FIXED = ['02 9432 207', '02 9432 203'];
+    const telItems = [].concat(phones.filter((p) => !FIXED.includes(p)).map((p, i) => [i ? (isClinic ? 'Клиника' : 'Звено') + ' · ' + (i + 1) : isClinic ? 'Клиника' : 'Звено', p]), [['Записване на час', '02 9432 207']], [['Спешно отделение · регистратура', '02 9432 203']]);
     const contactsHtml = sec('contacts', 'Контакти', 'Телефони', `<div class="ctel">${telItems.map(([t, p]) => `<a href="${telOf(p)}"><span>${esc(t)}</span><b>${esc(p)}</b></a>`).join('')}${c.emails.map((e) => `<a href="mailto:${esc(e)}"><span>Имейл</span><b>${esc(e)}</b></a>`).join('')}</div>${phoneSec.length ? `<div class="cs__extra">${phoneSec.map((s) => richBody(s.items, acc)).join('')}</div>` : ''}`, 'cs--panel');
 
     const grp = GROUP_OF[id], near = grp ? clinicList().filter((x) => x.id != id && GROUP_OF[x.id] === grp) : [];
@@ -1263,6 +1266,13 @@
   function clinicXPage(c0, id, tab) {
     const c1 = clinicRest(c0), c = { ...c1, blocks: noDop(c1.blocks), patient: noDop(c1.patient) };
     const A = IC.arrow;
+    // #/clinic/<id>/nova — a calmer version of the page (fewer colours, no repeats), kept beside the current one to compare
+    const CLEAN = /^nova/.test(tab || '');
+    // three looks for the head's band, to choose from: #/clinic/<id>/nova-a | nova-b | nova-c
+    const CHF = CLEAN ? ((tab.split('-')[1] || '').match(/^[abc]$/) || [''])[0] : '';
+    // the Благоевград / НКБ order („Подредба“) is the clinic page; #/clinic/<id>/team and /patient open it at that
+    // section; the earlier page stays at #/clinic/<id>/staro to compare
+    const PODR = !tab || ['podredba', 'team', 'patient'].includes(tab);
     const isClinic = /^Клиника по /.test(c.name), shortN = clinicShort(c);
     const phones = (c.phones.join('; ') || '02 9432 170').split(/;|,| и /).map((x) => x.trim()).filter((x) => /\d{3}/.test(x));
     const tel1 = phones[0] || '02 9432 170';
@@ -1318,14 +1328,15 @@
     const chief = docs.find((d) => /(началник|ръководител)\s+(на\s+)?(клиник|отделени|лаборатори|центр|звен)/i.test(d.role || '')) || docs.find((d) => d.head);
     const chiefHtml = chief ? chiefBand(chief, { isClinic, kind: KIND_OF[id] || 'clinic', sid: 'kx-head' }) : '';
     const teamDocs = chief ? docs.filter((d) => d !== chief) : docs;
-    const nav = [['about', 'За клиниката'], (prices.length || units.length || equip) && ['exam', 'Изследвания'], chief && ['head', /ръковод/i.test(chief.role || '') ? 'Ръководител' : 'Началник'], teamDocs.length && ['team', 'Екип'], G.length > 1 && ['gallery', 'Галерия'], ['video', 'Видео'], news.length && ['news', 'Новини'], urg && ['urgent', 'Спешно'], ['patient', 'За пациента'], where && ['where', 'Къде се намира'], ['contacts', 'Контакти']].filter(Boolean);
+    // calm version: what is treated, then who treats it, then the examinations
+    const nav = CLEAN ? [['about', 'За клиниката'], (chief || teamDocs.length) && [chief ? 'head' : 'team', 'Екип'], (prices.length || units.length || equip) && ['exam', 'Изследвания'], G.length > 1 && ['gallery', 'Галерия'], urg && ['urgent', 'Спешно'], ['patient', 'За пациента'], ['contacts', 'Контакти']].filter(Boolean) : [['about', 'За клиниката'], (prices.length || units.length || equip) && ['exam', 'Изследвания'], chief && ['head', /ръковод/i.test(chief.role || '') ? 'Ръководител' : 'Началник'], teamDocs.length && ['team', 'Екип'], G.length > 1 && ['gallery', 'Галерия'], ['video', 'Видео'], news.length && ['news', 'Новини'], urg && ['urgent', 'Спешно'], ['patient', 'За пациента'], where && ['where', 'Къде се намира'], ['contacts', 'Контакти']].filter(Boolean);
     // the name in the clinic's menu, on one line: the official name without its qualifier („… с извършване на …“, „… и болести на обмяната …“)
     const mark = (isClinic ? shortN : c.name.replace(/^(Отделение|Лаборатория) по /, '')).replace(/\s+(с|със)\s+.*$|\s+и болести на .*$|\s+[„"].*$/, '').replace(/^(.)/, (m) => m.toUpperCase());
     const headD = docs.find((d) => d.head);
 
     /* ---- header: as on „Кариери“, with the clinic photo on the right ---- */
-    const hero = kxHead({ crumbs: [['Клиники и отделения', '#/clinics'], [c.name]], kick: (GROUP_OF[id] || 'Клиника') + ' · УМБАЛ „Царица Йоанна – ИСУЛ“', title: esc(c.name),
-      lead: lead ? cutS(lead, 230) : '',
+    const hero = kxHead({ crumbs: [['Клиники и отделения', '#/clinics'], [c.name]], kick: (GROUP_OF[id] || 'Клиника') + ' · УМБАЛ „Царица Йоанна – ИСУЛ“', title: CLEAN && CLINIC_ICON[id] ? `<span class="kxc-ic">${clinicIcon(id)}</span><span>${esc(c.name)}</span>` : esc(c.name),
+      lead: lead ? cutS(lead, CLEAN ? 170 : 230) : '',
       cta: `<div class="kx-cta"><a class="kx-btn kx-btn--w" href="${SUPERDOC}" target="_blank" rel="noopener">Запази час ↗</a><a class="kx-btn kx-btn--o" href="${telOf(tel1)}">${IC.phone}${esc(tel1)}</a></div>`,
       img: heroOf(c), cap: G.length > 1 ? `<a class="kx-ph__gal" href="#kx-gallery" data-kj="kx-gallery">${G.length} снимки ${A}</a>` : '' });
     // the clinic's own menu comes after the strip, so the strip can rise into the hero photo
@@ -1346,6 +1357,13 @@
       <div class="kx-strip__tiles">${tiles.map(([t, p, to]) => `<a class="kx-tile" href="#${to}" data-kj="${to}"><b>${t}</b><span>${p}</span><i aria-hidden="true">${A}</i></a>`).join('')}</div>
     </div></div></section>`;
 
+    const cleanFacts = [headD && [/ръковод/i.test(headD.role) ? 'Ръководител' : 'Началник', `<a href="${drUrl(headD)}">${esc(headD.name)}</a>`], (signAt.length || floor) && ['Разположение', esc(signAt.length ? signAt.join('; ') : floor)], ['Телефон', phones.slice(0, 2).map((x) => `<a href="${telOf(x)}">${esc(x)}</a>`).join('<br>')], visit && ['Свиждане', esc(visit)], c.emails[0] && ['Имейл', `<a href="mailto:${esc(c.emails[0])}">${esc(c.emails[0])}</a>`]].filter(Boolean);
+    // calm version: the band sits in a wrapper (so it can be a card); option А adds the clinic's phone and e-mail beside it
+    const chiefC = CLEAN && chiefHtml ? chiefHtml.replace('<div class="vwrap chf', '<div class="vwrap"><div class="chf').replace(/<\/div><\/div><\/section>$/, CHF === 'a'
+      ? `</div><aside class="chf__ct"><p>Връзка с клиниката</p><a href="${telOf(tel1)}">${IC.phone}<span>${esc(tel1)}</span></a>${c.emails[0] ? `<a href="mailto:${esc(c.emails[0])}">${IC.mail}<span>${esc(c.emails[0])}</span></a>` : ''}</aside></div></div></section>`
+      : '</div></div></div></section>') : chiefHtml;
+    const factsHtml = `<section class="kxc-facts" aria-label="Накратко"><div class="vwrap"><dl>${cleanFacts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div></section>`;
+
     /* ---- about: text beside a photo collage, activities as tabs (no ragged card grid) ---- */
     const prose = (pre.length > 1 ? pre.slice(1) : pre);   // the first paragraph is already the hero lead
     const stats = [[docs.length, docs.length === 1 ? 'лекар' : 'лекари'], [units.length, units.length === 1 ? 'звено' : 'звена'], [equip ? equip.length : 0, 'вида апаратура'], [prices.length, 'услуги с цени']].filter(([n]) => n > 0).slice(0, 3);
@@ -1356,11 +1374,11 @@
         <div class="kx-about__t">${kick('За клиниката')}<h2 class="kx-h2">${isClinic ? 'Клиниката' : 'Звеното'} накратко</h2>
           <div class="kx-prose${prose.reduce((n, b) => n + b.x.length, 0) > 900 ? ' is-long' : ''}">${prose.map((b) => `<p>${linkify(b.x)}</p>`).join('') || '<p class="muted">Описанието предстои.</p>'}</div>
           ${prose.reduce((n, b) => n + b.x.length, 0) > 900 ? '<button type="button" class="kx-more" data-more>Прочети цялото ↓</button>' : ''}</div>
-        <div class="kx-collage">
+        ${CLEAN ? '' : `<div class="kx-collage">
           <span class="kx-collage__a nwm"><img src="${esc(colA)}" alt="" loading="lazy"></span>
           ${colB ? `<span class="kx-collage__b nwm"><img src="${esc(colB)}" alt="" loading="lazy"></span>` : ''}
           ${stats.length ? `<dl class="kx-collage__st">${stats.map(([n, t]) => `<div><dd>${n}</dd><dt>${t}</dt></div>`).join('')}</dl>` : ''}
-        </div>
+        </div>`}
       </div>
       ${actsHtml}
     </div></section>`;
@@ -1448,7 +1466,7 @@
     const patient = `<section class="kx-sec kx-pat" id="kx-patient"><div class="vwrap">
       ${kick('За пациента')}<h2 class="kx-h2">Вашето посещение — стъпка по стъпка</h2>
       <ol class="kx-steps kx-steps--wide">${steps.map(([t, d], i) => `<li><span>${i + 1}</span><div><b>${t}</b><p>${d}</p></div></li>`).join('')}</ol>
-      ${patientBlocks.length ? `<div class="kx-box kx-box--notes"><h3>От клиниката</h3><div class="kx-notes">${richBody(patientBlocks, acc)}</div></div>` : ''}
+      ${patientBlocks.length ? (CLEAN ? `<details class="kxc-notes"><summary>Информация от клиниката</summary><div class="kx-notes">${richBody(patientBlocks, acc)}</div></details>` : `<div class="kx-box kx-box--notes"><h3>От клиниката</h3><div class="kx-notes">${richBody(patientBlocks, acc)}</div></div>`) : ''}
     </div></section>`;
 
 
@@ -1457,7 +1475,7 @@
       <div class="kx-head"><div>${kick('Спешни случаи')}<h2 class="kx-h2">Кога е спешно</h2><p>${esc(urg.title)}${urg.head ? ' — ' + esc(urg.head) : ''}.</p></div></div>
       <div class="kx-urg__g">
         <aside class="kx-urg__side">
-          <div class="kx-urg__call"><small>При опасност за живота</small><a class="kx-urg__112" href="tel:112">112</a><a class="kx-btn kx-btn--w" href="${telOf('02 9432 637')}">${IC.phone}Спешно отделение · 02 9432 637</a></div>
+          <div class="kx-urg__call"><small>При опасност за живота</small><a class="kx-urg__112" href="tel:112">112</a><a class="kx-btn kx-btn--w" href="${telOf('02 9432 203')}">${IC.phone}Спешно отделение · 02 9432 203</a></div>
           ${urg.where.length ? `<div class="kx-urg__where"><h3>Къде и кога</h3><ul>${urg.where.map((x) => `<li>${linkify(x)}</li>`).join('')}</ul></div>` : ''}
         </aside>
         <ol class="kx-urg__list">${urg.items.map((u, i) => `<li class="kx-uc"><header><span class="kx-uc__ic"><svg viewBox="0 0 24 24" aria-hidden="true">${u.ic}</svg></span><span class="kx-uc__n">${String(i + 1).padStart(2, '0')}</span></header><h3>${esc(u.t)}</h3>${u.lead ? `<p>${esc(u.lead)}</p>` : ''}${u.pts.length ? `<ul>${u.pts.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ol>
@@ -1466,16 +1484,109 @@
     </div></section>` : '';
 
     /* ---- contacts ---- */
-    const telItems = phones.map((p, i) => [phones.length > 1 ? 'Клиника · ' + (i + 1) : 'Клиника', p]).concat([['Записване на час', '02 9432 207'], ['Спешно отделение', '02 9432 637']]);
+    const telItems = phones.map((p, i) => [phones.length > 1 ? 'Клиника · ' + (i + 1) : 'Клиника', p]).concat([['Записване на час', '02 9432 207'], ['Спешно отделение', '02 9432 203']]);
     const contacts = `<section class="kx-sec kx-ct" id="kx-contacts"><div class="vwrap kx-ct__g">
       <div>${kick('Контакти', ' kx-kick--g')}<h2 class="kx-h2">Свържете се с клиниката</h2><p class="kx-ct__fl">${IC.pin}<span>${floor ? esc(floor) + ' · ' : ''}УМБАЛ „Царица Йоанна – ИСУЛ“, ул. „Бяло море“ № 8, София</span></p><a class="kx-btn kx-btn--w" href="route.html">Как да стигна ${A}</a></div>
       <div class="kx-ct__tels">${telItems.map(([t, p]) => `<a href="${telOf(p)}"><span>${esc(t)}</span><b>${esc(p)}</b></a>`).join('')}${c.emails.map((e) => `<a href="mailto:${esc(e)}"><span>Имейл</span><b>${esc(e)}</b></a>`).join('')}</div>
     </div>
-    <div class="vwrap kx-others"><p>Други клиники и отделения</p><div class="kx-others__g">${clinicList().filter((x) => x.id != id).map((x) => `<a href="#/clinic/${x.id}">${esc(x.name)}</a>`).join('')}</div></div></section>`;
+    ${CLEAN ? `${where}<div class="vwrap kxc-all"><a class="kx-link" href="#/clinics">Всички клиники и отделения ${A}</a></div>` : `<div class="vwrap kx-others"><p>Други клиники и отделения</p><div class="kx-others__g">${clinicList().filter((x) => x.id != id).map((x) => `<a href="#/clinic/${x.id}">${esc(x.name)}</a>`).join('')}</div></div>`}</section>`;
+    // switch between the current and the calm version (prototype only: hidden online with the other prototype bars)
+    const vsw = `<nav class="kxv-sw" aria-label="Версия на страницата"><span>Страница</span><a href="#/clinic/${id}"${PODR ? ' aria-current="page"' : ''}>Подредба</a><a href="#/clinic/${id}/nova"${CLEAN ? ' aria-current="page"' : ''}>Изчистена</a><a href="#/clinic/${id}/staro"${tab === 'staro' ? ' aria-current="page"' : ''}>Предишна</a>${CLEAN ? `<i aria-hidden="true"></i><span>Началник</span>${[['', 'Сега'], ['a', 'А'], ['b', 'Б'], ['c', 'В']].map(([k, t]) => `<a href="#/clinic/${id}/nova${k ? '-' + k : ''}"${CHF === k ? ' aria-current="true"' : ''}>${t}</a>`).join('')}` : ''}</nav>`;
 
+
+    /* ======== #/clinic/<id>/podredba — the order of the МБАЛ Благоевград / НКБ clinic pages ========
+       one dark background; the photo behind the name; the clinic's menu; the content on the left and the contacts
+       in a card on the right that stays in view; at the end the other clinics of the same group */
+    if (PODR) {
+      const grp = GROUP_OF[id] || '';
+      const docsN = docs.length;
+      const meta = [KIND_OF[id] === 'lab' ? 'Лаборатория' : isClinic ? 'Клиника' : 'Отделение', docsN && `${docsN} ${docsN === 1 ? 'лекар' : 'лекари'}`, units.length && `${units.length} ${units.length === 1 ? 'звено' : 'звена'}`].filter(Boolean);
+      // the activities: lists as a grid of ticks, text as paragraphs
+      const tickBody = (items) => { let out = '', ul = [];
+        const flush = () => { if (ul.length) { out += `<ul class="kp-ticks">${ul.map((x) => `<li>${ICON.check}<span>${linkify(x)}</span></li>`).join('')}</ul>`; ul = []; } };
+        items.forEach((b) => { if (b.t === 'li') ul.push(b.x || ''); else { flush(); out += b.t === 'p' ? `<p>${linkify(b.x || '')}</p>` : richBody([b], acc); } });
+        flush(); return out; };
+      const proseAll = prose.length ? prose : (lead ? [{ x: lead }] : []);
+      const proseLen = proseAll.reduce((n, b) => n + (b.x || '').length, 0);
+      const av = (d, big) => `<span class="kp-av${big ? ' kp-av--l' : ''}">${d.img ? `<img src="${esc(d.img)}" alt="" loading="lazy">` : esc(initialsOf(d))}</span>`;
+      const headP = chief || headD;
+      const team2 = headP ? docs.filter((d) => d !== headP) : docs;
+      const related = grp ? clinicList().filter((x) => x.id != id && GROUP_OF[x.id] === grp) : [];
+
+      const S = [];   // [id, menu label, html]
+      S.push(['about', 'Представяне', `<p class="kp-k">${esc(isClinic ? 'Клиника' : 'Звено')}</p><h2>Представяне</h2>
+        <div class="kp-prose${proseLen > 900 ? ' is-long' : ''}">${proseAll.map((b) => `<p>${linkify(b.x)}</p>`).join('') || '<p>Описанието предстои.</p>'}</div>${proseLen > 900 ? '<button type="button" class="kx-more" data-more>Прочети цялото ↓</button>' : ''}`]);
+      // up to three activity sections each with its heading; more (Хирургия has 14) as one section of folds, the first open
+      if (acts.length <= 3) acts.forEach((a, i) => S.push([`act${i}`, i === 0 ? (a.title || 'Медицинска дейност') : '', `<h2>${esc(a.title || 'Медицинска дейност')}</h2>${tickBody(a.items)}`]));
+      else S.push(['acts', 'Медицинска дейност', `<h2>Медицинска дейност</h2><p class="kp-note">${acts.length} направления</p>${acts.map((a, i) => `<details class="kp-fold kp-fold--act"${i ? '' : ' open'}><summary>${esc(a.title || 'Медицинска дейност')}</summary><div>${tickBody(a.items)}</div></details>`).join('')}`]);
+      if (headP) S.push(['head', 'Екип', `<h2>${/ръковод/i.test(headP.role || '') ? 'Ръководител' : 'Началник'}</h2>
+        <div class="kp-chief">${av(headP, true)}<div><b><a href="${drUrl(headP)}">${esc(headP.name)}</a></b>${headP.role ? `<small>${esc(headP.role)}</small>` : ''}</div>
+          <span class="kp-chief__act">${hasCv(headP) ? `<button type="button" class="kp-lnk" data-bio="${esc(headP.slug)}">Биография</button>` : ''}<a class="kp-lnk" href="${drUrl(headP)}">Профил ${A}</a></span></div>`]);
+      if (team2.length || staff.length) S.push(['team', headP ? '' : 'Екип', `<h2>Медицински екип</h2>
+        ${team2.length ? `<ul class="kp-team">${team2.map((d) => `<li><a href="${drUrl(d)}">${av(d)}<span><b>${esc(d.name)}</b>${d.role ? `<small>${esc(d.role)}</small>` : ''}</span></a></li>`).join('')}</ul>` : ''}
+        ${staff.length ? `<details class="kp-fold"><summary>Професионалисти по здравни грижи <span>${staff.length}</span></summary><div>${Object.entries(og).map(([g, xs]) => `<h4>${esc(g)}</h4><p>${xs.map(esc).join(' · ')}</p>`).join('')}</div></details>` : ''}`]);
+      if (units.length) S.push(['units', 'Звена', `<h2>Звена в ${isClinic ? 'клиниката' : 'отделението'}</h2>
+        <div class="kp-units">${units.map((u, i) => `<a class="kp-unit" href="${unitUrl(u)}"><small>${String(i + 1).padStart(2, '0')} · ${esc(u.kind)}</small><b>${esc(u.name)}</b>${u.short ? `<p>${esc(u.short)}</p>` : ''}${u.headP ? `<span>Ръководител: ${esc(u.headP.name)}</span>` : ''}<em>Към звеното ${A}</em></a>`).join('')}</div>`]);
+      if (equip) S.push(['equip', eqT, `<h2>${eqT}</h2><ul class="kp-ticks">${equip.map((b) => `<li>${ICON.check}<span>${linkify(b.x)}</span></li>`).join('')}</ul>`]);
+      if (prices.length) S.push(['exam', 'Изследвания и цени', `<div class="kp-h"><h2>Изследвания и цени</h2>${find}</div><p class="kp-note">Цените са от утвърдения ценоразпис на болницата, с ДДС — за пациенти без здравна осигуровка или извън НЗОК.</p>${priceHtml}`]);
+      if (urg) S.push(['urgent', 'Спешно', `<h2>Кога е спешно</h2><p class="kp-note">${esc(urg.title)}${urg.head ? ' — ' + esc(urg.head) : ''}.</p>
+        <ol class="kp-urg">${urg.items.map((u) => `<li><b>${esc(u.t)}</b>${u.lead ? `<p>${esc(u.lead)}</p>` : ''}${u.pts.length ? `<ul>${u.pts.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ol>
+        <p class="kp-note">При опасност за живота — <a href="tel:112">112</a> или Спешно отделение <a href="${telOf('02 9432 203')}">02 9432 203</a>.</p>`]);
+      if (G.length > 1) S.push(['gallery', 'Галерия', `<div class="kp-h"><h2>Галерия</h2><button type="button" class="kp-lnk" data-g="0">Цял екран ${A}</button></div>
+        <div class="kx-gal__strip kp-gal" id="kx-gs">${G.map((g, i) => `<button type="button" class="kx-gal__it nwm" data-g="${i}" aria-label="Отвори снимка ${i + 1} от ${G.length}"><img src="${esc(g.src)}" alt="" loading="lazy"></button>`).join('')}</div>
+        <dialog class="kx-lb" id="kx-lb" aria-label="Галерия"><button type="button" class="kx-lb__x" data-close aria-label="Затвори">${IC.x}</button><button type="button" class="kx-lb__nav kx-lb__nav--p" data-step="-1" aria-label="Предишна снимка">←</button><figure class="nwm"><img alt=""><figcaption></figcaption></figure><button type="button" class="kx-lb__nav kx-lb__nav--n" data-step="1" aria-label="Следваща снимка">→</button></dialog>`]);
+      S.push(['patient', 'За пациента', `<h2>Информация за пациентите</h2>
+        <ol class="kp-steps">${steps.map(([t, d], i) => `<li><span>${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
+        ${patientBlocks.length ? `<details class="kp-fold"><summary>Информация от ${isClinic ? 'клиниката' : 'звеното'}</summary><div>${richBody(patientBlocks, acc)}</div></details>` : ''}
+        <div class="kp-btns"><a href="#/admission">Постъпване в болницата ${A}</a><a href="#/patient">За пациента ${A}</a><a href="route.html">Как да стигна ${A}</a></div>`]);
+      if (news.length) S.push(['news', 'Новини', `<div class="kp-h"><h2>Свързани новини</h2><a class="kp-lnk" href="#/news">Всички новини ${A}</a></div>
+        <ul class="kp-news">${news.slice(0, 4).map((n) => `<li><a href="#/news/${n.id}"><span class="kp-news__img nwm"><img src="${nimg(n)}" alt="" loading="lazy"></span><time>${esc(n.date)}</time><b>${esc(n.title)}</b></a></li>`).join('')}</ul>`]);
+
+      const kpNav = `<nav class="kp-nav" aria-label="${esc(c.name)} — съдържание"><div class="vwrap kp-nav__w"><div class="kp-nav__in">${S.filter(([, t]) => t).map(([k, t]) => `<a href="#kp-${k}" data-kj="kp-${k}">${esc(t)}</a>`).join('')}</div>
+        <button type="button" class="kp-theme" aria-pressed="true"><svg class="kp-theme__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="kp-theme__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Светла</span></button></div></nav>`;
+      const side = `<aside class="kp-side" aria-label="Контакти"><div class="kp-card">
+        <p class="kp-k">Контакти</p>
+        ${phones.map((ph, i) => `<a class="kp-tel" href="${telOf(ph)}"><small>${phones.length > 1 ? (isClinic ? 'Клиника' : 'Звено') + ' · ' + (i + 1) : isClinic ? 'Клиника' : 'Звено'}</small>${IC.phone}<b>${esc(ph)}</b></a>`).join('')}
+        ${[['Записване на час', '02 9432 207'], ['Централа на болницата', '02 9432 170']].filter(([, n]) => !phones.some((ph) => ph.replace(/\D/g, '').endsWith(n.replace(/\D/g, '').slice(-7)))).map(([t, n]) => `<a class="kp-tel" href="${telOf(n)}"><small>${t}</small>${IC.phone}<b>${n}</b></a>`).join('')}
+        <hr>
+        ${c.emails[0] ? `<p class="kp-row">${IC.mail}<a href="mailto:${esc(c.emails[0])}">${esc(c.emails[0])}</a></p>` : ''}
+        ${signAt.length || floor ? `<p class="kp-row">${IC.pin}<span>${esc(signAt.length ? signAt.join('; ') : floor)}<br><small>ул. „Бяло море“ № 8, София</small></span></p>` : `<p class="kp-row">${IC.pin}<span>ул. „Бяло море“ № 8, София</span></p>`}
+        ${visit ? `<p class="kp-row kp-row--t"><small>Свиждане</small><span>${esc(visit)}</span></p>` : ''}
+        <a class="kp-book" href="${SUPERDOC}" target="_blank" rel="noopener">Запази час ↗</a>
+        <a class="kp-go" href="${PL && placesOf(id).length ? `#/kade/c${id}` : 'route.html'}">${PL && placesOf(id).length ? 'Покажи на картата' : 'Как да стигна'} ${A}</a>
+      </div></aside>`;
+      const hero = `<header class="kp-hero">${heroOf(c) ? `<img class="kp-hero__bg" src="${esc(heroOf(c))}" alt="">` : ''}<div class="vwrap kp-hero__in">
+        ${crumbs([['Клиники и отделения', '#/clinics'], [c.name]])}
+        ${grp ? `<p class="kp-k">${esc(grp)}</p>` : ''}
+        <h1>${CLINIC_ICON[id] ? `<span class="kp-ic">${clinicIcon(id)}</span>` : ''}<span>${esc(c.name)}</span></h1>
+        <p class="kp-meta">${meta.map(esc).join(' <i>·</i> ')}</p>
+        ${lead ? `<p class="kp-lead">${esc(cutS(lead, 230))}</p>` : ''}
+        <div class="kp-cta"><a class="kp-b kp-b--w" href="${telOf(tel1)}">${IC.phone}${esc(tel1)}</a>${team2.length || headP ? `<a class="kp-b" href="#kp-${headP ? 'head' : 'team'}" data-kj="kp-${headP ? 'head' : 'team'}">Медицинският екип</a>` : ''}</div>
+      </div></header>`;
+      const more = related.length ? `<section class="kp-more"><div class="vwrap"><div class="kp-h"><h2>Още: ${esc(grp.toLowerCase())}</h2><a class="kp-lnk" href="#/clinics">Всички клиники ${A}</a></div>
+        <div class="kp-more__row">${related.map((x) => `<a class="kp-mc" href="#/clinic/${x.id}">${heroOf(x) ? `<img src="${esc(heroOf(x))}" alt="" loading="lazy">` : ''}<span class="kp-mc__g">${esc(grp)}</span>${CLINIC_ICON[x.id] ? `<span class="kp-mc__ic">${clinicIcon(x.id)}</span>` : ''}<b>${esc(x.name)}</b></a>`).join('')}</div></div></section>` : '';
+      const bioDlg = `<dialog class="kx-bio" id="kx-bio" aria-labelledby="kx-bio-h"><div class="kx-bio__in"></div></dialog>`;
+      return { title: c.name, og: `assets/og/clinic-${id}.jpg`, desc: lead ? lead.slice(0, 180) : c.name,
+        html: `<div class="kx kp">${hero}${kpNav}<div class="vwrap kp-grid"><div class="kp-main">${S.map(([k, , h]) => `<section class="kp-sec" id="kp-${k}">${h}</section>`).join('')}</div>${side}</div>${more}${bioDlg}${vsw}</div>`,
+        init: () => {
+          clinicXInit('', G, BIO);
+          // light / dark: the device setting until the visitor picks one (remembered)
+          const root = document.documentElement, tb = $('.kp-theme', page), sys = matchMedia('(prefers-color-scheme: dark)');
+          const saved = () => { try { return localStorage.getItem('isul-theme'); } catch (e) { return null; } };
+          const show = () => { const dark = root.dataset.theme !== 'light'; tb.setAttribute('aria-pressed', String(dark)); $('span', tb).textContent = dark ? 'Светла' : 'Тъмна'; tb.title = dark ? 'Светла версия' : 'Тъмна версия'; };
+          root.dataset.theme = saved() || (sys.matches ? 'dark' : 'light'); show();
+          tb.addEventListener('click', () => { const t = root.dataset.theme === 'light' ? 'dark' : 'light'; root.dataset.theme = t; try { localStorage.setItem('isul-theme', t); } catch (e) { /* storage blocked */ } show(); });
+          const links = $$('.kp-nav a', page);
+          const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => { const on = a.dataset.kj === e.target.id; a.classList.toggle('is-on', on); if (on) a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }); }), { rootMargin: '-30% 0px -60% 0px' });
+          $$('.kp-sec[id]', page).forEach((x) => io.observe(x));
+          const to = tab === 'team' ? ($('#kp-head', page) || $('#kp-team', page)) : tab === 'patient' ? $('#kp-patient', page) : null;
+          if (to) setTimeout(() => window.scrollTo({ top: to.getBoundingClientRect().top + scrollY - 140 }), 60);
+        } };
+    }
     return { title: c.name, og: `assets/og/clinic-${id}.jpg`, desc: lead ? lead.slice(0, 180) : c.name,
       ld: { '@context': 'https://schema.org', '@type': 'MedicalClinic', name: c.name, telephone: tel1, parentOrganization: { '@type': 'Hospital', name: 'УМБАЛ „Царица Йоанна – ИСУЛ“' } },
-      html: `<div class="kx">${hero}${strip}${navHtml}${about}${band}${exam}${chiefHtml}${team}${gallery}${reelsBand(id, 'kx-video', isClinic ? 'клиниката' : 'звеното')}${newsHtml}${urgent}${patient}${where}${contacts}</div>`,
+      html: CLEAN ? `<div class="kx kxc" data-chf="${CHF}">${hero}${navHtml}${factsHtml}${about}${chiefC}${team}${exam}${gallery}${newsHtml}${urgent}${patient}${contacts}${vsw}</div>`
+        : `<div class="kx">${hero}${strip}${navHtml}${about}${band}${exam}${chiefHtml}${team}${gallery}${reelsBand(id, 'kx-video', isClinic ? 'клиниката' : 'звеното')}${newsHtml}${urgent}${patient}${where}${contacts}${vsw}</div>`,
       init: () => { clinicXInit(tab, G, BIO); reelsBind(page); } };
   }
   function clinicXInit(tab, G, BIO) {
@@ -1621,7 +1732,7 @@
             <h3>Клиника / отделение</h3><div class="jb__f" id="jclin"><button type="button" aria-pressed="true" data-v="">Всички клиники<span>${jobs.length}</span></button>${clinics.map((c) => `<button type="button" aria-pressed="false" data-v="${c}">${esc(cname(c).replace(/^Клиника по /, ''))}<span>${count((j) => j.clinic === c)}</span></button>`).join('')}</div>
             <a class="mbp" href="${J.company}" target="_blank" rel="noopener" aria-label="Powered by medboard — Career platform"><small>Powered by</small><img src="assets/brand/medboard.svg" alt="medboard"><span>Career platform</span></a>
           </aside>
-          <div class="jb__main"><div class="jb__head"><p class="jb__n" id="jn"></p><a class="mbp mbp--s" href="${J.company}" target="_blank" rel="noopener" aria-label="Powered by medboard — Career platform"><small>Powered by</small><img src="assets/brand/medboard.svg" alt="medboard"><span>Career platform</span></a>${X ? viewX : ''}</div>${X ? `<div class="cx-results is-cards jx-res" id="jcards">${jobs.map(cardX).join('')}</div>` : `<div class="jb__cards" id="jcards">${jobs.map(card).join('')}</div>`}<p class="jb__empty" hidden>Няма позиции по избраните филтри. Изпратете отворена кандидатура на <a href="mailto:pr@isul.eu">pr@isul.eu</a>.</p></div>
+          <div class="jb__main"><div class="jb__head"><p class="jb__n" id="jn"></p><a class="mbp mbp--s" href="${J.company}" target="_blank" rel="noopener" aria-label="Powered by medboard — Career platform"><small>Powered by</small><img src="assets/brand/medboard.svg" alt="medboard"><span>Career platform</span></a>${X ? viewX : ''}</div>${X ? `<div class="cx-results is-cards jx-res" id="jcards">${jobs.map(cardX).join('')}</div>` : `<div class="jb__cards" id="jcards">${jobs.map(card).join('')}</div>`}<p class="jb__empty" hidden>Няма позиции по избраните филтри. Изпратете отворена кандидатура на <a href="mailto:hr@isul.eu">hr@isul.eu</a>.</p></div>
         </div>
         ${X ? `<div class="jx-comp"><div><h2>Конкурси за длъжности</h2><p>Официалните конкурси по заповед на изпълнителния директор — например за лекари-специализанти — се публикуват в раздел „Конкурси“.</p></div><a href="#/competition">Към конкурсите →</a></div>` : ''}
         <div class="jb__open"><div><h2>Не намирате подходяща позиция?</h2><p>Изпратете автобиография и мотивационно писмо — ще се свържем с Вас при подходяща възможност.</p></div><a href="mailto:pr@isul.eu?subject=${encodeURIComponent('Отворена кандидатура')}">Отворена кандидатура →</a></div>
@@ -1730,7 +1841,7 @@
     const ib = blocksOf('insurance'), FUNDS = [];
     ib.forEach((b, i) => { const n = ib[i + 1]; if (b.t === 'h' && n && n.links && n.links.length && /\bАД\b|ЕАД|"/.test(b.x)) FUNDS.push([b.x.trim(), n.links[0]]); });
     const TELK = (() => { const ps = blocksOf('admission').map((b) => (b.x || '').trim()); const out = []; ps.forEach((x, i) => { const m = x.match(/^ТЕЛК комисия № (\d+)/); if (m) out.push({ n: m[1], chair: ps[i + 1] || '', sec: ps[i + 2] || '' }); }); return out; })();
-    const PH = { central: '02 9432 170', book: '02 9432 207', reg: '02 9432 203', er: '02 9432 637' };
+    const PH = { central: '02 9432 170', book: '02 9432 207', reg: '02 9432 203', er: '02 9432 203' };
     const ext = (u) => /^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '';
     const pdf = (u) => /\.pdf$/i.test(u) ? ' <span class="phx-tag">PDF</span>' : /\.xlsx?$/i.test(u) ? ' <span class="phx-tag">XLSX</span>' : /^https?:/.test(u) ? ' <span aria-hidden="true">↗</span>' : '';
     const A = (t, u, cls = '') => `<a${cls ? ` class="${cls}"` : ''} href="${esc(u)}"${ext(u)}>${t}${pdf(u)}</a>`;
@@ -2078,12 +2189,12 @@
         <button type="button" class="cx-card${p ? '' : ' no-img'}" aria-expanded="false" aria-controls="cx-panel">
           <span class="cx-card__img${p ? ' nwm' : ''}">${p ? `<img src="${p}" alt="" loading="lazy" decoding="async" width="750" height="470">` : '<img class="cx-crest" src="assets/brand/isul-crest-white.svg" alt="">'}</span>
           ${us.length ? `<span class="cx-badge">${uN(us.length)}</span>` : ''}
-          <span class="cx-card__body"><b>${esc(c.name)}</b>${tel(c) ? `<span class="cx-card__tel">${IC.phone}${esc(tel(c))}</span>` : ''}</span>
+          <span class="cx-card__body">${CLINIC_ICON[c.id] ? `<span class="cx-ic">${clinicIcon(c.id)}</span>` : ''}<b>${esc(c.name)}</b>${tel(c) ? `<span class="cx-card__tel">${IC.phone}${esc(tel(c))}</span>` : ''}</span>
           <span class="cx-card__go">${IC.arrow}</span>
         </button>
         <div class="cx-row">
           <span class="cx-row__img">${p ? `<img src="${p}" alt="" loading="lazy" decoding="async" width="750" height="470">` : '<img class="cx-crest" src="assets/brand/isul-crest-white.svg" alt="">'}</span>
-          <div class="cx-row__b"><p class="cx-row__g">${esc(GROUP_OF[c.id] || '')}</p><h3><a href="#/clinic/${c.id}">${esc(c.name)}</a></h3>${intro(c) ? `<p class="cx-row__t">${esc(intro(c))}</p>` : ''}
+          <div class="cx-row__b"><p class="cx-row__g">${clinicIcon(c.id)}${esc(GROUP_OF[c.id] || '')}</p><h3><a href="#/clinic/${c.id}">${esc(c.name)}</a></h3>${intro(c) ? `<p class="cx-row__t">${esc(intro(c))}</p>` : ''}
             <p class="cx-row__m">${tel(c) ? `<span>${IC.phone}${esc(tel(c))}</span>` : ''}${us.length ? `<span class="cx-badge cx-badge--l">${uN(us.length)}</span>` : ''}</p></div>
           <button type="button" class="cx-btn cx-btn--o cx-row__more" aria-expanded="false" aria-controls="cx-panel">Подробности</button>
         </div>
@@ -2096,33 +2207,37 @@
         ${h ? `<a class="cx-head cx-head--s" href="${drUrl(h)}"><span class="cx-av">${h.img ? `<img src="${esc(h.img)}" alt="" loading="lazy">` : esc(initialsOf(h))}</span><span><small>Ръководител</small><b>${esc(h.name)}</b></span></a>` : ''}
         <a class="cx-unit__go" href="${unitUrl(u)}">Към звеното ${IC.arrow}</a></div>`; };
 
-    /* the expanded clinic: ISUL Studio style */
-    const panelHtml = (c) => { const us = PP.unitsOf(c.id), h = headOf(c), p = img(c), mail = (c.emails || [])[0];
-      return `<div class="cx-panel__in">
+    /* the expanded clinic: a calm white card in the style of the clinic page („Подредба“) — photo, name, short text,
+       the head and the contacts on one row, two buttons; the units as a plain list */
+    const panelHtml = (c) => { const us = PP.unitsOf(c.id), h = headOf(c), p = img(c), mail = (c.emails || [])[0], t = tel(c);
+      const grp = GROUP_OF[c.id], kind = /^Клиника/.test(c.name) ? 'Клиника' : /^Лаборатория/.test(c.name) ? 'Лаборатория' : 'Звено';
+      return `<div class="cx-panel__in cxp">
         <button type="button" class="cx-panel__x" aria-label="Затвори">${IC.x}</button>
-        <div class="cx-panel__hero">
-          <span class="cx-panel__img${p ? ' nwm' : ''}">${p ? `<img src="${p}" alt="">` : '<img class="cx-crest" src="assets/brand/isul-crest-white.svg" alt="">'}</span>
-          <div class="cx-panel__b">
-            <span class="cx-pill">${esc(GROUP_OF[c.id] || 'Клиника')}</span>
-            <h3 class="cx-panel__h" tabindex="-1">${esc(c.name)}</h3>
-            ${intro(c) ? `<p class="cx-panel__t">${esc(intro(c))}</p>` : ''}
-            ${h ? `<a class="cx-head" href="${drUrl(h)}"><span class="cx-av">${h.img ? `<img src="${esc(h.img)}" alt="" loading="lazy">` : esc(initialsOf(h))}</span><span><small>Ръководител</small><b>${esc(h.name)}</b></span></a>` : ''}
-            <dl class="cx-facts">
-              ${tel(c) ? `<div><dt>Телефон</dt><dd><a href="${telOf(tel(c))}">${esc(tel(c))}</a></dd></div>` : ''}
-              ${mail ? `<div><dt>Имейл</dt><dd><a href="mailto:${esc(mail)}">${esc(mail)}</a></dd></div>` : ''}
-              ${c.floor ? `<div><dt>Място</dt><dd>${esc(c.floor)}</dd></div>` : ''}
-            </dl>
-            <div class="cx-cta"><a class="cx-btn cx-btn--w" href="#/clinic/${c.id}">Към клиниката ${IC.arrow}</a><a class="cx-btn cx-btn--ow" href="${SUPERDOC}" target="_blank" rel="noopener">Запази час ↗</a></div>
+        <div class="cxp__top">
+          <a class="cxp__img${p ? ' nwm' : ''}" href="#/clinic/${c.id}" tabindex="-1" aria-hidden="true">${p ? `<img src="${p}" alt="">` : `<span class="cxp__ph">${clinicIcon(c.id)}</span>`}</a>
+          <div class="cxp__b">
+            <p class="cxp__k"><span class="cxp__ic">${clinicIcon(c.id)}</span>${esc(kind)}${grp ? ` · ${esc(grp)}` : ''}</p>
+            <h3 class="cx-panel__h cxp__h" tabindex="-1">${esc(c.name)}</h3>
+            ${intro(c) ? `<p class="cxp__t">${esc(intro(c))}</p>` : ''}
+            <div class="cxp__row">
+              ${h ? `<a class="cxp__head" href="${drUrl(h)}"><span class="cxp__av">${h.img ? `<img src="${esc(h.img)}" alt="" loading="lazy">` : esc(initialsOf(h))}</span><span><b>${esc(h.name)}</b><small>Ръководител</small></span></a>` : ''}
+              <ul class="cxp__ct">
+                ${t ? `<li><a href="${telOf(t)}">${ICON.tel}<span>${esc(t)}</span></a></li>` : ''}
+                ${mail ? `<li><a href="mailto:${esc(mail)}">${ICON.mail}<span>${esc(mail)}</span></a></li>` : ''}
+                ${c.floor ? `<li>${ICON.pin}<span>${esc(c.floor)}</span></li>` : ''}
+              </ul>
+            </div>
+            <div class="cxp__cta"><a class="cxp__btn" href="#/clinic/${c.id}">Към ${kind === 'Клиника' ? 'клиниката' : kind === 'Лаборатория' ? 'лабораторията' : 'звеното'} ${IC.arrow}</a><a class="cxp__btn cxp__btn--o" href="${SUPERDOC}" target="_blank" rel="noopener">Запази час ↗</a><a class="cxp__lnk" href="#/clinic/${c.id}/team">Медицински екип</a></div>
           </div>
         </div>
-        ${us.length ? `<div class="cx-panel__units"><p class="cx-panel__uh">Специализирани звена <span>${us.length}</span></p><div class="cx-units">${us.map((u) => unitCard(u, false)).join('')}</div></div>` : ''}
+        ${us.length ? `<div class="cxp__units"><p class="cxp__uh">Специализирани звена <span>${us.length}</span></p><ul>${us.map((u) => `<li><a href="${unitUrl(u)}"><span><b>${esc(u.name)}</b><small>${esc(u.kind)}</small></span>${IC.arrow}</a></li>`).join('')}</ul></div>` : ''}
       </div>`; };
 
     const filters = `<aside class="cx-side" id="cx-side" aria-label="Филтри">
         <div class="cx-side__top"><b>Филтри</b><button type="button" class="cx-side__x" aria-label="Затвори филтрите">${IC.x}</button></div>
         <div class="cx-side__scroll">
-          <p class="cx-side__h" id="cx-g-h">Направление</p>
-          <div class="cx-opts" role="group" aria-labelledby="cx-g-h"><button type="button" data-g="" aria-pressed="true">Всички клиники<span>${list.length}</span></button>${groups.map((g) => `<button type="button" data-g="${esc(g)}" aria-pressed="false">${esc(g)}<span>${list.filter((c) => GROUP_OF[c.id] === g).length}</span></button>`).join('')}</div>
+          <p class="cx-side__h" id="cx-g-h">Клиники и отделения</p>
+          <div class="cx-opts cx-opts--c" role="group" aria-labelledby="cx-g-h"><button type="button" data-g="" aria-pressed="true">Всички клиники<span>${list.length}</span></button>${list.slice().sort((a, b) => a.name.localeCompare(b.name, 'bg')).map((c) => `<button type="button" data-c="${c.id}" aria-pressed="false">${clinicIcon(c.id)}<em>${esc(c.name)}</em></button>`).join('')}</div>
           <button type="button" class="cx-side__acc" aria-expanded="false" aria-controls="cx-kinds">Звена по вид <span>${units.length}</span>${IC.chev}</button>
           <div class="cx-opts" id="cx-kinds" role="group" aria-label="Звена по вид" hidden><button type="button" data-k="" aria-pressed="true">Всички клиники</button>${KINDS.map(([k, n]) => `<button type="button" data-k="${esc(k)}" aria-pressed="false">${esc(k)}<span>${n}</span></button>`).join('')}</div>
         </div>
@@ -2173,6 +2288,7 @@
         const c = C.clinics[id]; openId = String(id); opener = from || null;
         items.forEach((x) => $$('[aria-expanded]', x).forEach((b) => b.setAttribute('aria-expanded', String(x.dataset.id === openId))));
         items.forEach((x) => x.classList.toggle('is-open', x.dataset.id === openId));
+        $$('[data-c]', side).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.c === openId)));
         panel.innerHTML = panelHtml(c); panel.setAttribute('aria-label', c.name); panel.hidden = false;
         placePanel();
         $('.cx-panel__x', panel).addEventListener('click', () => closePanel(true));
@@ -2182,6 +2298,7 @@
       const closePanel = (focusBack) => {
         const id = openId; openId = null; panel.hidden = true; panel.remove();
         items.forEach((x) => { x.classList.remove('is-open'); $$('[aria-expanded]', x).forEach((b) => b.setAttribute('aria-expanded', 'false')); });
+        $$('[data-c]', side).forEach((b) => b.setAttribute('aria-pressed', 'false'));
         if (focusBack && opener && document.contains(opener)) opener.focus();
         else if (focusBack && id) { const b = $(`.cx-item[data-id="${id}"] ${st.view === 'list' ? '.cx-row__more' : '.cx-card'}`, res); if (b) b.focus(); }
       };
@@ -2232,6 +2349,12 @@
       fbtn.addEventListener('click', () => sheet(true));
       $('.cx-side__x', side).addEventListener('click', () => sheet(false));
       $$('[data-done]', side).forEach((b) => b.addEventListener('click', () => sheet(false)));
+      /* a clinic in the sidebar list: show all clinics and expand that one in place */
+      $$('[data-c]', side).forEach((b) => b.addEventListener('click', () => {
+        if (side.classList.contains('is-sheet')) sheet(false);
+        if (st.k || st.g || st.q) { st.k = ''; st.g = ''; st.q = ''; $('#cxq').value = ''; $('.cx-search__clear').hidden = true; $$('[data-k]', side).forEach((x) => x.setAttribute('aria-pressed', String(!x.dataset.k))); run(); }
+        if (openId !== b.dataset.c) openPanel(b.dataset.c, b);
+      }));
       side.addEventListener('keydown', (e) => { if (!side.classList.contains('is-sheet')) return; if (e.key === 'Escape') { e.preventDefault(); sheet(false); } if (e.key === 'Tab') { const f = $$('button, a', side).filter((x) => x.offsetParent); const a0 = f[0], a1 = f[f.length - 1]; if (e.shiftKey && document.activeElement === a0) { e.preventDefault(); a1.focus(); } else if (!e.shiftKey && document.activeElement === a1) { e.preventDefault(); a0.focus(); } } });
 
       /* search: filters the catalogue + grouped suggestions with keyboard navigation */
@@ -3154,14 +3277,14 @@
         <aside class="cx__side">
           <nav class="jb__f cx__nav" aria-label="На тази страница">${nav.map(([id, t], i) => `<a href="#${id}" data-cx="${id}"${i ? '' : ' class="is-on"'}>${t}</a>`).join('')}</nav>
           <div class="cx__addr"><span class="cx__k">Адрес</span><b>ул. „Бяло море“ № 8</b><small>София 1527 · кв. Оборище</small><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('УМБАЛ Царица Йоанна ИСУЛ, ул. Бяло море 8, София')}" target="_blank" rel="noopener">Отвори в Google Maps ↗</a></div>
-          <div class="cx__emg"><span class="cx__k">Спешно · 24/7</span><a href="tel:+35929432637">02 9432 637</a><small>При опасност за живота — 112</small></div>
+          <div class="cx__emg"><span class="cx__k">Спешно · 24/7</span><a href="tel:+35929432203">02 9432 203</a><small>При опасност за живота — 112</small></div>
         </aside>
         <div class="cx__main">
           <section class="cx__sec" id="cx-tel"><h2>Телефони</h2><div class="cx__cards">
             ${phone('+35929432170', 'Телефонна централа', 'Денонощно', 'cx__c--main')}
             ${phone('+35929432207', 'Записване на час', 'Медицински център · СуперДок')}
             ${phone('+35929432203', 'Регистратура', 'Спешно отделение')}
-            ${phone('+35929432637', 'Спешно отделение', 'Денонощно · 24/7', 'cx__c--emg')}
+            ${phone('+35929432203', 'Спешно отделение', 'Денонощно · 24/7', 'cx__c--emg')}
           </div></section>
           <section class="cx__sec" id="cx-route"><h2>Как да стигна</h2><p class="cx__lead">Въведете откъде тръгвате и вижте пътя с кола, пеша или с градски транспорт.</p><div id="cx-rt" class="rt rt--embed cx__rt"><p class="cx__loading">Зареждане на картата…</p></div>
             <details class="cx__scheme"><summary>Схема за достъп с градски транспорт (isul.eu)</summary><button type="button" class="cx__g" data-gal="map"><img src="${esc(map)}" alt="Схема за достъп с градски транспорт" loading="lazy"></button></details></section>
@@ -3206,7 +3329,7 @@
     HX.sec = sectionOf('contacts'); HX.cur = 'contacts';
     const tel = (n, t) => `<a class="ct-card" href="tel:${n}"><span>${t}</span><b>${n.replace('+359', '0').replace(/^0(\d)(\d{4})(\d{3})$/, '0$1 $2 $3')}</b></a>`;
     return { title: 'Контакти', html: hero('Контакти', [['Контакти']], 'УМБАЛ „Царица Йоанна – ИСУЛ“ ЕАД · ул. „Бяло море“ № 8, София 1527') +
-      `<div class="vwrap ct-top">${tel('+35929432170', 'Телефонна централа')}${tel('+35929432207', 'Записване на час')}${tel('+35929432203', 'Регистратура')}<a class="ct-card is-emg" href="tel:+35929432637"><span>Спешно отделение</span><b>02 9432 637</b></a><a class="ct-card" href="mailto:pr@isul.eu"><span>Пресцентър</span><b>pr@isul.eu</b></a></div>
+      `<div class="vwrap ct-top">${tel('+35929432170', 'Телефонна централа')}${tel('+35929432207', 'Записване на час')}<a class="ct-card is-emg" href="tel:+35929432203"><span>Спешно отделение · регистратура</span><b>02 9432 203</b></a><a class="ct-card" href="mailto:pr@isul.eu"><span>Пресцентър</span><b>pr@isul.eu</b></a></div>
       <div class="vwrap"><a class="ct-route-cta" href="route.html"><span class="ct-route-cta__ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 44s-13-11.6-13-21a13 13 0 0 1 26 0c0 9.4-13 21-13 21z"/><circle cx="24" cy="22" r="4.5"/></svg></span><span><b>Как да стигнете до ИСУЛ</b><small>Въведете откъде тръгвате и вижте пътя си с кола, пеша или с градски транспорт</small></span><span class="ct-route-cta__btn">Покажи моя път →</span></a></div>` +
       (NEW ? bands(pg.blocks, source(pg.src), 1) : layout(sectionOf('contacts'), 'contacts', blocks(pg.blocks) + source(pg.src))) + videoBand() };
   }
@@ -3341,7 +3464,7 @@
     push({ g: 'Страници', t: 'Как да стигнете до ИСУЛ', x: 'маршрут карта адрес транспорт автобус трамвай метро паркиране', u: 'route.html', m: 'Карта и маршрут' });
     push({ g: 'Страници', t: 'Лабораторни резултати', x: 'резултати изследвания lab', u: LAB, m: 'lab.isul.eu' });
     C.news.forEach((n) => push({ g: 'Новини', t: n.title, x: txt(n.blocks), u: '#/news/' + n.id, m: n.date, img: n.img }));
-    [['Телефонна централа', '02 9432 170'], ['Записване на час', '02 9432 207'], ['Регистратура', '02 9432 203'], ['Спешно отделение', '02 9432 637']].forEach(([t, ph]) => push({ g: 'Телефони', t: t + ' · ' + ph, x: ph + ' телефон', u: 'tel:+359' + ph.replace(/\D/g, '').slice(1), m: 'ИСУЛ' }));
+    [['Телефонна централа', '02 9432 170'], ['Записване на час', '02 9432 207'], ['Спешно отделение · регистратура', '02 9432 203']].forEach(([t, ph]) => push({ g: 'Телефони', t: t + ' · ' + ph, x: ph + ' телефон', u: 'tel:+359' + ph.replace(/\D/g, '').slice(1), m: 'ИСУЛ' }));
     return items;
   }
   function search(q) {
@@ -3425,7 +3548,7 @@
         groups: [{ t: 'За болницата', items: navItems(sec('about').items).map(it) }, { t: 'Обяви и дейности', items: sec('notices').items.map(it) }, { t: 'Обществени поръчки', items: [['profile/1', 'Обществени поръчки'], ['profile', 'Профил на купувача']].map(it) }],
         aside: { t: '90 години ИСУЛ', d: 'Историята на болницата — от указа на Цар Борис III до днес.', cta: [['#/history', 'История'], ['#/management', 'Ръководство']] } },
       '#/contacts': { type: 'drop', groups: [{ t: 'Контакти', items: [['contacts', 'Телефони и адрес'], ['route.html', 'Как да стигнете до ИСУЛ'], ['book', 'Запази час'], [LAB, 'Лабораторни резултати'], ['sitemap', 'Карта на сайта']].map(it) }],
-        foot: { t: 'Телефонна централа', cta: [['tel:+35929432170', '02 9432 170'], ['tel:+35929432637', 'Спешно 02 9432 637']] } }
+        foot: { t: 'Телефонна централа', cta: [['tel:+35929432170', '02 9432 170'], ['tel:+35929432203', 'Спешно 02 9432 203']] } }
     };
     const ext = (h) => /^https?:/.test(h) ? ' target="_blank" rel="noopener"' : '';
     const ARW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -3504,7 +3627,7 @@
         if (!m) return `<a class="nxm__top-a" href="${h}">${esc(t)}</a>`;
         return `<div class="nxm__sec"><button type="button" class="nxm__acc" aria-expanded="false" aria-controls="nxm-${i}"><span>${esc(t)}</span>${CHV}</button>
           <div class="nxm__body" id="nxm-${i}" hidden>${mGroup(m).map((g) => `${g.t ? `<p class="nx__gt">${esc(g.t)}</p>` : ''}${g.items.map((x) => link(x, 'nxm__a')).join('')}`).join('')}</div></div>`; }).join('')}</nav>
-      <div class="nxm__cta"><a class="nx__btn" href="${SUPERDOC}" target="_blank" rel="noopener">Запази час ↗</a><a class="nx__btn nx__btn--er" href="#/clinic/20">Спешно 24/7 · 02 9432 637</a></div></div>`;
+      <div class="nxm__cta"><a class="nx__btn" href="${SUPERDOC}" target="_blank" rel="noopener">Запази час ↗</a><a class="nx__btn nx__btn--er" href="#/clinic/20">Спешно 24/7 · 02 9432 203</a></div></div>`;
     document.body.appendChild(drawer);
     let lastF = null;
     const mClose = () => { drawer.hidden = true; burger.setAttribute('aria-expanded', 'false'); document.documentElement.style.overflow = ''; if (lastF) lastF.focus(); };

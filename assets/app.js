@@ -173,7 +173,7 @@
     ['ЕЕГ', 'neurology'], ['ЕМГ', 'neurology'], ['Аудиометрия', 'ent'], ['Ставно протезиране', 'orthopedics'], ['Артроскопия', 'orthopedics'], ['Химиотерапия', 'oncology']
   ];
   const DOCS_IDX = [['Права и задължения на пациента', '#/patients'], ['Ценоразпис на платените услуги', '#/patients'], ['Необходими документи за хоспитализация', '#/patients'], ['Декларация за информирано съгласие', '#/patients'], ['Обществени поръчки', '#/about']];
-  const PHONES_IDX = [['Телефонна централа', PHONE], ['Записване на час (Медицински център)', PHONE_REG], ['Регистратура', PHONE_DESK], ['Спешно отделение', PHONE_EMG]];
+  const PHONES_IDX = [['Телефонна централа', PHONE], ['Записване на час (Медицински център)', PHONE_REG], ['Спешно отделение · регистратура', PHONE_EMG]];
 
   function renderSearch(raw) {
     const q = norm(raw || '');
@@ -633,7 +633,7 @@
       <section class="sec sec--tight"><div class="wrap">
         <div class="emg-grid">
           <div class="emg-box"><h2>Къде</h2><p class="big" style="font-size:1.3rem">${ADDRESS}</p><p>Спешното отделение с диагностичен стационар е в сградата на бившата поликлиника.</p><a class="btn btn--alert" href="${MAPS}" target="_blank" rel="noopener">Маршрут до спешното ↗</a></div>
-          <div class="emg-box"><h2>Телефон</h2><a class="big" href="tel:${PHONE_EMG.tel}">${PHONE_EMG.label}</a><span class="meta">Спешно отделение · Регистратура ${PHONE_DESK.label}</span><p>При животозастрашаващо състояние първо се обадете на 112.</p></div>
+          <div class="emg-box"><h2>Телефон</h2><a class="big" href="tel:${PHONE_EMG.tel}">${PHONE_EMG.label}</a><span class="meta">Спешно отделение · регистратура</span><p>При животозастрашаващо състояние първо се обадете на 112.</p></div>
           <div class="emg-box"><h2>Какво да нося</h2><ul class="checklist"><li>Лична карта</li><li>Списък с лекарствата</li><li>Последна епикриза, ако имате</li><li>Телефон за връзка с близък</li></ul></div>
         </div>
       </div></section>
@@ -716,8 +716,7 @@
       <section class="sec sec--tight"><div class="wrap"><div class="grid4">
         <div class="contact-card"><dl><div><dt>Телефонна централа</dt><dd>${tel(PHONE)}</dd></div></dl></div>
         <div class="contact-card"><dl><div><dt>Записване на час</dt><dd>${tel(PHONE_REG)}</dd></div></dl><span class="meta">Медицински център · СуперДок</span></div>
-        <div class="contact-card"><dl><div><dt>Регистратура</dt><dd>${tel(PHONE_DESK)}</dd></div></dl></div>
-        <div class="contact-card" style="border-color:var(--alert)"><dl><div><dt style="color:var(--alert)">Спешно отделение</dt><dd>${tel(PHONE_EMG)}</dd></div></dl></div>
+        <div class="contact-card" style="border-color:var(--alert)"><dl><div><dt style="color:var(--alert)">Спешно отделение · регистратура</dt><dd>${tel(PHONE_EMG)}</dd></div></dl></div>
       </div>
       <div class="grid4" style="margin-top:20px"><div class="contact-card"><dl><div><dt>Пресцентър</dt><dd><a href="mailto:pr@isul.eu" style="font-size:1rem">pr@isul.eu</a></dd></div></dl></div><div class="contact-card"><dl><div><dt>Изпълнителен директор</dt><dd><a href="mailto:director@isul.eu" style="font-size:1rem">director@isul.eu</a></dd></div></dl></div><div class="contact-card"><dl><div><dt>Медицински център</dt><dd><a href="mailto:msc_isul@abv.bg" style="font-size:1rem">msc_isul@abv.bg</a></dd></div></dl></div><div class="contact-card"><dl><div><dt>Адрес</dt><dd style="font-size:1rem">${ADDRESS}</dd></div></dl></div></div>
       </div></section>
