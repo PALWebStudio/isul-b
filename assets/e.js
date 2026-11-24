@@ -222,7 +222,7 @@
       <div class="dr-body" style="--c:${it.col}"><p class="dr-k">${it.g}</p><h2 id="dr-h">${it.name}</h2>
       <span class="dr-organ"><i></i>${it.organ}</span>
       <div class="dr-ct">${(c.phones || []).map((p) => `<a href="tel:+359${p.replace(/\D/g, '').replace(/^0/, '').slice(0, 9)}"><span>Телефон</span>${p}</a>`).join('')}${(c.emails || []).map((m) => `<a href="mailto:${m}"><span>Имейл</span>${m}</a>`).join('')}${c.floor ? `<div><span>Местоположение</span>${c.floor}</div>` : ''}</div>
-      <div class="dr-links"><a class="is-main" href="${D}">Към клиниката →</a><a href="${D}/team">Екип</a><a href="${D}/patient">За пациента</a><a href="https://www.superdoc.bg" target="_blank" rel="noopener">Запази час ↗</a></div></div>`;
+      <div class="dr-links"><a class="is-main" href="${D}">Към клиниката →</a><a href="${D}/team">Екип</a><a href="${D}/patient">За пациента</a><a href="variant-d.html#/book">Как да се прегледам</a></div></div>`;
     drawer.hidden = false; $('#drx').focus();
   }
   const close = () => { drawer.hidden = true; if (lastFocus) lastFocus.focus(); };

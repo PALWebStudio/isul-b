@@ -92,7 +92,7 @@
     if (!q) { out.innerHTML = ''; return; }
     if (RED_FLAGS.some((f) => q.includes(f))) { out.innerHTML = `<div class="warn"><b>Може да е спешно. Обадете се на 112.</b><br>Спешно отделение на ИСУЛ: 02 9432 203</div>`; return; }
     const m = SYMPTOMS.find((s) => s.k.some((k) => q.includes(k)));
-    if (!m) { out.innerHTML = `<div class="warn" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#fff">Не открихме насочване. Обадете се на 02 9432 207 за информация.</div>`; return; }
+    if (!m) { out.innerHTML = `<div class="warn" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#fff">Не открихме насочване. Обадете се на телефонната централа 02 9432 170.</div>`; return; }
     const sp = SPECIALTIES.find((s) => s.id === m.spec), cl = CLINICS.filter((c) => c.spec === m.spec);
     out.innerHTML = `<a href="index.html#/specialties/${sp.id}"><span><small>Специалност</small><br><b>${sp.name}</b></span><span>→</span></a>`
       + cl.map((c, i) => `<a href="index.html#/clinics/${c.id}" style="animation-delay:${(i + 1) * 80}ms"><span><small>Клиника</small><br><b>${c.short || c.name}</b></span><span>→</span></a>`).join('')

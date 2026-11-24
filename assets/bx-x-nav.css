@@ -153,3 +153,28 @@
   .proto .vswitch [data-dev], .proto .vswitch .vswitch__sep { display: none; }
   body { padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Клиники: all clinics one by one, A–Я in three columns, each with its icon (no medical groups) */
+.nx__flat { display: flex; flex-direction: column; padding: 16px 18px 14px; min-width: 0; }
+.nx__list--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px 6px; }
+.nx__a--ic { grid-template-columns: 30px minmax(0, 1fr); column-gap: 10px; align-items: center; min-height: 40px; padding: 6px 10px; font-size: .92rem; line-height: 1.3; }
+.nx__ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: #F6EEF2; color: #9d305c; transition: background .15s, color .15s; }
+.nx__ic svg { width: 17px; height: 17px; }
+.nx__a--ic:hover .nx__ic, .nx__a--ic.is-cur .nx__ic { background: #9d305c; color: #fff; }
+.nx__flat .nx__extra { margin-top: auto; padding-top: 12px; }
+@media (max-width: 1180px) { .nx__list--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.nxm__a.nx__a--ic { display: grid; }
+/* the clinics panel is wider so most names fit on one or two lines; A–Я runs down each column */
+.nx--mega.nx--flat { width: min(1380px, calc(100vw - 24px)); }
+.nx--flat .nx__in { grid-template-columns: 210px minmax(0, 1fr) 236px; }
+.nx--flat .nx__intro { padding: 26px 22px; }
+.nx--flat .nx__list--3 { grid-auto-flow: column; grid-template-rows: repeat(var(--r, 9), auto); }
+@media (max-width: 1180px) { .nx--flat .nx__list--3 { grid-auto-flow: row; grid-template-rows: none; } }
+
+/* 1281–1439 px (the common laptops): the eight items and the actions did not fit — the last button was cut off */
+@media (min-width: 1281px) and (max-width: 1439px) {
+  .hd__nav { margin-left: 14px; }
+  .hd__nav > a, .nx-dd > a { padding-inline: 7px !important; }
+  .nx-dd > a { padding-right: 1px !important; }
+  .nx-tg { width: 20px; margin-right: 2px; }
+}

@@ -65,7 +65,7 @@ body[data-route="patient"] #page { background: #f3f6fa; color: #0f1a2b; }
 /* 2 · quick actions — first card larger, in burgundy */
 .phx-quick { padding-top: 32px; }
 .phx-quick .phx-h2 { margin-bottom: 16px; }
-.phx-qgrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 16px; }
+.phx-qgrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; }
 .phx-q { position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 230px; padding: 24px; border-radius: 22px; background: #fff; border: 1px solid #e3e8ef; color: #0f1a2b; text-decoration: none;
   box-shadow: 0 1px 2px rgba(15,26,43,.04), 0 18px 36px -28px rgba(12,22,38,.5); transition: transform .2s, box-shadow .2s, border-color .2s; }
 .phx-q:hover { transform: translateY(-4px); border-color: rgba(26,73,125,.35); box-shadow: 0 28px 48px -28px rgba(12,22,38,.6); }
@@ -249,6 +249,7 @@ body[data-route="patient"] #page { background: #f3f6fa; color: #0f1a2b; }
 /* responsive */
 @media (max-width: 1100px) {
   .phx-qgrid { grid-template-columns: 1fr 1fr; }
+  .phx-qgrid .phx-q--main { grid-column: 1 / -1; }
   .phx-igrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .phx-dock { display: none; }
 }

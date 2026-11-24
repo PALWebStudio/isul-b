@@ -993,3 +993,207 @@ html[data-theme="light"] .kp-more { background: #fff; }
 .kp-fold--act summary { font-size: 1rem; }
 .kp-fold--act > div { padding-top: 4px; }
 .kp-fold--act .kp-ticks li { background: transparent; }
+
+/* „Подредба“ — Как да стигнете: the places from the board on the left, the small plan of the hospital on the right */
+.kp-wh { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.kp-wh__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.kp-wh__list li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-wh__list b { display: block; font-size: .95rem; line-height: 1.35; }
+.kp-wh__list small { display: block; margin-top: 2px; font-size: .84rem; color: var(--kpm); }
+.kp-wh__list em { display: block; margin-top: 6px; font-style: normal; font-size: .84rem; font-weight: 600; color: var(--kb-hi); }
+.kp-wh .kp-btns { grid-template-columns: minmax(0, 1fr); }
+.kp-wh__map { display: block; padding: 8px; border-radius: 18px; background: #fff; border: 1px solid var(--kpl); transition: border-color .2s; }
+.kp-wh__map:hover { border-color: var(--kb-hi); }
+.kp-wh__map svg { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) { .kp-wh { grid-template-columns: minmax(0, 1fr); } .kp-wh__map { order: -1; } }
+.kp-wh + .kp-note { margin-top: 16px; }
+
+/* ДКБ cabinets as cards (the ДКБ page and „Как да се прегледам“), in the shape of the patient portal cards */
+.dkc-g { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.dkc { position: relative; display: flex; flex-direction: column; gap: 6px; min-height: 150px; padding: 18px; border-radius: 18px; background: #fff; border: 1px solid #E2DCDF; color: #2B1E24; text-decoration: none; transition: transform .25s, border-color .2s, box-shadow .25s; }
+a.dkc:hover { transform: translateY(-3px); border-color: rgba(120,43,74,.35); box-shadow: 0 22px 40px -28px rgba(74,24,48,.55); }
+.dkc__ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #F6EEF2; color: #782B4A; margin-bottom: 6px; }
+.dkc__ic svg { width: 22px; height: 22px; }
+.dkc__n { position: absolute; right: 16px; top: 14px; display: flex; flex-direction: column; align-items: flex-end; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.55rem; line-height: 1; color: #85704F; }
+.dkc__n small { font-family: var(--f-body); font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #85704F; margin-bottom: 3px; }
+.dkc b { font-size: 1rem; line-height: 1.3; }
+.dkc__m { font-size: .82rem; color: #666066; }
+.dkc em { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 6px; font-style: normal; font-size: .84rem; font-weight: 600; line-height: 1.3; color: #782B4A; }
+.dkc em svg { width: 15px; height: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s; }
+a.dkc:hover em svg { transform: translateX(3px); }
+/* on the clinic page („Подредба“) they follow its light / dark theme */
+.kp .dkc { background: var(--kpc); border-color: var(--kpl); color: inherit; }
+.kp .dkc__ic { background: rgba(255,255,255,.08); color: var(--kb-hi); }
+.kp .dkc__m { color: var(--kpm); }
+.kp .dkc em { color: var(--kb-hi); }
+html[data-theme="light"] .kp .dkc__ic { background: #F6EEF2; color: #782B4A; }
+html[data-theme="light"] .kp .dkc em { color: #782B4A; }
+@media (prefers-reduced-motion: reduce) { .dkc, a.dkc:hover { transition: none; transform: none; } }
+
+/* „Подредба“ gallery: large round arrows on both sides of the strip (no touchpad needed); off at the ends */
+.kp-galw { position: relative; }
+.kp-arr { position: absolute; top: calc(50% - 4px); z-index: 2; translate: 0 -50%; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; border: 0; background: #fff; color: #2B1E24; box-shadow: 0 8px 24px -8px rgba(0,0,0,.45); cursor: pointer; transition: opacity .2s, transform .15s; }
+.kp-arr svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.kp-arr--p { left: 10px; } .kp-arr--n { right: 10px; }
+.kp-arr:hover { transform: scale(1.06); color: var(--kb); }
+.kp-arr:focus-visible { outline: 3px solid var(--kb-hi); outline-offset: 2px; }
+.kp-arr:disabled { opacity: 0; pointer-events: none; }
+@media (max-width: 640px) { .kp-arr { width: 44px; height: 44px; } }
+
+/* ДКБ cabinets — one per row, like the list of clinics: icon | name and floor | room number | „Към клиниката“ */
+.dkc-g { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.dkc { display: grid; grid-template-columns: 52px minmax(0, 1fr) 96px 170px; grid-template-areas: "ic t n l" "ic m n l"; align-items: center; column-gap: 18px; row-gap: 2px; min-height: 0; padding: 14px 18px; border-radius: 16px; }
+a.dkc:hover { transform: none; }
+.dkc__ic { grid-area: ic; align-self: center; margin: 0; width: 52px; height: 52px; border-radius: 14px; }
+.dkc__ic svg { width: 24px; height: 24px; }
+.dkc b { grid-area: t; align-self: end; font-size: 1.05rem; }
+.dkc__m { grid-area: m; align-self: start; }
+.dkc__n { grid-area: n; position: static; align-self: center; flex-direction: column; align-items: center; padding: 0 0 0 16px; border-left: 1px solid #EEE8EB; font-size: 1.7rem; }
+.dkc em { grid-area: l; justify-self: end; margin: 0; padding: 0 18px; min-height: 44px; border-radius: 99px; border: 1.5px solid rgba(120,43,74,.35); background: #fff; white-space: nowrap; transition: background .15s, border-color .15s; }
+a.dkc:hover em { background: #F6EEF2; border-color: #782B4A; }
+.kp .dkc__n { border-left-color: var(--kpl); }
+.kp .dkc em { background: transparent; border-color: var(--kpl); }
+.kp a.dkc:hover em { background: rgba(255,255,255,.06); border-color: var(--kb-hi); }
+html[data-theme="light"] .kp .dkc em { background: #fff; border-color: rgba(120,43,74,.35); }
+@media (max-width: 640px) {
+  .dkc { grid-template-columns: 44px minmax(0, 1fr) auto; grid-template-areas: "ic t n" "ic m n" "l l l"; column-gap: 12px; padding: 12px 14px; }
+  .dkc__ic { width: 44px; height: 44px; }
+  .dkc__n { font-size: 1.4rem; padding-left: 12px; }
+  .dkc em { justify-self: stretch; justify-content: center; margin-top: 10px; }
+}
+
+/* „За нас“ in the „Подредба“ order */
+.kp-ic--crest { background: transparent !important; border: 0 !important; }
+.kp-ic--crest img { width: auto; height: 100%; max-height: 52px; }
+.kp-then { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 6px; }
+.kp-then figure { margin: 0; }
+.kp-then__img { position: relative; display: block; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background: var(--kpc); }
+.kp-then__img img { width: 100%; height: 100%; object-fit: cover; }
+.kp-then__img--old img { filter: grayscale(1) contrast(1.05); }
+.kp-then figcaption { margin-top: 8px; font-size: .84rem; line-height: 1.45; color: var(--kpm); }
+.kp-then figcaption b { margin-right: 6px; color: inherit; font-weight: 700; }
+.kp-tl { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.kp-tl li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding: 14px 16px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-tl__y { font-family: var(--f-disp); font-size: 1.15rem; font-weight: 500; color: var(--kb-hi); }
+.kp-tl small { display: block; font-size: .76rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--kpm); }
+.kp-tl b { display: block; font-size: .98rem; margin: 1px 0 3px; }
+.kp-tl p { margin: 0; font-size: .88rem; line-height: 1.5; color: var(--kpm); }
+.kp-first { display: flex; align-items: center; gap: 14px; margin-top: 12px; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--kpl); background: var(--kpc); color: inherit; text-decoration: none; }
+.kp-first b { font-family: var(--f-disp); font-size: 1.7rem; font-weight: 500; color: var(--kb-hi); }
+.kp-first span { flex: 1; font-size: .92rem; }
+.kp-first:hover { border-color: var(--kb-hi); }
+.kp-first svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.kp-team__x { display: flex; align-items: center; gap: 12px; height: 100%; padding: 12px 14px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-team a { height: 100%; }
+.kp-sub { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 2px; }
+.kp-sub a { display: block; padding: 7px 10px; border-radius: 10px; font-size: .9rem; color: inherit; text-decoration: none; }
+.kp-sub a:hover { background: var(--kpc); }
+.kp-sub a[aria-current="page"] { font-weight: 700; color: var(--kb-hi); background: var(--kpc); }
+@media (max-width: 640px) { .kp-then { grid-template-columns: minmax(0, 1fr); } .kp-tl li { grid-template-columns: 64px minmax(0, 1fr); } }
+.kp-sub-h { margin: 18px 0 2px; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--kpm); }
+.kp-k--s { margin-top: 14px; }
+
+/* ---------- „За нас“ family in the „Подредба“ order ---------- */
+.kp-hero__bg.is-gray { filter: grayscale(1) contrast(1.05); }
+.kp-a { position: relative; top: -150px; display: block; height: 0; }
+.kp-sub-h b { font-family: var(--f-disp); font-weight: 500; font-size: 1.1rem; letter-spacing: 0; color: var(--kb-hi); margin-right: 4px; }
+.kp-btns--1 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Първите в страната */
+.kp-firsts { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 8px; }
+.kp-firsts li { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-firsts span { font-family: var(--f-disp); font-size: 1.05rem; font-weight: 500; color: var(--kb-hi); }
+.kp-firsts b { font-size: .9rem; line-height: 1.35; }
+.kp-firsts small { font-size: .78rem; color: var(--kpm); }
+/* Архив */
+.kp-arch { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 12px; margin-top: 6px; }
+.kp-arch figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.kp-arch__img { display: block; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--kpl); }
+.kp-arch__img img { width: 100%; height: 100%; object-fit: cover; }
+.kp-arch__img.is-small img { object-fit: contain; padding: 18px; }
+.kp-arch figcaption span, .kp-arch__book span { font-family: var(--f-disp); font-size: 1rem; color: var(--kb-hi); }
+.kp-arch figcaption b, .kp-arch__book b { display: block; font-size: .95rem; line-height: 1.3; }
+.kp-arch figcaption p, .kp-arch__book p { margin: 4px 0 0; font-size: .82rem; line-height: 1.45; color: var(--kpm); }
+.kp-arch__book { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); color: inherit; text-decoration: none; }
+.kp-arch__book em { margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 6px; font-style: normal; font-weight: 600; font-size: .86rem; color: var(--kb-hi); }
+.kp-arch__book em svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.kp-arch__book:hover { border-color: var(--kb-hi); }
+/* the archival story: short until opened */
+.kp-story { position: relative; }
+.kp-story.is-short { max-height: 460px; overflow: hidden; -webkit-mask: linear-gradient(180deg, #000 70%, transparent); mask: linear-gradient(180deg, #000 70%, transparent); }
+.kp-story figure { margin: 16px 0; }
+.kp-story img { max-width: 100%; height: auto; border-radius: 12px; }
+.kp-story .hi-note { color: var(--kpm); font-size: .88em; }
+/* Структура: the medical units as link rows */
+.kp-lk { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.kp-lk a, .kp-lk__x { display: flex; align-items: center; gap: 10px; height: 100%; padding: 10px 12px; border-radius: 12px; background: var(--kpc); border: 1px solid var(--kpl); color: inherit; text-decoration: none; font-size: .9rem; line-height: 1.3; }
+.kp-lk a span { flex: 1; }
+.kp-lk a > svg:first-child { width: 18px; height: 18px; flex: none; color: var(--kb-hi); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.kp-lk a > svg:last-child { width: 15px; height: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+.kp-lk a:hover { border-color: var(--kb-hi); }
+/* Администрация */
+.kp-dep { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 6px; }
+.kp-dep__c { padding: 16px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-dep__c h3 { margin: 0 0 8px; font-size: .95rem; line-height: 1.3; color: var(--kb-hi); }
+.kp-dep__c p { margin: 8px 0 0; display: flex; flex-direction: column; gap: 3px; }
+.kp-dep__c b { font-size: .93rem; }
+.kp-dep__c small { font-size: .8rem; color: var(--kpm); }
+.kp-dep__c a, .kp-mail { display: inline-flex; align-items: center; gap: 6px; font-size: .86rem; color: inherit; text-decoration: none; }
+.kp-dep__c a:hover, .kp-mail:hover { color: var(--kb-hi); }
+.kp-dep__c a svg, .kp-mail svg { width: 15px; height: 15px; flex: none; color: var(--kb-hi); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* Ръководство */
+.kp-team--mg .kp-team__x { align-items: flex-start; }
+.kp-team--mg .kp-av--l { width: 64px; height: 64px; }
+.kp-team--mg b a { color: inherit; text-decoration: none; } .kp-team--mg b a:hover { color: var(--kb-hi); }
+.kp-mail { margin-top: 6px; }
+/* announcements and procurement notices */
+.kp-nt { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.kp-nt li { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 16px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-nt__d time, .kp-nt__d span { font-family: var(--f-disp); font-size: 1rem; font-weight: 500; color: var(--kb-hi); white-space: nowrap; }
+.kp-nt__b small { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--kpm); margin-bottom: 3px; }
+.kp-nt__b b { display: block; font-size: .93rem; font-weight: 600; line-height: 1.45; }
+.kp-nt__b p { margin: 6px 0 0; font-size: .86rem; line-height: 1.5; color: var(--kpm); }
+.kp-nt__docs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.kp-nt__docs a { padding: 4px 10px; border-radius: 99px; border: 1px solid var(--kpl); font-size: .78rem; color: var(--kb-hi); text-decoration: none; }
+.kp-nt__go { align-self: center; padding: 8px 14px; border-radius: 99px; border: 1.5px solid var(--kpl); font-size: .85rem; font-weight: 600; color: var(--kb-hi); text-decoration: none; white-space: nowrap; }
+.kp-nt__go:hover { border-color: var(--kb-hi); }
+/* Финансови отчети */
+.kp-docs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.kp-docs a { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: var(--kpc); border: 1px solid var(--kpl); color: inherit; text-decoration: none; }
+.kp-docs a span { flex: none; padding: 3px 7px; border-radius: 6px; background: var(--kb-hi); color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .04em; }
+.kp-docs a b { flex: 1; font-size: .9rem; font-weight: 600; line-height: 1.35; }
+.kp-docs a svg { width: 15px; height: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+.kp-docs a:hover { border-color: var(--kb-hi); }
+/* the migrated text of the other pages, in the page's light / dark colours */
+.kp-rich p { margin: 0 0 12px; line-height: 1.65; }
+.kp-rich a { color: var(--kb-hi); }
+.kp .kp-rich .rl-doc, .kp .kp-rich .rl-link { background: var(--kpc); border-color: var(--kpl); color: inherit; }
+.kp .kp-rich .rl-doc__t, .kp .kp-rich .rl-link span:last-child { color: inherit; }
+.kp .kp-rich .rl-list li, .kp .kp-rich .rl-checks li { color: inherit; }
+.kp .kp-rich .rl-checks li { background: var(--kpc); border-color: var(--kpl); }
+.kp .kp-rich .rl-table table { color: inherit; } .kp .kp-rich .rl-table th, .kp .kp-rich .rl-table td { border-color: var(--kpl); background: transparent; color: inherit; }
+.kp .kp-rich .rl-inline { color: var(--kb-hi); }
+.kp-src { margin-top: 18px; font-size: .8rem; }
+@media (max-width: 760px) { .kp-lk, .kp-dep, .kp-docs, .kp-btns--1 { grid-template-columns: minmax(0, 1fr); } .kp-nt li { grid-template-columns: minmax(0, 1fr); gap: 6px; } .kp-nt__go { justify-self: start; } }
+
+/* fixes: names and e-mails in Ръководство are plain links (not boxes); a wider date column */
+.kp-team--mg .kp-team__x a { display: inline; height: auto; padding: 0; border: 0; border-radius: 0; background: none; }
+.kp-team--mg .kp-team__x a.kp-mail { display: inline-flex; margin-top: 6px; }
+.kp-nt li { grid-template-columns: 128px minmax(0, 1fr) auto; }
+.kp-nt__d time, .kp-nt__d span { font-size: .95rem; }
+/* phones: on the „За нас“ pages the card with the contacts and the list of pages comes after the content (on the clinic pages it stays first) */
+@media (max-width: 1000px) { .kp--about .kp-side { order: 1; } }
+@media (max-width: 760px) { .kp-nt li { grid-template-columns: minmax(0, 1fr); gap: 6px; } .kp-nt__go { justify-self: start; } }
+/* page links in the menu (Обяви, Обществени поръчки): the current page stays marked */
+.kp-nav a[aria-current="page"] { background: var(--kb-hi); border-color: var(--kb-hi); color: #fff; }
+html[data-theme="light"] .kp-nav a[aria-current="page"] { background: var(--kb); border-color: var(--kb); color: #fff; }
+
+/* one announcement / procurement notice: its documents as rows (type, date, size, „Отвори ↗“) */
+.kp-docl { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.kp-docl__it { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 14px; background: var(--kpc); border: 1px solid var(--kpl); }
+.kp-docl__e { display: grid; place-items: center; height: 34px; border-radius: 8px; background: var(--kb-hi); color: #fff; font-size: .7rem; font-weight: 800; letter-spacing: .04em; }
+.kp-docl__it b { display: block; font-size: .95rem; line-height: 1.35; }
+.kp-docl__it small { display: block; margin-top: 2px; font-size: .8rem; color: var(--kpm); }
+.kp-docl__it em { font-style: normal; font-size: .8rem; color: var(--kpm); }
+.kp-docl__it.is-miss { opacity: .7; } .kp-docl__it.is-miss .kp-docl__e { background: var(--kpm); }
+.kp-nt__b b a { color: inherit; text-decoration: none; } .kp-nt__b b a:hover { color: var(--kb-hi); text-decoration: underline; }
+@media (max-width: 640px) { .kp-docl__it { grid-template-columns: 46px minmax(0, 1fr); } .kp-docl__it > a, .kp-docl__it > em { grid-column: 2; justify-self: start; } }

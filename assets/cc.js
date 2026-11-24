@@ -19,7 +19,7 @@
     copy: I('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>')
   };
   const clinics = Object.values(C).sort((a, b) => a.name.localeCompare(b.name, 'bg'));
-  const PHONES = [['Телефонна централа', '02 9432 170'], ['Записване на час', '02 9432 207'], ['Спешно отделение · регистратура', '02 9432 203']];
+  const PHONES = [['Телефонна централа', '02 9432 170'], ['Спешно отделение · регистратура', '02 9432 203']];
 
   root.innerHTML = `
   <article class="cct cct--book">
@@ -28,10 +28,10 @@
     <select id="cc-cl" class="cct__sel"><option value="">Изберете клиника или отделение…</option>${clinics.map((c) => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select>
     <div class="cct__pop"><span>Най-търсени</span>${[[3, 'Кардиология'], [5, 'Неврология'], [9, 'Ортопедия'], [12, 'УНГ'], [10, 'Очни болести'], [15, 'Хирургия'], [2, 'Гастроентерология'], [8, 'Образна диагностика'], [19, 'Консултативен блок']].map(([id, t]) => `<button type="button" data-cl="${id}">${t}</button>`).join('')}</div>
     <div class="cct__out" id="cc-out" aria-live="polite">
-      <a class="cct__btn cct__btn--main" href="https://www.superdoc.bg" target="_blank" rel="noopener">Запази онлайн в СуперДок ↗</a>
-      <a class="cct__btn cct__btn--wide" href="tel:+35929432207">${ICO.phone}Телефон · 02 9432 207</a>
+      <a class="cct__btn cct__btn--main" href="#/book">Как да се прегледам</a>
+      
     </div>
-    <p class="cct__info">Медицински център „ИСУЛ – Царица Йоанна“ приема по направление от НЗОК, платено или със здравноосигурителен фонд.</p>
+    <p class="cct__info">Прегледите са в кабинета на клиниката в ДКБ — II етаж над Спешно отделение, в работни дни от 8 до 14 ч. Информация: телефонна централа 02 9432 170.</p>
   </article>
 
   <article class="cct cct--emg">
@@ -70,7 +70,7 @@
 
   // compact mode: a row of buttons; the matching tile drops down underneath when clicked
   (function compact() {
-    const T = [['book', ICO.cal, 'Запази час', 'СуперДок · 02 9432 207'], ['emg', ICO.plus, 'Спешно отделение', '24/7 · 02 9432 203'], ['lab', ICO.lab, 'Лабораторни резултати', 'lab.isul.eu'], ['route', ICO.pin, 'Как да стигна', 'ул. „Бяло море“ 8'], ['phones', ICO.phone, 'Важни телефони', 'Централа · Регистратура']];
+    const T = [['book', ICO.cal, 'Преглед', 'Кабинетите в ДКБ'], ['emg', ICO.plus, 'Спешно отделение', '24/7 · 02 9432 203'], ['lab', ICO.lab, 'Лабораторни резултати', 'lab.isul.eu'], ['route', ICO.pin, 'Как да стигна', 'ул. „Бяло море“ 8'], ['phones', ICO.phone, 'Важни телефони', 'Централа · Регистратура']];
     const bar = document.createElement('div'); bar.className = 'ccb'; bar.setAttribute('role', 'tablist');
     bar.innerHTML = T.map(([k, ic, t, sub]) => `<button type="button" class="ccb__b ccb__b--${k}" role="tab" aria-selected="false" aria-controls="cct-${k}" data-k="${k}"><span class="cct__ico">${ic}</span><span><b>${t}</b><small>${sub}</small></span><i aria-hidden="true"></i></button>`).join('');
     root.before(bar);
@@ -93,10 +93,10 @@
   sel.addEventListener('change', () => {
     const c = C[sel.value];
     root.querySelectorAll('.cct__pop button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cl === sel.value)));
-    if (!c) { out.innerHTML = `<a class="cct__btn cct__btn--main" href="https://www.superdoc.bg" target="_blank" rel="noopener">Запази онлайн в СуперДок ↗</a><a class="cct__btn cct__btn--wide" href="tel:+35929432207">${ICO.phone}Телефон · 02 9432 207</a>`; return; }
-    const ph = (c.phones[0] || '02 9432 207').split(/ и |;|,/)[0].trim();
+    if (!c) { out.innerHTML = `<a class="cct__btn cct__btn--main" href="#/book">Как да се прегледам</a>`; return; }
+    const ph = (c.phones[0] || '02 9432 170').split(/ и |;|,/)[0].trim();
     out.innerHTML = `<div class="cct__picked"><b>${esc(c.name)}</b><span>${c.floor ? esc(c.floor) + ' · ' : ''}${esc(c.emails[0] || '')}</span></div>
-      <a class="cct__btn cct__btn--main" href="https://www.superdoc.bg" target="_blank" rel="noopener">Запази онлайн в СуперДок ↗</a>
+      <a class="cct__btn cct__btn--main" href="#/book">Как да се прегледам</a>
       <a class="cct__btn" href="${telHref(ph)}">${ICO.phone}${esc(ph)}</a>
       <a class="cct__btn" href="#/clinic/${c.id}">За клиниката →</a>`;
   });

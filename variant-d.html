@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Onest:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/bx-x-b.css?v=95779f61">
 <link rel="stylesheet" href="assets/bx-x-cband.css?v=3c61469c">
-<link rel="stylesheet" href="assets/bx-x-pages.css?v=ccbf2d5f">
+<link rel="stylesheet" href="assets/bx-x-pages.css?v=ae6e96ee">
 <link rel="stylesheet" href="assets/bx-x-body.css?v=c95cc8a3">
 <link rel="stylesheet" href="assets/wide.css?v=5">
 <link rel="stylesheet" href="assets/bx-x-bands.css?v=3f45f19a">
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="assets/bx-x-careers.css?v=69ec100f">
 <link rel="stylesheet" href="assets/bx-x-rich.css?v=7ea5d004">
 <link rel="stylesheet" href="assets/bx-x-clinic.css?v=3f75a497">
-<link rel="stylesheet" href="assets/bx-x-kx.css?v=2f9e8036">
+<link rel="stylesheet" href="assets/bx-x-kx.css?v=57a4bc1c">
 <link rel="stylesheet" href="assets/bx-x-cc.css?v=74c76d8d">
 <link rel="stylesheet" href="assets/bx-x-clg.css?v=a01e75a0">
 <link rel="stylesheet" href="assets/bx-x-team3.css?v=cd7252e7">
@@ -30,15 +30,15 @@
 <link rel="stylesheet" href="assets/bx-x-menu.css?v=36ce11ff">
 <link rel="stylesheet" href="assets/bx-x-clinics.css?v=a51dfc3e">
 <link rel="stylesheet" href="assets/bx-x-accents.css?v=9028fcaa">
-<link rel="stylesheet" href="assets/bx-x-patient.css?v=a71a7cec">
-<link rel="stylesheet" href="assets/bx-x-nav.css?v=870e400f">
+<link rel="stylesheet" href="assets/bx-x-patient.css?v=ea4625c8">
+<link rel="stylesheet" href="assets/bx-x-nav.css?v=f343bb12">
 <link rel="stylesheet" href="assets/x-footer.css?v=954932">
 <link rel="stylesheet" href="assets/x-videos.css?v=281359">
-<link rel="stylesheet" href="assets/bx-x-hub.css?v=8dbf64ca">
+<link rel="stylesheet" href="assets/bx-x-hub.css?v=e102f053">
 <link rel="stylesheet" href="assets/bx-x-jobs.css?v=5e133881">
 <link rel="stylesheet" href="assets/bx-x-about.css?v=9c0a4923">
 <link rel="stylesheet" href="assets/bx-x-anm.css?v=ad9474d0">
-<link rel="stylesheet" href="assets/bx-x-film.css?v=9b5c9d3e">
+<link rel="stylesheet" href="assets/bx-x-film.css?v=5cde52dd">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap">
 <link rel="stylesheet" href="assets/bx-head.css?v=879dcf14">
 <link rel="stylesheet" href="assets/b-only.css?v=916a1f01">
@@ -70,7 +70,7 @@
     </nav>
     <div class="hd__act">
       <a class="pill pill--emg" href="index.html#/emergency"><span class="pulse" aria-hidden="true"></span>Спешно 24/7</a>
-      <a class="pill pill--main" href="index.html#/book">Запази час</a>
+      <a class="pill pill--main" href="index.html#/book" title="Как да се прегледам">Прегледи</a>
     </div>
   </div>
 </header>
@@ -118,22 +118,65 @@
   <!-- QUICK LINKS -->
 
   <!-- FILM: „90 години“ — one minute about the hospital (x-film.css / x-film.js); the film plays from YouTube / pCloud, not from this site -->
-  <section class="film" id="film90" aria-labelledby="film-h">
-    <div class="wrap film__in">
-      <div class="film__copy">
-        <p class="film__kick"><span></span>1936 — 2026 · 90 години ИСУЛ</p>
-        <h2 id="film-h">90 години, <em>посветени на живота</em></h2>
-        <p class="film__lead">Една минута в УМБАЛ „Царица Йоанна – ИСУЛ“ — сградата, хората и апаратурата, с които работим всеки ден.</p>
-        <ul class="film__meta"><li>1 минута</li><li>Full HD</li></ul>
-        <button type="button" class="film__cta" data-film><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></i>Гледай филма</button>
+  <!-- HIGHLIGHTS: a carousel (x-film.css / x-film.js). Slide 1 is the film „90 години“; add a slide (banner, campaign) as one more .film__slide -->
+  <section class="film film--carousel" id="film90" aria-roledescription="въртележка" aria-label="Акценти">
+    <div class="film__track" aria-live="off">
+      <div class="film__slide is-on" role="group" aria-roledescription="слайд" aria-label="1 от 3">
+      <div class="wrap film__in">
+        <div class="film__copy">
+          <p class="film__kick"><span></span>1936 — 2026 · 90 години ИСУЛ</p>
+          <h2 id="film-h">90 години, <em>посветени на живота</em></h2>
+          <p class="film__lead">Една минута в УМБАЛ „Царица Йоанна – ИСУЛ“ — сградата, хората и апаратурата, с които работим всеки ден.</p>
+          <ul class="film__meta"><li>1 минута</li><li>Full HD</li></ul>
+          <button type="button" class="film__cta" data-film><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></i>Гледай филма</button>
+        </div>
+        <button type="button" class="film__screen nwm" data-film aria-label="Пусни филма „90 години ИСУЛ“ — 1 минута">
+          <span class="film__slides" aria-hidden="true"><img src="assets/photos/film90/f1.jpg" alt="" loading="lazy"><img src="assets/photos/film90/f2.jpg" alt="" loading="lazy"><img src="assets/photos/film90/f3.jpg" alt="" loading="lazy"></span>
+          <span class="film__shade" aria-hidden="true"></span>
+          <span class="film__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          <span class="film__cap" aria-hidden="true"><b>ИСУЛ · 90</b><time>1:00</time></span>
+          <span class="film__bar" aria-hidden="true"><span></span></span>
+        </button>
       </div>
-      <button type="button" class="film__screen nwm" data-film aria-label="Пусни филма „90 години ИСУЛ“ — 1 минута">
-        <span class="film__slides" aria-hidden="true"><img src="assets/photos/film90/f1.jpg" alt="" loading="lazy"><img src="assets/photos/film90/f2.jpg" alt="" loading="lazy"><img src="assets/photos/film90/f3.jpg" alt="" loading="lazy"></span>
-        <span class="film__shade" aria-hidden="true"></span>
-        <span class="film__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
-        <span class="film__cap" aria-hidden="true"><b>ИСУЛ · 90</b><time>1:00</time></span>
-        <span class="film__bar" aria-hidden="true"><span></span></span>
-      </button>
+      </div>
+      <div class="film__slide film__slide--gray" role="group" aria-roledescription="слайд" aria-label="2 от 3" hidden>
+        <div class="wrap film__in">
+          <div class="film__copy">
+            <p class="film__kick"><span></span>1936 — 2026 · История</p>
+            <h2>90 години <em>ИСУЛ</em></h2>
+            <p class="film__lead">От закона за „болница на обществените осигуровки“ през 1927 г. до днешната университетска болница — хронология, архив и 28 медицински постижения, появили се за първи път в България именно тук.</p>
+            <ul class="film__meta"><li>1927 — 2026</li><li>28 първи в страната</li></ul>
+            <a class="film__cta" href="#/history"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Нашата история</a>
+          </div>
+          <a class="film__screen film__screen--img nwm" href="#/history" tabindex="-1" aria-hidden="true">
+            <img src="assets/photos/history/building-1938.jpg" alt="" loading="lazy">
+            <span class="film__shade"></span>
+            <span class="film__cap"><b>1938</b><time>Архив</time></span>
+          </a>
+        </div>
+      </div>
+      <div class="film__slide" role="group" aria-roledescription="слайд" aria-label="3 от 3" hidden>
+        <div class="wrap film__in">
+          <div class="film__copy">
+            <p class="film__kick"><span></span>За пациента</p>
+            <h2>Как да се <em>прегледам</em></h2>
+            <p class="film__lead">При специалист от клиниките се преглеждате в кабинета на клиниката в Диагностично-консултативния блок — II етаж над Спешно отделение, в работни дни от 8 до 14 ч.</p>
+            <ul class="film__meta"><li>20 кабинета в ДКБ</li><li>5 стъпки</li></ul>
+            <a class="film__cta" href="#/book"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Как да се прегледам</a>
+          </div>
+          <a class="film__screen film__screen--img nwm" href="#/book" tabindex="-1" aria-hidden="true">
+            <img src="assets/photos/isul-entrance.jpg" alt="" loading="lazy">
+            <span class="film__shade"></span>
+            <span class="film__cap"><b>ДКБ</b><time>II етаж</time></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap film__ctl">
+      <button type="button" class="film__arr" data-step="-1" aria-label="Предишен акцент"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="film__dots" role="tablist" aria-label="Акценти"></div>
+      <button type="button" class="film__arr" data-step="1" aria-label="Следващ акцент"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button type="button" class="film__pause" aria-pressed="false" aria-label="Спри смяната"><svg class="film__i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><svg class="film__i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
     </div>
   </section>
 
@@ -223,7 +266,6 @@
     <div class="ft__brand"><span class="ftc" id="ftc" aria-hidden="true"><img class="ftc__ghost" src="assets/brand/isul-crest-white.svg" width="1017" height="1737" alt=""><span class="ftc__fill"><svg class="ftc__wave" viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M0 20 Q 50 0 100 20 T 200 20 T 300 20 T 400 20 V40 H0z"/></svg></span><span class="ftc__shine"></span></span><p><b>УМБАЛ „Царица Йоанна – ИСУЛ“ ЕАД</b><br>ул. „Бяло море“ № 8, София 1527</p></div>
     <dl class="ft__tel">
       <div><dt>Централа</dt><dd><a href="tel:+35929432170">02 9432 170</a></dd></div>
-      <div><dt>Записване</dt><dd><a href="tel:+35929432207">02 9432 207</a></dd></div>
       <div><dt>Спешно</dt><dd><a href="tel:+35929432203">02 9432 203</a></dd></div>
       <div><dt>Пресцентър</dt><dd><a href="mailto:pr@isul.eu">pr@isul.eu</a></dd></div>
     </dl>
@@ -236,19 +278,20 @@
 </footer>
 
 <nav class="dock" aria-label="Бързи действия">
-  <a href="index.html#/book">Запази час</a><a href="index.html#/doctors">Лекари</a><a href="index.html#/emergency" class="is-emg">Спешно</a>
+  <a href="index.html#/book">Преглед</a><a href="index.html#/doctors">Лекари</a><a href="index.html#/emergency" class="is-emg">Спешно</a>
 </nav>
 
 <script src="assets/data.js?v=5"></script>
 <script src="assets/content/isul-content.js?v=922298"></script>
 <script src="assets/content/careers.js?v=1"></script>
-<script src="assets/bx-b.js?v=690ddff3"></script>
+<script src="assets/bx-b.js?v=62d211b8"></script>
 <script src="assets/bx-body.js?v=6bd4e18f"></script>
 <script>ISUL_NAVIGATOR.mount(document.getElementById('anav-b'), { wrap: '', compact: true, unitHref: (u) => '#/clinic/' + u, clinicHref: (id) => '#/clinics' });</script>
 <script src="assets/bx-variants.js?v=88223d20"></script>
 <script src="assets/content/prices.js?v=1"></script>
 <script src="assets/content/staff.js?v=1"></script>
 <script src="assets/content/units.js?v=1"></script>
+<script src="assets/content/notices-detail.js?v=3"></script>
 <script src="assets/content/places.js?v=6"></script>
 <script src="assets/content/osm-isul.js?v=2"></script>
 <script src="assets/content/cv.js?v=1"></script>
@@ -256,13 +299,13 @@
 <script src="assets/people.js?v=2"></script>
 <script>window.ISUL_CLIST = true;</script>
 <script>window.ISUL_X = true;</script>
-<script src="assets/bx-site.js?v=d734a5e0"></script>
+<script src="assets/bx-site.js?v=839dcb81"></script>
 <script src="assets/cband.js?v=1"></script>
 <script>window.CC_ONLY = true;</script>
 <script src="assets/cc.js?v=41"></script>
 <script src="assets/x-hub.js?v=285044"></script>
 <!-- e.js after the content: the mini clinic map uses its body and clinic anchors -->
-<script src="assets/bx-e.js?v=d6956def"></script>
+<script src="assets/bx-e.js?v=22e1af3f"></script>
 <script src="assets/bx-x-anm.js?v=a063f4b5"></script>
 <script src="assets/x-film.js?v=2"></script>
 <script>(function () { var c = document.getElementById('ftc'); if (!c) return;

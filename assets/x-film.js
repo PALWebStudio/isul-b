@@ -32,4 +32,38 @@
     dlg.showModal();
   };
   sec.querySelectorAll('[data-film]').forEach((b) => b.addEventListener('click', () => open(b)));
+
+  /* the highlights carousel: slide 1 is the film; the next slide every 7 s (never with reduced motion), arrows, dots and a pause;
+     it holds while the pointer or the keyboard is in it, while the tab is hidden and while the film plays */
+  const slides = Array.from(sec.querySelectorAll('.film__slide'));
+  if (slides.length > 1) {
+    const dots = sec.querySelector('.film__dots'), pauseB = sec.querySelector('.film__pause'), ctl = sec.querySelector('.film__ctl');
+    ctl.classList.remove('wrap');   // the arrows sit in the active slide, under its button
+    let k = 0, timer = null, hold = false, paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    dots.innerHTML = slides.map((s, i) => `<button type="button" role="tab" aria-selected="${i === 0}" aria-label="${i + 1} от ${slides.length}: ${(s.querySelector('h2') || {}).textContent.replace(/\s+/g, ' ').trim()}"></button>`).join('');
+    const db = Array.from(dots.children);
+    const show = (n) => {
+      k = (n + slides.length) % slides.length;
+      const copy = slides[k].querySelector('.film__copy'), had = ctl.contains(document.activeElement) && document.activeElement;
+      if (copy && ctl.parentElement !== copy) { copy.appendChild(ctl); if (had) had.focus(); }
+      slides.forEach((s, i) => { const on = i === k; s.classList.toggle('is-on', on); s.inert = !on; s.setAttribute('aria-hidden', String(!on)); });
+      db.forEach((b, i) => { b.setAttribute('aria-selected', String(i === k)); b.tabIndex = i === k ? 0 : -1; });
+    };
+    // held: the pointer or the keyboard is in the section (checked live — the arrows move between slides, so events alone miss it)
+    const held = () => hold || sec.matches(':hover') || sec.contains(document.activeElement);
+    const tick = () => { clearTimeout(timer); if (paused || held() || document.hidden || (dlg && dlg.open)) return; timer = setTimeout(() => { if (held()) return tick(); show(k + 1); tick(); }, 7000); };
+    const setPaused = (p) => { paused = p; pauseB.setAttribute('aria-pressed', String(p)); pauseB.setAttribute('aria-label', p ? 'Пусни смяната' : 'Спри смяната'); tick(); };
+    slides.forEach((s) => { s.hidden = false; }); show(0); setPaused(paused);
+    sec.querySelectorAll('.film__arr').forEach((b) => b.addEventListener('click', () => { show(k + +b.dataset.step); tick(); }));
+    db.forEach((b, i) => b.addEventListener('click', () => { show(i); tick(); }));
+    dots.addEventListener('keydown', (e) => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); show(k + d); db[k].focus(); tick(); });
+    pauseB.addEventListener('click', () => setPaused(!paused));
+    sec.addEventListener('mouseenter', tick);
+    sec.addEventListener('mouseleave', () => setTimeout(tick, 0));
+    sec.addEventListener('focusin', tick);
+    sec.addEventListener('focusout', () => setTimeout(tick, 0));
+    document.addEventListener('visibilitychange', tick);
+    document.addEventListener('close', tick, true);   // the film's dialog closed
+    tick();
+  }
 })();

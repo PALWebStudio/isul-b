@@ -145,24 +145,34 @@
   const NEWS = C.news.map((n) => ({ ...n, r: RB ? RB.of(n) : 'news', iso: iso(n.date), img: 'assets/photos/news-c/' + n.id + '.jpg', ex: exOf(n) }))
     .sort((a, b) => b.iso.localeCompare(a.iso));
   const NAMES = (RB && RB.names) || { news: 'Новини' };
-  const meta = (n) => `<span class="hn__meta"><span class="hn__rb">${esc(NAMES[n.r] || 'Новини')}</span><time datetime="${n.iso}">${esc(n.date)}</time></span>`;
-  const lead = (n) => `<a class="hn__lead" href="#/news/${n.id}"><span class="hn__img nwm"><img src="${esc(n.img)}" alt="" loading="lazy" decoding="async"></span>
-      <span class="hn__lt">${meta(n)}<h3>${esc(n.title)}</h3>${n.ex ? `<p>${esc(n.ex)}</p>` : ''}<span class="hn__read">Прочети <span aria-hidden="true">→</span></span></span></a>`;
-  // small cards in the shape of variant B's „Медицински направления“: gold day number, display-font title, rubric at the foot
-  const card = (n) => `<li><a class="hn__card" href="#/news/${n.id}"><span class="hn__cimg nwm"><img src="${esc(n.img)}" alt="" loading="lazy" decoding="async"></span>
-      <span class="hn__ct"><time class="hn__n" datetime="${n.iso}">${esc(n.date.slice(0, 2))}<small>${esc(n.date.slice(2))}</small></time><h3>${esc(n.title)}</h3><span class="hn__crb">${esc(NAMES[n.r] || 'Новини')}</span></span></a></li>`;
-  const KEYS = ['all'].concat(['interviews', 'patients', 'achievements', 'news'].filter((k) => NEWS.some((n) => n.r === k)));
-  tabs.innerHTML = KEYS.map((k, i) => `<button type="button" aria-pressed="${i === 0}" data-k="${k}">${k === 'all' ? 'Всички' : esc(NAMES[k])}</button>`).join('');
+  /* a dashboard window: title bar, one tile per rubric (count, latest date; a tile filters the list),
+     the latest publications as rows with a coloured rubric tag, and the figures at the foot */
+  const KEYS = ['interviews', 'patients', 'achievements', 'news'].filter((k) => NEWS.some((n) => n.r === k));
+  const ofR = (k) => NEWS.filter((n) => n.r === k);
+  const pl = (x) => x === 1 ? 'публикация' : 'публикации';
+  const ntag = (k) => `<span class="hw__tag hw__tag--${k}">${esc(NAMES[k] || 'Новини')}</span>`;
+  const nrow = (n) => `<li><a class="hw__row" href="#/news/${n.id}"><span class="hw__th"><img src="${esc(n.img)}" alt="" loading="lazy" decoding="async"></span>${ntag(n.r)}<span class="hw__t">${esc(n.title)}</span><time datetime="${n.iso}">${esc(n.date)}</time></a></li>`;
+  // the latest one opens the list with its photo and first lines
+  const nfeat = (n) => `<li><a class="hw__feat" href="#/news/${n.id}"><span class="hw__fi nwm"><img src="${esc(n.img)}" alt="" loading="lazy" decoding="async"></span><span class="hw__fb"><span class="hw__fm">${ntag(n.r)}<time datetime="${n.iso}">${esc(n.date)}</time></span><h3>${esc(n.title)}</h3>${n.ex ? `<p>${esc(n.ex)}</p>` : ''}<span class="hw__more">Прочети <span aria-hidden="true">→</span></span></span></a></li>`;
+  tabs.hidden = true;
+  nb.innerHTML = `<div class="hw">
+    <div class="hw__bar"><span class="hw__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="hw__ttl">ИСУЛ · Прес център</span><button type="button" class="hw__clr" hidden>Всички рубрики <span aria-hidden="true">×</span></button></div>
+    <div class="hw__in">
+      <div class="hw__tiles" role="group" aria-label="Рубрики">${KEYS.map((k) => { const l = ofR(k); return `<button type="button" class="hw__tile" data-k="${k}" aria-pressed="false"><b>${esc(NAMES[k])}</b><small>Последна: ${esc(l[0].date)}</small><span class="hw__st hw__st--${k}">${l.length} ${pl(l.length)}</span></button>`; }).join('')}</div>
+      <ul class="hw__list" id="hw-list"></ul>
+      <div class="hw__stats"><div><b>${NEWS.length}</b><span>публикации в прес центъра</span></div><div><b>${ofR('interviews').length}</b><span>интервюта с лекари</span></div><div><b>${ofR('achievements').length}</b><span>постижения на екипите</span></div></div>
+    </div></div>`;
+  const listEl = nb.querySelector('#hw-list'), hclr = nb.querySelector('.hw__clr'), tiles = Array.from(nb.querySelectorAll('.hw__tile'));
   function news(k) {
-    const list = k === 'all' ? NEWS : NEWS.filter((n) => n.r === k);
-    nb.innerHTML = list.length ? `${lead(list[0])}${list.length > 1 ? `<ul class="hn__cards">${list.slice(1, 7).map(card).join('')}</ul>` : ''}` : '<p class="hn__empty">Още няма публикации в тази рубрика.</p>';
+    const list = k === 'all' ? NEWS : ofR(k);
+    listEl.innerHTML = list.slice(0, 6).map((n, i) => (i ? nrow(n) : nfeat(n))).join('') || '<li class="hn__empty">Още няма публикации в тази рубрика.</li>';
+    tiles.forEach((t) => t.setAttribute('aria-pressed', String(t.dataset.k === k)));
+    hclr.hidden = k === 'all';
     nall.setAttribute('href', k === 'all' ? '#/news' : '#/news?r=' + k);
     nst.textContent = k === 'all' ? '' : `Показани са новини от рубрика ${NAMES[k]}.`;
-    if (!reduce) { nb.classList.remove('dnx-in'); void nb.offsetWidth; nb.classList.add('dnx-in'); }
+    if (!reduce) { listEl.classList.remove('dnx-in'); void listEl.offsetWidth; listEl.classList.add('dnx-in'); }
   }
-  tabs.addEventListener('click', (e) => {
-    const b = e.target.closest('button'); if (!b || b.getAttribute('aria-pressed') === 'true') return;
-    tabs.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); news(b.dataset.k);
-  });
+  tiles.forEach((t) => t.addEventListener('click', () => news(t.getAttribute('aria-pressed') === 'true' ? 'all' : t.dataset.k)));
+  hclr.addEventListener('click', () => news('all'));
   news('all');
 })();
