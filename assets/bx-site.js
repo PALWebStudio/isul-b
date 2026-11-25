@@ -1536,7 +1536,7 @@
         <div class="kp-prose${proseLen > 900 ? ' is-long' : ''}">${proseAll.map((b) => `<p>${linkify(b.x)}</p>`).join('') || '<p>Описанието предстои.</p>'}</div>${proseLen > 900 ? '<button type="button" class="kx-more" data-more>Прочети цялото ↓</button>' : ''}`]);
       // up to three activity sections each with its heading; more (Хирургия has 14) as one section of folds, the first open
       const actBody = (a) => { const xs = a.items.map((b) => b.x || ''); return /кабинет/i.test(a.title || '') && xs.filter((x) => dkbCab(x)).length >= 3 ? dkbCards(xs) : tickBody(a.items); };
-      if (acts.length <= 3) acts.forEach((a, i) => S.push([`act${i}`, i === 0 ? (/кабинет/i.test(a.title || '') ? 'Кабинети' : a.title || 'Медицинска дейност') : '', `<h2>${esc(a.title || 'Медицинска дейност')}</h2>${actBody(a)}`]));
+      if (acts.length <= 3) acts.forEach((a, i) => S.push([`act${i}`, i === 0 ? 'Медицинска дейност' : '', `<h2>${esc(a.title || 'Медицинска дейност')}</h2>${actBody(a)}`]));
       else S.push(['acts', 'Медицинска дейност', `<h2>Медицинска дейност</h2><p class="kp-note">${acts.length} направления</p>${acts.map((a, i) => `<details class="kp-fold kp-fold--act"${i ? '' : ' open'}><summary>${esc(a.title || 'Медицинска дейност')}</summary><div>${tickBody(a.items)}</div></details>`).join('')}`]);
       if (headP) S.push(['head', 'Екип', `<h2>${/ръковод/i.test(headP.role || '') ? 'Ръководител' : 'Началник'}</h2>
         <div class="kp-chief">${av(headP, true)}<div><b><a href="${drUrl(headP)}">${esc(headP.name)}</a></b>${headP.role ? `<small>${esc(headP.role)}</small>` : ''}</div>
@@ -1550,7 +1550,7 @@
         <div class="kp-units">${units2.map((u, i) => ucard(u, i, 'Към звеното')).join('')}</div>`]);
       if (machines.length) S.push(['machines', 'Апаратура', `<h2>Апаратура</h2>
         <div class="kp-units">${machines.map((u, i) => ucard(u, i, '')).join('')}</div>`]);
-      if (equip) S.push(['equip', machines.length && eqT === 'Апаратура' ? '' : eqT, `<h2>${eqT}</h2><ul class="kp-ticks">${equip.map((b) => `<li>${ICON.check}<span>${linkify(b.x)}</span></li>`).join('')}</ul>`]);
+      if (equip) S.push(['equip', eqT === 'Апаратура' ? (machines.length ? '' : 'Апаратура') : (acts.length ? '' : 'Медицинска дейност'), `<h2>${eqT}</h2><ul class="kp-ticks">${equip.map((b) => `<li>${ICON.check}<span>${linkify(b.x)}</span></li>`).join('')}</ul>`]);
       if (prices.length) S.push(['exam', 'Изследвания и цени', `<div class="kp-h"><h2>Изследвания и цени</h2>${find}</div><p class="kp-note">Цените са от утвърдения ценоразпис на болницата, с ДДС — за пациенти без здравна осигуровка или извън НЗОК.</p>${priceHtml}`]);
       if (urg) S.push(['urgent', 'Спешно', `<h2>Кога е спешно</h2><p class="kp-note">${esc(urg.title)}${urg.head ? ' — ' + esc(urg.head) : ''}.</p>
         <ol class="kp-urg">${urg.items.map((u) => `<li><b>${esc(u.t)}</b>${u.lead ? `<p>${esc(u.lead)}</p>` : ''}${u.pts.length ? `<ul>${u.pts.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ol>
@@ -2617,7 +2617,8 @@
     const show = () => { const dark = root.dataset.theme !== 'light'; tb.setAttribute('aria-pressed', String(dark)); $('span', tb).textContent = dark ? 'Светла' : 'Тъмна'; tb.title = dark ? 'Светла версия' : 'Тъмна версия'; };
     root.dataset.theme = saved() || (sys.matches ? 'dark' : 'light'); show();
     tb.addEventListener('click', () => { const t = root.dataset.theme === 'light' ? 'dark' : 'light'; root.dataset.theme = t; try { localStorage.setItem('isul-theme', t); } catch (e) { /* storage blocked */ } show(); });
-    const links = $$('.kp-nav a', page);
+    const links = $$('.kp-nav a', page), nin = $('.kp-nav__in', page);
+    if (nin) { const edge = () => nin.classList.toggle('is-more', nin.scrollWidth - nin.clientWidth - nin.scrollLeft > 4); nin.addEventListener('scroll', edge, { passive: true }); addEventListener('resize', edge); edge(); setTimeout(edge, 400); }
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => { const on = a.dataset.kj === e.target.id; a.classList.toggle('is-on', on); if (on) a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }); }), { rootMargin: '-30% 0px -60% 0px' });
     $$('.kp-sec[id]', page).forEach((x) => io.observe(x));
   }
@@ -2738,7 +2739,7 @@
       S.push(['about', 'Представяне', `<p class="kp-k">${esc(u.kind)}</p><h2>${isM ? 'За изследването' : 'Представяне'}</h2>
         <div class="kp-prose">${textBody(textItems) || `<p>${esc(u.short || '')}</p>`}</div>
         ${u.draft ? '<p class="kp-note">Текстът е проект за прототипа — очаква се одобрение и допълване от клиниката.</p>' : ''}`]);
-      if (u.treats && treats.length) S.push(['treats', verb, `<h2>${verb}</h2><ul class="kp-ticks">${treats.map((t) => `<li>${ICON.check}<span>${esc(t)}</span></li>`).join('')}</ul>`]);
+      if (u.treats && treats.length) S.push(['treats', 'Медицинска дейност', `<h2>${verb}</h2><ul class="kp-ticks">${treats.map((t) => `<li>${ICON.check}<span>${esc(t)}</span></li>`).join('')}</ul>`]);
       if (head) S.push(['head', 'Екип', `<h2>${/ръковод/i.test(head.role || '') ? 'Ръководител' : 'Началник'}</h2>
         <div class="kp-chief">${av(head, true)}<div><b><a href="${drUrl(head)}">${esc(head.name)}</a></b>${head.role ? `<small>${esc(head.role)}</small>` : ''}</div>
           <span class="kp-chief__act"><a class="kp-lnk" href="${drUrl(head)}">Профил ${A}</a></span></div>`]);
@@ -2748,7 +2749,7 @@
         <div class="kp-btns"><a href="#/clinic/${cid}/team">Екипът на клиниката ${A}</a></div>`]);
       const whereKp = kpWhere(placesOfUnit(u), `#/kade/u${cid}:${u.slug}`); if (whereKp) S.push(['where', 'Как да стигна', whereKp]);
       const others = sibs.filter((s) => s.slug !== u.slug);
-      if (others.length) S.push(['more', isM ? 'Друга апаратура' : 'Други звена', `<div class="kp-h"><h2>Още в ${esc(clinicShort(c))}</h2><a class="kp-lnk" href="#/clinic/${cid}">Към клиниката ${A}</a></div>
+      if (others.length) S.push(['more', 'Други звена', `<div class="kp-h"><h2>Още в ${esc(clinicShort(c))}</h2><a class="kp-lnk" href="#/clinic/${cid}">Към клиниката ${A}</a></div>
         <div class="kp-units">${others.map((s, i) => `<a class="kp-unit" href="${unitUrl(s)}"><small>${String(i + 1).padStart(2, '0')} · ${esc(s.kind)}</small><b>${esc(s.name)}</b>${s.short ? `<p>${esc(s.short)}</p>` : ''}${s.headP ? `<span>Ръководител: ${esc(s.headP.name)}</span>` : ''}<em>${s.kind === 'Апаратура' ? 'Подробно' : 'Към звеното'} ${A}</em></a>`).join('')}</div>`]);
       const meta = [u.kind, own && `${u.team.length} ${u.team.length === 1 ? 'лекар' : 'лекари'}`, beds && `${beds} легла`, 'към ' + clinicShort(c)].filter(Boolean);
       const kpNav = `<nav class="kp-nav" aria-label="${esc(u.name)} — съдържание"><div class="vwrap kp-nav__w"><div class="kp-nav__in"><a href="#/clinic/${cid}">← ${esc(clinicShort(c))}</a>${S.filter(([, t]) => t).map(([k, t]) => `<a href="#kp-${k}" data-kj="kp-${k}">${esc(t)}</a>`).join('')}</div>

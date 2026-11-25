@@ -1199,3 +1199,8 @@ html[data-theme="light"] .kp-nav a[aria-current="page"] { background: var(--kb);
 @media (max-width: 640px) { .kp-docl__it { grid-template-columns: 46px minmax(0, 1fr); } .kp-docl__it > a, .kp-docl__it > em { grid-column: 2; justify-self: start; } }
 .kp-h3 { margin: 20px 0 8px; font-size: 1.02rem; font-weight: 700; line-height: 1.35; }
 .kp-h3:first-child { margin-top: 0; }
+
+/* the menu of a page: when its buttons go on past the right edge, a fade there says so (it scrolls sideways) */
+.kp-nav__in.is-more { -webkit-mask: linear-gradient(90deg, #000 calc(100% - 56px), transparent); mask: linear-gradient(90deg, #000 calc(100% - 56px), transparent); }
+/* laptops: the menu buttons a little more compact and the theme switch as an icon, so the full set fits */
+@media (max-width: 1439px) and (min-width: 761px) { .kp-nav a { padding: 8px 12px; font-size: .82rem; } .kp-nav__in { gap: 6px; } .kp-theme span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .kp-theme { padding-inline: 10px; } }
