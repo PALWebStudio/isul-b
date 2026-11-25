@@ -569,7 +569,7 @@
     const prices = kxPrices(c);
     const wherePs = placesOf(id);
 
-    const chief = docs.find((d) => /(началник|ръководител)\s+(на\s+)?(клиник|отделени|лаборатори|центр|звен)/i.test(d.role || '')) || docs.find((d) => d.head);
+    const chief = docs.find((d) => /(началник|н-к|ръководител)\s+(на\s+)?(клиник|отделени|лаборатори|центр|звен)/i.test(d.role || '')) || docs.find((d) => d.head);
 
     /* ---- header: name → short profile → main action → head, block and floor ---- */
     const whereShort = placeLine(wherePs);
@@ -1339,7 +1339,7 @@
     const urg = kxUrgent(c);
     const where = PL ? whereBand(id, 'kx-where') : '', signAt = placeLine(placesOf(id));
     // the head of the clinic has a band of its own (as on the clinic pages of the other layout); the team shows the others
-    const chief = docs.find((d) => /(началник|ръководител)\s+(на\s+)?(клиник|отделени|лаборатори|центр|звен)/i.test(d.role || '')) || docs.find((d) => d.head);
+    const chief = docs.find((d) => /(началник|н-к|ръководител)\s+(на\s+)?(клиник|отделени|лаборатори|центр|звен)/i.test(d.role || '')) || docs.find((d) => d.head);
     const chiefHtml = chief ? chiefBand(chief, { isClinic, kind: KIND_OF[id] || 'clinic', sid: 'kx-head' }) : '';
     const teamDocs = chief ? docs.filter((d) => d !== chief) : docs;
     // calm version: what is treated, then who treats it, then the examinations
@@ -4195,6 +4195,18 @@
     const vs = $('.vswitch'), bar = $('.proto'); if (!window.ISUL_X || !vs || !bar) return;
     const mq = matchMedia('(max-width: 760px)'), place = () => (mq.matches ? bar : document.body).appendChild(vs);
     place(); mq.addEventListener('change', place);
+  })();
+  /* a section's sub-menu (.pg-sub) that scrolls sideways: the current page's button in view, a fade on the edge that has more */
+  (function subNavFit() {
+    const fit = () => document.querySelectorAll('.pg-sub').forEach((n) => {
+      const edge = () => { const more = n.scrollWidth - n.clientWidth; n.classList.toggle('is-more', more - n.scrollLeft > 4); n.classList.toggle('is-less', more > 4 && n.scrollLeft > 4); };
+      if (!n.dataset.fit) { n.dataset.fit = '1'; n.addEventListener('scroll', edge, { passive: true }); }
+      const cur = n.querySelector('[aria-current]');
+      if (cur && n.scrollWidth > n.clientWidth) { const r = cur.getBoundingClientRect(), nr = n.getBoundingClientRect(); n.scrollLeft += (r.left - nr.left) - (n.clientWidth - r.width) / 2; }
+      edge();
+    });
+    const later = () => { setTimeout(fit, 60); setTimeout(fit, 500); };
+    addEventListener('hashchange', later); addEventListener('resize', fit); later();
   })();
   addEventListener('hashchange', route); route();
 })();

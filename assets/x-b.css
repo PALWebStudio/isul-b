@@ -268,7 +268,6 @@ h1 .l2 { animation: up 1s var(--ease) both .25s; }
   .dock a { text-align: center; padding: 16px 6px; text-decoration: none; font-weight: 700; font-size: .9rem; }
   .dock a:first-child { background: var(--plum); }
   .dock .is-emg { color: #FFB9BA; }
-  body { padding-bottom: 90px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
