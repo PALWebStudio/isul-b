@@ -9,6 +9,8 @@
   const ICO = {
     cal: I('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
     plus: I('<path d="M12 5v14M5 12h14"/>'),
+    // emergency: a siren (the flashing light) — reads as „спешно“ at a glance, unlike a plain +
+    siren: I('<path d="M7 18v-6a5 5 0 0 1 10 0v6"/><path d="M5 21h14v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M12 12v3"/><path d="M12 2v2M3 12h1.5M19.5 12H21M5.1 5.1l1.1 1.1M18.9 5.1l-1.1 1.1"/>'),
     lab: I('<path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3M7.5 14h9"/>'),
     pin: I('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
     phone: I('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>'),
@@ -35,7 +37,7 @@
   </article>
 
   <article class="cct cct--emg">
-    <div class="cct__top"><span class="cct__ico">${ICO.plus}</span><div><h3>Спешно отделение</h3><p class="cct__live"><span class="cct__dot"></span>Работи денонощно · 24/7</p></div></div>
+    <div class="cct__top"><span class="cct__ico">${ICO.siren}</span><div><h3>Спешно отделение</h3><p class="cct__live"><span class="cct__dot"></span>Работи денонощно · 24/7</p></div></div>
     <a class="cct__big" href="tel:+35929432203">02 9432 203</a>
     <div class="cct__row"><a class="cct__btn cct__btn--red" href="tel:+35929432203">${ICO.phone}Обади се</a><a class="cct__btn" href="route.html">${ICO.pin}Маршрут</a><a class="cct__btn" href="#/clinic/20">Информация</a></div>
     <p class="cct__note">При опасност за живота се обадете на <a href="tel:112"><b>112</b></a>.</p>
@@ -70,7 +72,7 @@
 
   // compact mode: a row of buttons; the matching tile drops down underneath when clicked
   (function compact() {
-    const T = [['book', ICO.cal, 'Преглед', 'Кабинетите в ДКБ'], ['emg', ICO.plus, 'Спешно отделение', '24/7 · 02 9432 203'], ['lab', ICO.lab, 'Лабораторни резултати', 'lab.isul.eu'], ['route', ICO.pin, 'Как да стигна', 'ул. „Бяло море“ 8'], ['phones', ICO.phone, 'Важни телефони', 'Централа · Регистратура']];
+    const T = [['book', ICO.cal, 'Преглед', 'Кабинетите в ДКБ'], ['emg', ICO.siren, 'Спешно отделение', '24/7 · 02 9432 203'], ['lab', ICO.lab, 'Лабораторни резултати', 'lab.isul.eu'], ['route', ICO.pin, 'Как да стигна', 'ул. „Бяло море“ 8'], ['phones', ICO.phone, 'Важни телефони', 'Централа · Регистратура']];
     const bar = document.createElement('div'); bar.className = 'ccb'; bar.setAttribute('role', 'tablist');
     bar.innerHTML = T.map(([k, ic, t, sub]) => `<button type="button" class="ccb__b ccb__b--${k}" role="tab" aria-selected="false" aria-controls="cct-${k}" data-k="${k}"><span class="cct__ico">${ic}</span><span><b>${t}</b><small>${sub}</small></span><i aria-hidden="true"></i></button>`).join('');
     root.before(bar);

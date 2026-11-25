@@ -325,3 +325,7 @@ body.b-cc .dpanel .ring ul { font-size: .74rem; gap: 3px; min-width: 0; }
 body.b-cc .dpanel .ring ul li { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.b-cc .dpanel .ring ul li { overflow: visible; white-space: normal; text-overflow: clip; line-height: 1.3; }
 body.b-cc .dpanel .ring ul li:nth-child(n+4) { display: none; }
+
+/* the emergency icon is a siren now (was a +): the normal line weight, the heavier one was for the bare + */
+.cct--emg .cct__ico svg, .ccb__b--emg .cct__ico svg { stroke-width: 2; }
+.ccb--sticky .ccb__b--emg:not([aria-selected="true"]) .cct__ico svg { stroke: #FF8A8A; }
