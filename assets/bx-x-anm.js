@@ -87,14 +87,24 @@
   }
   measure(); frame();
 
-  /* hover / click on an organ point */
-  const near = (e) => { const b = box.getBoundingClientRect(), mx = e.clientX - b.left, my = e.clientY - b.top; return pts.find((p) => Math.hypot(p.x - mx, p.y - my) < 14); };
+  /* hover / click on an organ point. On a touch screen the first tap shows what the point is (the organ and the clinic, its card lit up),
+     the second tap on it opens the clinic: a tap used to open the clinic at once, the label only flashed */
+  const TOUCH = matchMedia('(hover: none)').matches; let armed = null;
+  // the label above a point, kept inside the picture (on a phone the body is narrow and a label may be wider than its side)
+  const place = (p, text) => { tip.hidden = false; tip.textContent = text; tip.style.left = p.x + 'px'; tip.style.top = p.y + 'px'; tip.style.marginLeft = '0px';
+    const r = tip.getBoundingClientRect(), b = box.getBoundingClientRect(), d = r.left < b.left + 8 ? b.left + 8 - r.left : r.right > b.right - 8 ? b.right - 8 - r.right : 0; if (d) tip.style.marginLeft = d + 'px'; };
+  const near = (e) => { const b = box.getBoundingClientRect(), mx = e.clientX - b.left, my = e.clientY - b.top; return pts.find((p) => Math.hypot(p.x - mx, p.y - my) < (TOUCH ? 22 : 14)); };
   box.addEventListener('mousemove', (e) => {
     if (e.target.closest('.anm__c')) return;
     const p = near(e);
-    if (p) { setHot(p.it.id); box.style.cursor = 'pointer'; tip.hidden = false; tip.textContent = p.it.organ; tip.style.left = p.x + 'px'; tip.style.top = p.y + 'px'; }
+    if (p) { setHot(p.it.id); box.style.cursor = 'pointer'; place(p, p.it.organ); }
     else if (box.style.cursor) { setHot(null); box.style.cursor = ''; tip.hidden = true; }
   });
-  box.addEventListener('mouseleave', () => { setHot(null); tip.hidden = true; box.style.cursor = ''; });
-  box.addEventListener('click', (e) => { if (e.target.closest('.anm__c')) return; const p = near(e); if (p) location.hash = '#/clinic/' + p.it.id; });
+  box.addEventListener('mouseleave', () => { if (TOUCH && armed) return; setHot(null); tip.hidden = true; box.style.cursor = ''; });
+  box.addEventListener('click', (e) => {
+    if (e.target.closest('.anm__c')) return; const p = near(e);
+    if (!p) { armed = null; setHot(null); tip.hidden = true; return; }
+    if (TOUCH && armed !== p.it.id) { armed = p.it.id; setHot(p.it.id); place(p, p.it.organ + ' · ' + p.it.short + ' →'); return; }
+    location.hash = '#/clinic/' + p.it.id;
+  });
 })();

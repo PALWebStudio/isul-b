@@ -210,10 +210,19 @@
     if (sel) { // label next to the selected spot (nearest visible one)
       const s2 = spotsXY.filter((o) => o.sp.z === sel.z && o.vis).sort((a, b) => a.x - b.x)[0];
       if (s2) {
-        const off = Math.min(150, W * .3), lx = s2.x + (s2.x < cx0 ? -off : off), ly = s2.y - 24;
+        // the name beside the point, on the side with room and always inside the picture (a long one on two lines)
+        ctx.font = '600 13px Onest, system-ui, sans-serif';
+        const M = 12, G = 6, MINOFF = 14, tw = (x) => ctx.measureText(x).width, name = sel.z.name;
+        const room = (l) => (l ? s2.x : W - s2.x) - M - G - MINOFF;
+        let left = s2.x < cx0; if (tw(name) > room(left) && room(!left) > room(left)) left = !left;
+        const lines = []; name.split(' ').forEach((w) => { const t = lines.length ? lines[lines.length - 1] + ' ' + w : w; if (lines.length && tw(t) > room(left)) lines.push(w); else if (lines.length) lines[lines.length - 1] = t; else lines.push(w); });
+        const wMax = Math.max(...lines.map(tw)), off = Math.max(MINOFF, Math.min(Math.min(150, W * .3), (left ? s2.x : W - s2.x) - M - G - wMax));
+        // on a phone the top corners hold the buttons (left: 3 under one another, right: 2) — the name goes below them
+        const top = NARROW ? (left ? 150 : 110) : 16;
+        const lx = s2.x + (left ? -off : off), ly = Math.max(top + (lines.length - 1) * 16, s2.y - 24);
         ctx.strokeStyle = 'rgba(255,143,190,.8)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(s2.x, s2.y); ctx.lineTo(lx, ly); ctx.stroke();
-        ctx.font = '600 13px Onest, system-ui, sans-serif'; ctx.fillStyle = '#fff'; ctx.textAlign = s2.x < cx0 ? 'right' : 'left';
-        const label = sel.z.name.length > 16 && NARROW ? sel.z.name.split(' ')[0] : sel.z.name; ctx.fillText(label, lx + (s2.x < cx0 ? -6 : 6), ly + 4);
+        ctx.fillStyle = '#fff'; ctx.textAlign = left ? 'right' : 'left';
+        lines.forEach((t, i) => ctx.fillText(t, lx + (left ? -G : G), ly + 4 - (lines.length - 1 - i) * 16));
       }
     }
   }

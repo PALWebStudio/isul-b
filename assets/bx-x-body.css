@@ -128,3 +128,9 @@ body[data-variant="c"] .anav .panel h2, body[data-variant="c"] .anav .zones h2 {
 .pz__docs b { display: block; font-size: .9rem; line-height: 1.25; }
 .pz__docs small { display: block; font-size: .76rem; opacity: .7; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 .pz__more { display: inline-block; margin-top: 8px; font-size: .86rem; font-weight: 700; color: #9d305c; text-decoration: none; }
+
+/* phone: the buttons in the two top corners, one under another (in a row „Дете · Спешно“ covered the pause button); the head stays free */
+@media (max-width: 600px) {
+  .stage__ctl { left: 10px; top: 12px; gap: 5px; flex-direction: column; align-items: flex-start; } .stage__extra { right: 10px; top: 12px; gap: 5px; flex-direction: column; align-items: flex-end; }
+  .stage__ctl button, .stage__extra button { font-size: .76rem; padding: 6px 10px; min-height: 36px; }
+}
