@@ -268,7 +268,7 @@
       ${(TESTS[z.id] || []).length ? `<div class="pz"><h3>Изследвания</h3><ul class="pz__tests">${TESTS[z.id].map((k) => `<li><a href="${linkUnit(T[k][0])}">${T[k][1]}<span aria-hidden="true">→</span></a></li>`).join('')}</ul></div>` : ''}
       ${(opts.doctors || window.ISUL_NAV_DOCTORS) ? (opts.doctors || window.ISUL_NAV_DOCTORS)(z.clinics, z.id) : ''}
       <div class="pz"><h3>Клиники в ИСУЛ</h3><ul class="pz__cl">${cls.map((c) => `<li><a href="${linkClinic(c.id)}"><span>${c.short || c.name}<small>${c.group}</small></span></a></li>`).join('')}</ul></div>
-      <div class="pz__cta"><a class="p1" href="${linkBook(z.specs[0])}">Запази час</a>${z.lab ? '<a class="p2" href="https://lab.isul.eu/" target="_blank" rel="noopener">Лабораторни резултати ↗</a>' : `<a class="p2" href="${linkDocs(z.specs[0])}">Специалисти</a>`}</div>
+      <div class="pz__cta"><a class="p1" href="${linkBook(z.specs[0])}">Как да се прегледам</a>${z.lab ? '<a class="p2" href="https://lab.isul.eu/" target="_blank" rel="noopener">Лабораторни резултати ↗</a>' : `<a class="p2" href="${linkDocs(z.specs[0])}">Специалисти</a>`}</div>
       <p class="pz__note">Насочването е ориентировъчно и не поставя диагноза.</p>`;
     pbody.style.animation = 'none'; void pbody.offsetWidth; pbody.style.animation = '';
     const bar = $('[data-a="selbar"]'); if (bar) { bar.hidden = false; $('[data-a="selname"]').textContent = z.name; }
