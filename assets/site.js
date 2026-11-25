@@ -4110,7 +4110,8 @@
     drawer.setAttribute('role', 'dialog'); drawer.setAttribute('aria-modal', 'true'); drawer.setAttribute('aria-label', 'Основна навигация');
     drawer.innerHTML = `<div class="nxm__panel"><div class="nxm__top"><b>Меню</b><button type="button" class="nxm__x" aria-label="Затвори менюто">×</button></div>
       <nav class="nxm__nav" aria-label="Основна навигация">${navLinks.map((a, i) => { const h = a.getAttribute('href'), m = NAVM[h], t = a.textContent.trim();
-        if (!m) return `<a class="nxm__top-a" href="${h}">${esc(t)}</a>`;
+        // „Контакти“ on a phone opens the contacts page at once (its sub-menu repeated what the page itself has)
+        if (!m || h === '#/contacts') return `<a class="nxm__top-a" href="${h}">${esc(t)}</a>`;
         return `<div class="nxm__sec"><button type="button" class="nxm__acc" aria-expanded="false" aria-controls="nxm-${i}"><span>${esc(t)}</span>${CHV}</button>
           <div class="nxm__body" id="nxm-${i}" hidden>${mGroup(m).map((g) => `${g.t ? `<p class="nx__gt">${esc(g.t)}</p>` : ''}${g.items.map((x) => link(x, 'nxm__a')).join('')}`).join('')}</div></div>`; }).join('')}</nav>
       <div class="nxm__cta"><a class="nx__btn" href="${BOOK}">Как да се прегледам</a><a class="nx__btn nx__btn--er" href="#/clinic/20">Спешно 24/7 · 02 9432 203</a></div></div>`;
