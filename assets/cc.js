@@ -135,15 +135,15 @@
   const card = (c) => `<li><a class="c3r" href="#/clinic/${c.id}">${c.hero ? `<img src="${esc(c.hero)}" alt="" decoding="async">` : '<span class="c3r__ph" aria-hidden="true"></span>'}<span class="c3r__shade"></span><span class="c3r__txt"><small>${esc(groupOf[c.id] || '')}</small><b>${esc(short(c.name))}</b></span><span class="c3r__go" aria-hidden="true">→</span></a></li>`;
   const set = () => {
     const a = base + scrollA;
-    ring.style.transform = n > 6 ? `translateZ(${-R}px) rotateY(${a}deg)` : 'none';
-    const front = n > 6 ? ((Math.round(-a / step) % n) + n) % n : -1;
+    ring.style.transform = n > 8 ? `translateZ(${-R}px) rotateY(${a}deg)` : 'none';
+    const front = n > 8 ? ((Math.round(-a / step) % n) + n) % n : -1;
     ring.querySelectorAll(':scope > li').forEach((li, i) => li.classList.toggle('is-front', i === front));
   };
   const layout = () => {
     const lis = ring.querySelectorAll(':scope > li'); n = lis.length; step = 360 / Math.max(n, 1);
     const w = lis[0] ? lis[0].offsetWidth : 240;
     if (!w || !stage.offsetWidth) return;            // home is hidden (inner page) — lay out again when it is shown
-    const flat = n <= 6 || innerWidth <= 760;
+    const flat = n <= 8 || innerWidth <= 760;
     grid.classList.toggle('is-flat', flat);
     R = flat ? 0 : Math.round(w / 2 / Math.tan(Math.PI / Math.max(n, 4))) + 24;
     lis.forEach((li, i) => { li.style.transform = flat ? 'none' : `rotateY(${i * step}deg) translateZ(${R}px)`; });
@@ -152,12 +152,12 @@
   const render = (g) => {
     const items = g === 'Всички' ? sorted : sorted.filter((c) => groupOf[c.id] === g);
     ring.innerHTML = items.map(card).join(''); base = 0;
-    box.querySelector('.clg__count').textContent = items.length + (items.length === 1 ? ' клиника' : ' клиники и отделения') + (items.length > 6 ? ' · завъртете със скрол, стрелките или влачене' : '');
+    box.querySelector('.clg__count').textContent = items.length + (items.length === 1 ? ' клиника' : ' клиники и отделения') + (items.length > 8 ? ' · завъртете със скрол, стрелките или влачене' : '');
     layout();
   };
   grid.querySelectorAll('[data-r]').forEach((b) => b.addEventListener('click', () => { base -= +b.dataset.r * step; set(); }));
   // scroll drives rotation while the section is on screen
-  const onScroll = () => { if (reduce || n <= 6) return; const r = stage.getBoundingClientRect(); const p = (innerHeight - r.top) / (innerHeight + r.height); if (p < 0 || p > 1) return; scrollA = -p * 360 * Math.min(1, 12 / n) * 0.45; ring.style.transition = 'transform .2s linear'; set(); };
+  const onScroll = () => { if (reduce || n <= 8) return; const r = stage.getBoundingClientRect(); const p = (innerHeight - r.top) / (innerHeight + r.height); if (p < 0 || p > 1) return; scrollA = -p * 360 * Math.min(1, 12 / n) * 0.45; ring.style.transition = 'transform .2s linear'; set(); };
   addEventListener('scroll', onScroll, { passive: true });
   stage.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, b: base, moved: false }; ring.style.transition = 'none'; });
   addEventListener('pointermove', (e) => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 4) drag.moved = true; base = drag.b + dx * .15; set(); });
@@ -184,7 +184,7 @@
     hoverRaf = requestAnimationFrame(spin);
   };
   stage.addEventListener('pointermove', (e) => {
-    if (drag || n <= 6 || reduce || e.pointerType !== 'mouse') return;
+    if (drag || n <= 8 || reduce || e.pointerType !== 'mouse') return;
     const r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5;   // -0.5 … 0.5
     const dead = .14, k = Math.max(0, Math.abs(x) - dead) / (.5 - dead);
     hoverV = k ? -Math.sign(x) * (0.08 + k * k * 0.45) : 0;

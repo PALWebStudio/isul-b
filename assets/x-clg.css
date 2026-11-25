@@ -152,3 +152,11 @@ body.b-cc .c3r:hover::after, body.b-cc .c3r:focus-visible::after {
 .cring.is-flat .cring__ring > li { flex: 0 1 220px; width: 220px; max-width: calc(50% - 8px); height: auto; aspect-ratio: 3 / 4; }
 .cring.is-flat .cring__ring > li { flex-basis: 200px; width: 200px; }
 @media (max-width: 1360px) { .cring.is-flat .cring__ring > li { flex-basis: 180px; width: 180px; } }
+/* filtered (≤ 8 clinics): one row, card next to card — the cards narrow a little to fit (wraps only on small screens) */
+.cring.is-flat .cring__ring > li { flex: 1 1 150px; width: auto; max-width: min(210px, calc(50% - 8px)); }
+/* the small ИСУЛ crest of a clinic card sits top-left, so the name below has the whole width (it covered the end of long names) */
+.c3r::before { right: auto; bottom: auto; left: 16px; top: 16px; }
+.cring.is-flat .c3r__txt b { font-size: clamp(.98rem, 1.15vw, 1.15rem); hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; }
+/* the name follows the width of the card (7 in a row are narrower): „Гастроентерология“ still fits on one line */
+.cring.is-flat .c3r { container-type: inline-size; }
+.cring.is-flat .c3r__txt b { font-size: clamp(.85rem, 8cqi, 1.15rem); }
