@@ -258,3 +258,11 @@
   .hw__stats b { font-size: 1.3rem; }
 }
 @media (prefers-reduced-motion: reduce) { .dnx-in .hw__row { animation: none; } }
+
+/* phones: the careers band and its heading stay inside the screen */
+@media (max-width: 760px) {
+  .blk__head { flex-wrap: wrap; }
+  .jb2 { grid-template-columns: 88px minmax(0, 1fr); gap: 12px; }
+  .jb2 > * { min-width: 0; }
+  .jb2 b, .jb2 small { overflow-wrap: anywhere; }
+}

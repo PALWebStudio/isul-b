@@ -1198,3 +1198,5 @@ html[data-theme="light"] .kp-nav a[aria-current="page"] { background: var(--kb);
 .kp-docl__it.is-miss { opacity: .7; } .kp-docl__it.is-miss .kp-docl__e { background: var(--kpm); }
 .kp-nt__b b a { color: inherit; text-decoration: none; } .kp-nt__b b a:hover { color: var(--kb-hi); text-decoration: underline; }
 @media (max-width: 640px) { .kp-docl__it { grid-template-columns: 46px minmax(0, 1fr); } .kp-docl__it > a, .kp-docl__it > em { grid-column: 2; justify-self: start; } }
+.kp-h3 { margin: 20px 0 8px; font-size: 1.02rem; font-weight: 700; line-height: 1.35; }
+.kp-h3:first-child { margin-top: 0; }
