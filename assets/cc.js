@@ -25,7 +25,7 @@
 
   root.innerHTML = `
   <article class="cct cct--book">
-    <div class="cct__top"><span class="cct__ico">${ICO.cal}</span><div><h3>Запази час</h3><p>Изберете клиника и вижте как да се запишете.</p></div></div>
+    <div class="cct__top"><span class="cct__ico">${ICO.cal}</span><div><h3>Как да се прегледам</h3><p>Изберете клиника и вижте къде и как се преглеждате.</p></div></div>
     <label class="vh" for="cc-cl">Клиника</label>
     <select id="cc-cl" class="cct__sel"><option value="">Изберете клиника или отделение…</option>${clinics.map((c) => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select>
     <div class="cct__pop"><span>Най-търсени</span>${[[3, 'Кардиология'], [5, 'Неврология'], [9, 'Ортопедия'], [12, 'УНГ'], [10, 'Очни болести'], [15, 'Хирургия'], [2, 'Гастроентерология'], [8, 'Образна диагностика'], [19, 'Консултативен блок']].map(([id, t]) => `<button type="button" data-cl="${id}">${t}</button>`).join('')}</div>
@@ -341,9 +341,10 @@
 (function () {
   'use strict';
   const root = document.getElementById('cc'); if (!root) return;
-  const PAGES = { book: ['#/book', 'Към страница „Запази час“'], emg: ['#/clinic/20', 'Към страница „Спешно отделение“'], lab: ['#/trials', ''], route: ['route.html', 'Отвори пълната карта с маршрут'], phones: ['#/contacts', 'Към страница „Контакти“'] };
+  const PAGES = { book: ['#/book', 'Към страница „Как да се прегледам“'], emg: ['#/clinic/20', 'Към страница „Спешно отделение“'], lab: ['#/trials', ''], route: ['route.html', 'Отвори пълната карта с маршрут'], phones: ['#/contacts', 'Към страница „Контакти“'] };
   PAGES.lab = ['https://lab.isul.eu/', 'Към портала lab.isul.eu'];
-  Object.entries(PAGES).forEach(([k, [href, t]]) => {
+  PAGES.book = null;   // its main button already opens the page „Как да се прегледам“
+  Object.entries(PAGES).filter(([, v]) => v).forEach(([k, [href, t]]) => {
     const p = root.querySelector('.cct--' + k); if (!p || p.querySelector('.cct__page')) return;
     const a = document.createElement('a'); a.className = 'cct__page'; a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; }
     a.innerHTML = `<span>${t}</span><b aria-hidden="true">→</b>`;

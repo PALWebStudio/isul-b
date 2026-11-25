@@ -3859,10 +3859,12 @@
   function mapLink(href) {
     const m = href.match(/^index\.html#\/(.*)$/); if (!m) return null;
     const [p, q] = m[1].split('?'), seg = p.split('/');
-    if (seg[0] === 'clinics' && seg[1]) return SLUG2ID[seg[1]] ? '#/clinic/' + SLUG2ID[seg[1]] : '#/clinics';
+    if ((seg[0] === 'clinics' || seg[0] === 'specialties') && seg[1]) return SLUG2ID[seg[1]] ? '#/clinic/' + SLUG2ID[seg[1]] : '#/clinics';
     const map = { '': '#/', patients: '#/patient', clinics: '#/clinics', doctors: '#/doctors', book: '#/book', emergency: '#/clinic/20', where: '#/contacts', news: '#/news', isul90: '#/history', about: '#/about', science: '#/trials', contacts: '#/contacts', careers: '#/competition', results: LAB, specialties: '#/clinics', concept: '#/sitemap', medicine: '#/clinics' };
     return map[seg[0]] !== undefined ? map[seg[0]] : '#/' + seg[0];
   }
+  // links of the old prototype added later by the home scripts (the hero search results): translated on the click
+  document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a[href^="index.html#/"]'); if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return; const n = mapLink(a.getAttribute('href')); if (!n || /^https?:/.test(n)) return; e.preventDefault(); location.hash = n.slice(1); });
   function rewrite(root) { $$('a[href^="index.html#/"]', root).forEach((a) => { const n = mapLink(a.getAttribute('href')); if (n) { a.setAttribute('href', n); if (/^https?:/.test(n)) { a.target = '_blank'; a.rel = 'noopener'; } } });
     // variant X: migrated links to the SuperDoc home page („през СУПЕРДОК (www.superdoc.bg)“) open the centre's verified profile
     if (window.ISUL_X) $$('a[href*="superdoc.bg"]', root).forEach((a) => { if (/^https?:\/\/(www\.)?superdoc\.bg\/?$/.test(a.getAttribute('href'))) a.setAttribute('href', SUPERDOC); });

@@ -96,7 +96,7 @@
     const sp = SPECIALTIES.find((s) => s.id === m.spec), cl = CLINICS.filter((c) => c.spec === m.spec);
     out.innerHTML = `<a href="index.html#/specialties/${sp.id}"><span><small>Специалност</small><br><b>${sp.name}</b></span><span>→</span></a>`
       + cl.map((c, i) => `<a href="index.html#/clinics/${c.id}" style="animation-delay:${(i + 1) * 80}ms"><span><small>Клиника</small><br><b>${c.short || c.name}</b></span><span>→</span></a>`).join('')
-      + `<a href="index.html#/book?spec=${sp.id}" style="animation-delay:${(cl.length + 1) * 80}ms;background:rgba(210,74,132,.25);border-color:rgba(210,74,132,.6)"><b>Запази час</b><span>→</span></a><p class="ask__note">Насочването е ориентировъчно и не е диагноза.</p>`;
+      + `<a href="index.html#/book?spec=${sp.id}" style="animation-delay:${(cl.length + 1) * 80}ms;background:var(--plum);border-color:var(--plum);color:#fff"><b>Как да се прегледам</b><span>→</span></a><p class="ask__note">Насочването е ориентировъчно и не е диагноза.</p>`;
   });
 
   /* 3D clinic ring */

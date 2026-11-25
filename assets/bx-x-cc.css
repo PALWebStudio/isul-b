@@ -330,3 +330,9 @@ body.b-cc .dpanel .ring ul li:nth-child(n+4) { display: none; }
 /* the emergency icon is a siren now (was a +): the normal line weight, the heavier one was for the bare + */
 .cct--emg .cct__ico svg, .ccb__b--emg .cct__ico svg { stroke-width: 2; }
 .ccb--sticky .ccb__b--emg:not([aria-selected="true"]) .cct__ico svg { stroke: #FF8A8A; }
+
+/* phone: the „Преглед“ panel in one column (the desktop rule put „Най-търсени“ in a second, very narrow column) */
+@media (max-width: 640px) {
+  .cc__panels > .cct--book.is-open #cc-cl, .cc__panels > .cct--book.is-open .cct__out, .cc__panels > .cct--book.is-open .cct__pop, .cc__panels > .cct--book.is-open .cct__info { grid-column: 1; grid-row: auto; }
+  .cc__panels > .cct--book.is-open .cct__out { grid-template-columns: minmax(0, 1fr); }
+}

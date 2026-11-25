@@ -415,3 +415,7 @@ h1 .l2 { animation: up 1s var(--ease) both .25s; }
 .navlink__ico { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); position: relative; }
 .navlink__ico::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: #E6C99A; box-shadow: 0 0 0 0 rgba(230,201,154,.7); animation: navping 1.8s infinite; }
 @keyframes navping { 70% { box-shadow: 0 0 0 8px rgba(230,201,154,0); } 100% { box-shadow: 0 0 0 0 rgba(230,201,154,0); } }
+
+/* the hero search results: near-opaque, so the ECG line of the hero does not run through them */
+.ask__out a { background: color-mix(in srgb, var(--night) 90%, #fff 10%); position: relative; z-index: 1; }
+.ask__out .warn { position: relative; z-index: 1; }
